@@ -12,3 +12,4 @@ UTC is used when determining release dates.
 - Project license (Apache License, Version 2.0).
 - Project README.
 - Project CHANGELOG.
+- [Travis CI configuration](https://github.com/apcountryman/avr-libcpp/issues/1).

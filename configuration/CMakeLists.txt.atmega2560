@@ -12,8 +12,16 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: .gitignore
-# Description: Git ignore rules for the avr-libcpp repository.
+# File: configuration/CMakeLists.txt.atmega2560
+# Description: avr-libcpp ATmega2560 configuration.
 
-# ignore the build directory
-build/
+# install prefix is not applicable
+mark_as_advanced( CMAKE_INSTALL_PREFIX )
+
+# build configuration
+set( CMAKE_BUILD_TYPE              "Release" CACHE STRING "" FORCE )
+set( CMAKE_EXPORT_COMPILE_COMMANDS ON        CACHE BOOL   "" FORCE )
+mark_as_advanced(
+    CMAKE_BUILD_TYPE
+    CMAKE_EXPORT_COMPILE_COMMANDS
+)

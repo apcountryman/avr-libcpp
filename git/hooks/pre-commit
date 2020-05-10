@@ -54,19 +54,24 @@ function display_help_text()
     echo "        - Filenames are portable"
     echo "        - No whitespace errors are present"
     echo "        - No script errors are present"
+    echo "        - No build errors are present"
     echo "SYNOPSIS"
     echo "    $mnemonic --help"
     echo "    $mnemonic --version"
-    echo "    $mnemonic"
+    echo "    $mnemonic [--jobs <jobs>]"
     echo "OPTIONS"
     echo "    --help"
     echo "        Display this help text."
+    echo "    --jobs <jobs>"
+    echo "        Specify the number of build jobs to use when building. If the number of"
+    echo "        jobs is not specified, 'nproc - 1' jobs will be used."
     echo "    --version"
     echo "        Display the version of this script."
     echo "EXAMPLES"
     echo "    $mnemonic --help"
     echo "    $mnemonic --version"
     echo "    $mnemonic"
+    echo "    $mnemonic --jobs 1"
 }
 
 function display_version()
@@ -105,7 +110,7 @@ function ensure_no_script_errors_are_present()
 {
     message "checking for script errors ........................ "
 
-    local scripts; mapfile -t scripts < <( git -C "$repository" ls-files | xargs -r -d '\n' -I '{}' find "$repository/{}" -executable ); readonly scripts
+    local scripts; mapfile -t scripts < <( git -C "$repository" ls-files ':!:toolchain-avr-gcc/' | xargs -r -d '\n' -I '{}' find "$repository/{}" -executable ); readonly scripts
 
     if ! shellcheck "${scripts[@]}" > "/dev/null" 2>&1; then
         errors_found
@@ -115,6 +120,60 @@ function ensure_no_script_errors_are_present()
     fi
 
     echo "none"
+}
+
+function ensure_no_build_errors_are_present()
+{
+    local -r build_type="$1"
+    local -r ellipsis="$2"
+
+    message "checking for ($build_type) build errors $ellipsis "
+
+    local -r toolchain_file="$repository/toolchain-avr-gcc/toolchain.cmake"
+    local -r build_directory="$repository/build/$build_type"
+    local -r build_configuration="$repository/configuration/CMakeLists.txt.$build_type"
+
+    if [[ ! -d "$build_directory" ]]; then
+        if ! cmake -DCMAKE_TOOLCHAIN_FILE="$toolchain_file" -C "$build_configuration" -S "$repository" -B "$build_directory" > "/dev/null" 2>&1; then
+            errors_found
+            error "aborting commit due to ($build_type) build CMake initialization error(s), listed below"
+            rm -rf "$build_directory"
+            cmake -C "$build_configuration" -S "$repository" -B "$build_directory"
+            abort
+        fi
+    fi
+
+    if ! cmake -C "$build_configuration" "$build_directory" > "/dev/null" 2>&1; then
+        errors_found
+        error "aborting commit due to ($build_type) build CMake configuration error(s), listed below"
+        cmake -C "$build_configuration" "$build_directory"
+        abort
+    fi
+
+    if ! cmake --build "$build_directory" -j "$build_jobs" > "/dev/null" 2>&1; then
+        errors_found
+        error "aborting commit due to ($build_type) build CMake build error(s), listed below"
+        cmake --build "$build_directory" -j "$build_jobs"
+        abort
+    fi
+
+    echo "none"
+}
+
+function ensure_no_atmega2560_build_errors_are_present()
+{
+    local -r build_type="atmega2560"
+    local -r ellipsis="............"
+
+    ensure_no_build_errors_are_present "$build_type" "$ellipsis"
+}
+
+function ensure_no_atmega328p_build_errors_are_present()
+{
+    local -r build_type="atmega328p"
+    local -r ellipsis="............"
+
+    ensure_no_build_errors_are_present "$build_type" "$ellipsis"
 }
 
 function main()
@@ -165,9 +224,15 @@ function main()
         local -r against=$( git hash-object -t tree "/dev/null" )
     fi
 
+    if [[ -z "$build_jobs" ]]; then
+        local -r build_jobs=$(( $( nproc ) - 1 ))
+    fi
+
     ensure_filenames_are_portable
     ensure_no_whitespace_errors_are_present
     ensure_no_script_errors_are_present
+    ensure_no_atmega2560_build_errors_are_present
+    ensure_no_atmega328p_build_errors_are_present
 }
 
 main "$@"

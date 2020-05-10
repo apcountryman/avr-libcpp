@@ -12,8 +12,11 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: .gitignore
-# Description: Git ignore rules for the avr-libcpp repository.
+# File: CMakeLists.txt
+# Description: avr-libcpp core CMake rules.
 
-# ignore the build directory
-build/
+cmake_minimum_required( VERSION 3.13.4 )
+project(
+    avr-libcpp
+    LANGUAGES CXX
+)

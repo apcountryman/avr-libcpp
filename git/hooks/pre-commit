@@ -110,7 +110,7 @@ function ensure_no_script_errors_are_present()
 {
     message "checking for script errors ........................ "
 
-    local scripts; mapfile -t scripts < <( git -C "$repository" ls-files ':!:toolchain-avr-gcc/' | xargs -r -d '\n' -I '{}' find "$repository/{}" -executable ); readonly scripts
+    local scripts; mapfile -t scripts < <( git -C "$repository" ls-files ':!:cmake/modules/' ':!:toolchain-avr-gcc/' | xargs -r -d '\n' -I '{}' find "$repository/{}" -executable ); readonly scripts
 
     if ! shellcheck "${scripts[@]}" > "/dev/null" 2>&1; then
         errors_found
@@ -138,7 +138,7 @@ function ensure_no_build_errors_are_present()
             errors_found
             error "aborting commit due to ($build_type) build CMake initialization error(s), listed below"
             rm -rf "$build_directory"
-            cmake -C "$build_configuration" -S "$repository" -B "$build_directory"
+            cmake -DCMAKE_TOOLCHAIN_FILE="$toolchain_file" -C "$build_configuration" -S "$repository" -B "$build_directory"
             abort
         fi
     fi

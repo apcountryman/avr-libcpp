@@ -12,15 +12,22 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: .gitmodules
-# Description: Git submodules of the avr-libcpp repository.
+# File: CMakeLists.txt
+# Description: avr-libcpp CMake rules.
 
-# AVR CMake toolchain
-[submodule "toolchain-avr-gcc"]
-	path = toolchain-avr-gcc
-	url = ../toolchain-avr-gcc
+configure_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/avr-libcpp/version.cc.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/avr-libcpp/version.cc"
+    @ONLY
+)
 
-# CMake modules
-[submodule "cmake/modules/apcountryman-cmake-utilities"]
-	path = cmake/modules/apcountryman-cmake-utilities
-	url = ../cmake-utilities
+add_library(
+    avr-libcpp STATIC
+    "${CMAKE_CURRENT_BINARY_DIR}/avr-libcpp/version.cc"
+    "avr-libcpp.cc"
+    "std.cc"
+)
+target_include_directories(
+    avr-libcpp
+    PUBLIC "${PROJECT_SOURCE_DIR}/include"
+)

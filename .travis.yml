@@ -23,3 +23,11 @@ jobs:
         - name: "analyze (static) - shellcheck"
           language: bash
           script: ./ci/analyze --analyzer shellcheck
+
+        - name: "analyze (static) - cppcheck"
+          language: cpp
+          addons:
+              apt:
+                  packages:
+                      - cppcheck
+          script: ./ci/analyze --analyzer cppcheck

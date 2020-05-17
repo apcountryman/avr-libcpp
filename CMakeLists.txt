@@ -15,7 +15,7 @@
 # File: CMakeLists.txt
 # Description: avr-libcpp core CMake rules.
 
-cmake_minimum_required( VERSION 3.13.4 )
+cmake_minimum_required( VERSION 3.12.4 )
 project(
     avr-libcpp
     LANGUAGES CXX

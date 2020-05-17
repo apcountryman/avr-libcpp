@@ -65,7 +65,7 @@ function display_version()
 
 function run_shellcheck()
 {
-    local scripts; mapfile -t scripts < <( git -C "$repository" ls-files ':!:toolchain-avr-gcc/' | xargs -r -d '\n' -I '{}' find "$repository/{}" -executable ); readonly scripts
+    local scripts; mapfile -t scripts < <( git -C "$repository" ls-files ':!:cmake/modules/' ':!:toolchain-avr-gcc/' | xargs -r -d '\n' -I '{}' find "$repository/{}" -executable ); readonly scripts
 
     if ! shellcheck "${scripts[@]}"; then
         abort

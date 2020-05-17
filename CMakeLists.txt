@@ -20,3 +20,45 @@ project(
     avr-libcpp
     LANGUAGES CXX
 )
+
+# project configuration
+option( AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS "avr-libcpp: use parent project's build flags" ON )
+
+# load additional CMake modules
+list(
+    APPEND CMAKE_MODULE_PATH
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/apcountryman-cmake-utilities"
+)
+
+# configure compilation and linking
+if( NOT ${AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS} )
+    set( AVRLIBCPP_MCU "" CACHE STRING "avr-libcpp: MCU type" )
+
+    set(
+        CMAKE_CXX_FLAGS
+        "${CMAKE_CXX_FLAGS} \
+        -std=c++17 \
+        -mmcu=${AVRLIBCPP_MCU} \
+        -Werror -Wall -Wextra \
+        -Wcast-align=strict \
+        -Wcast-qual \
+        -Wextra-semi \
+        -Wfloat-equal \
+        -Wmissing-field-initializers \
+        -Wmissing-include-dirs \
+        -Wold-style-cast \
+        -Wpointer-arith \
+        -Wshadow \
+        "
+    )
+endif( NOT ${AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS} )
+
+# capture project version information
+include( git-utilities )
+execute_git_command(
+    AVRLIBCPP_VERSION
+    COMMAND describe --always --dirty --broken
+)
+
+# build the library
+add_subdirectory( source )

@@ -39,3 +39,7 @@ jobs:
                   packages:
                       - clang-tidy
           script: ./ci/analyze --analyzer clang-tidy
+
+        - name: "analyze (static) - lizard"
+          language: python
+          script: ./ci/analyze --analyzer lizard

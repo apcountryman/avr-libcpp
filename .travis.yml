@@ -31,3 +31,11 @@ jobs:
                   packages:
                       - cppcheck
           script: ./ci/analyze --analyzer cppcheck
+
+        - name: "analyze (static) - clang-tidy"
+          language: cpp
+          addons:
+              apt:
+                  packages:
+                      - clang-tidy
+          script: ./ci/analyze --analyzer clang-tidy

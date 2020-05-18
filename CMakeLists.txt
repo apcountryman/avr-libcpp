@@ -32,15 +32,11 @@ list(
 
 # configure compilation and linking
 if( NOT ${AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS} )
-    set( AVRLIBCPP_MCU "" CACHE STRING "avr-libcpp: MCU type" )
-
     set(
         CMAKE_CXX_FLAGS
         "${CMAKE_CXX_FLAGS} \
         -std=c++17 \
-        -mmcu=${AVRLIBCPP_MCU} \
         -Werror -Wall -Wextra \
-        -Wcast-align=strict \
         -Wcast-qual \
         -Wextra-semi \
         -Wfloat-equal \
@@ -51,6 +47,19 @@ if( NOT ${AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS} )
         -Wshadow \
         "
     )
+
+    option( AVRLIBCPP_USE_STATIC_ANALYSIS_BUILD_FLAGS "avr-libcpp: use static analysis build flags" OFF )
+    if( NOT ${AVRLIBCPP_USE_STATIC_ANALYSIS_BUILD_FLAGS} )
+        set( AVRLIBCPP_MCU "" CACHE STRING "avr-libcpp: MCU type" )
+
+        set(
+            CMAKE_CXX_FLAGS
+            "${CMAKE_CXX_FLAGS} \
+            -mmcu=${AVRLIBCPP_MCU} \
+            -Wcast-align=strict \
+            "
+        )
+    endif( NOT ${AVRLIBCPP_USE_STATIC_ANALYSIS_BUILD_FLAGS} )
 endif( NOT ${AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS} )
 
 # capture project version information

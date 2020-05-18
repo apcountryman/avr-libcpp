@@ -57,6 +57,11 @@ if( NOT ${AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS} )
             "${CMAKE_CXX_FLAGS} \
             -mmcu=${AVRLIBCPP_MCU} \
             -Wcast-align=strict \
+            -Wduplicated-cond \
+            -Wimplicit-fallthrough=5 \
+            -Wlogical-op \
+            -Wplacement-new=2 \
+            -Wunsafe-loop-optimizations \
             "
         )
     endif( NOT ${AVRLIBCPP_USE_STATIC_ANALYSIS_BUILD_FLAGS} )

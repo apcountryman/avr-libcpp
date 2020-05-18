@@ -17,3 +17,4 @@ UTC is used when determining release dates.
 - [Library skeleton](https://github.com/apcountryman/avr-libcpp/issues/13).
 - [`cppcheck` static analysis CI job](https://github.com/apcountryman/avr-libcpp/issues/15).
 - [`clang-tidy` static analysis CI job](https://github.com/apcountryman/avr-libcpp/issues/16).
+- [`lizard` static analysis CI job](https://github.com/apcountryman/avr-libcpp/issues/17).

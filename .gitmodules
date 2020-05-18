@@ -24,3 +24,8 @@
 [submodule "cmake/modules/apcountryman-cmake-utilities"]
 	path = cmake/modules/apcountryman-cmake-utilities
 	url = ../cmake-utilities
+
+# lizard
+[submodule "lizard"]
+	path = lizard
+	url = ../terryyin-lizard

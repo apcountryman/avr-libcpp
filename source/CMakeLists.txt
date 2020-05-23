@@ -25,9 +25,15 @@ add_library(
     avr-libcpp STATIC
     "${CMAKE_CURRENT_BINARY_DIR}/avr-libcpp/version.cc"
     "avr-libcpp.cc"
+    "cstdint.cc"
     "std.cc"
+    "std/cstdint.cc"
 )
 target_include_directories(
     avr-libcpp
     PUBLIC "${PROJECT_SOURCE_DIR}/include"
+)
+target_include_directories(
+    avr-libcpp SYSTEM BEFORE
+    PUBLIC "${PROJECT_SOURCE_DIR}/system"
 )

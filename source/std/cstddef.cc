@@ -20,3 +20,11 @@
  */
 
 #include "std/cstddef.h"
+
+#ifndef NULL
+#error "NULL not defined"
+#endif // NULL
+
+#ifndef offsetof
+#error "offsetof not defined"
+#endif // offsetof

@@ -27,9 +27,11 @@ add_library(
     "avr-libcpp.cc"
     "cstddef.cc"
     "cstdint.cc"
+    "new.cc"
     "std.cc"
     "std/cstddef.cc"
     "std/cstdint.cc"
+    "std/new.cc"
 )
 target_include_directories(
     avr-libcpp

@@ -22,7 +22,18 @@
 #ifndef STD_NEW_H
 #define STD_NEW_H
 
+#include <cstddef>
+
 namespace std {
 } // namespace std
+
+inline void * operator new( std::size_t, void * location ) noexcept
+{
+    return location;
+}
+
+inline void operator delete(void *, void *)noexcept
+{
+}
 
 #endif // STD_NEW_H

@@ -20,3 +20,4 @@ UTC is used when determining release dates.
 - [`lizard` static analysis CI job](https://github.com/apcountryman/avr-libcpp/issues/17).
 - [`clang-format` formatting CI job](https://github.com/apcountryman/avr-libcpp/issues/18).
 - [`cstdint`](https://github.com/apcountryman/avr-libcpp/issues/12).
+- [Partial `cstddef` (no `std::byte`)](https://github.com/apcountryman/avr-libcpp/issues/26).

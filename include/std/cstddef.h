@@ -25,6 +25,15 @@
 #include <stddef.h>
 
 namespace std {
+
+using ::size_t;
+
+using ::ptrdiff_t;
+
+using nullptr_t = decltype( nullptr );
+
+using ::max_align_t;
+
 } // namespace std
 
 #endif // STD_CSTDDEF_H

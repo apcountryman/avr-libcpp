@@ -1,7 +1,8 @@
 # avr-libcpp
 [![Build Status](https://travis-ci.com/apcountryman/avr-libcpp.svg?branch=master)](https://travis-ci.com/apcountryman/avr-libcpp)
 
-A partial implementation of the C++ standard library for use with avr-gcc/avr-libc.
+A partial implementation of the C++ standard library (C++17 only) for use with
+avr-gcc/avr-libc.
 
 ## Obtaining the Source Code
 HTTPS:

@@ -20,3 +20,5 @@
  */
 
 #include "avr-libcpp.h"
+
+static_assert( __cplusplus == 201703L, "avr-libcpp only supports C++17" );

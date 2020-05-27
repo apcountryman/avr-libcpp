@@ -38,8 +38,5 @@ add_library(
 target_include_directories(
     avr-libcpp
     PUBLIC "${PROJECT_SOURCE_DIR}/include"
-)
-target_include_directories(
-    avr-libcpp SYSTEM BEFORE
     PUBLIC "${PROJECT_SOURCE_DIR}/system"
 )

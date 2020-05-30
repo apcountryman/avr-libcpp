@@ -23,6 +23,39 @@
 #define STD_TYPE_TRAITS_H
 
 namespace std {
+
+//---------- declarations ----------//
+
+inline namespace Type_Traits_Helper_Constants {
+template<typename T, T v>
+struct integral_constant;
+
+} // namespace Type_Traits_Helper_Constants
+
+//---------- definitions ----------//
+
+inline namespace Type_Traits_Helper_Constants {
+template<typename T, T v>
+struct integral_constant {
+    using value_type = T;
+
+    using type = integral_constant;
+
+    static constexpr auto value = value_type{ v };
+
+    constexpr operator value_type() const noexcept
+    {
+        return value;
+    }
+
+    constexpr auto operator()() const noexcept
+    {
+        return value;
+    }
+};
+
+} // namespace Type_Traits_Helper_Constants
+
 } // namespace std
 
 #endif // STD_TYPE_TRAITS_H

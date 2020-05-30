@@ -30,6 +30,9 @@ inline namespace Type_Traits_Helper_Constants {
 template<typename T, T v>
 struct integral_constant;
 
+template<bool v>
+using bool_constant = integral_constant<bool, v>;
+
 } // namespace Type_Traits_Helper_Constants
 
 //---------- definitions ----------//

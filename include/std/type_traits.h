@@ -35,6 +35,8 @@ using bool_constant = integral_constant<bool, v>;
 
 using true_type = bool_constant<true>;
 
+using false_type = bool_constant<false>;
+
 } // namespace Type_Traits_Helper_Constants
 
 //---------- definitions ----------//

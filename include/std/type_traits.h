@@ -43,6 +43,9 @@ inline namespace Type_Traits_Type_Relationships {
 template<typename T, typename U>
 struct is_same;
 
+template<typename T, typename U>
+constexpr auto is_same_v = is_same<T, U>::value;
+
 } // namespace Type_Traits_Type_Relationships
 
 //---------- definitions ----------//

@@ -39,6 +39,12 @@ using false_type = bool_constant<false>;
 
 } // namespace Type_Traits_Helper_Constants
 
+inline namespace Type_Traits_Type_Relationships {
+template<typename T, typename U>
+struct is_same;
+
+} // namespace Type_Traits_Type_Relationships
+
 //---------- definitions ----------//
 
 inline namespace Type_Traits_Helper_Constants {
@@ -62,6 +68,17 @@ struct integral_constant {
 };
 
 } // namespace Type_Traits_Helper_Constants
+
+inline namespace Type_Traits_Type_Relationships {
+template<typename T, typename U>
+struct is_same : false_type {
+};
+
+template<typename T>
+struct is_same<T, T> : true_type {
+};
+
+} // namespace Type_Traits_Type_Relationships
 
 } // namespace std
 

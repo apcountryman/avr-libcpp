@@ -30,8 +30,8 @@ inline namespace Type_Traits_Helper_Constants {
 template<typename T, T v>
 struct integral_constant;
 
-template<bool v>
-using bool_constant = integral_constant<bool, v>;
+template<bool b>
+using bool_constant = integral_constant<bool, b>;
 
 using true_type = bool_constant<true>;
 
@@ -47,6 +47,12 @@ template<typename T, typename U>
 constexpr auto is_same_v = is_same<T, U>::value;
 
 } // namespace Type_Traits_Type_Relationships
+
+inline namespace Miscellaneous_Transformations {
+template<bool b, typename T = void>
+struct enable_if;
+
+} // namespace Miscellaneous_Transformations
 
 //---------- definitions ----------//
 
@@ -82,6 +88,18 @@ struct is_same<T, T> : true_type {
 };
 
 } // namespace Type_Traits_Type_Relationships
+
+inline namespace Miscellaneous_Transformations {
+template<bool b, typename T>
+struct enable_if {
+};
+
+template<typename T>
+struct enable_if<true, T> {
+    using type = T;
+};
+
+} // namespace Miscellaneous_Transformations
 
 } // namespace std
 

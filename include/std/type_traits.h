@@ -58,6 +58,9 @@ using enable_if_t = typename enable_if<b, T>::type;
 template<typename T>
 struct underlying_type;
 
+template<typename T>
+using underlying_type_t = typename underlying_type<T>::type;
+
 } // namespace Miscellaneous_Transformations
 
 //---------- definitions ----------//

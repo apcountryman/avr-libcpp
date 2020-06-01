@@ -52,6 +52,9 @@ inline namespace Miscellaneous_Transformations {
 template<bool b, typename T = void>
 struct enable_if;
 
+template<bool b, typename T = void>
+using enable_if_t = typename enable_if<b, T>::type;
+
 } // namespace Miscellaneous_Transformations
 
 //---------- definitions ----------//

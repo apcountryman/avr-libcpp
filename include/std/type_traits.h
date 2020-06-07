@@ -54,6 +54,9 @@ inline namespace Type_Traits_Composite_Type_Categories {
 template<typename T>
 struct is_reference;
 
+template<typename T>
+constexpr auto is_reference_v = is_reference<T>::value;
+
 } // namespace Type_Traits_Composite_Type_Categories
 
 inline namespace Type_Traits_Type_Relationships {

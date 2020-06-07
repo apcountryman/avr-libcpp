@@ -45,6 +45,9 @@ inline namespace Type_Traits_Primary_Type_Categories {
 template<typename T>
 struct is_array;
 
+template<typename T>
+constexpr auto is_array_v = is_array<T>::value;
+
 } // namespace Type_Traits_Primary_Type_Categories
 
 inline namespace Type_Traits_Type_Relationships {

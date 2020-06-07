@@ -63,6 +63,9 @@ inline namespace Type_Traits_Type_Properties {
 template<typename T>
 struct is_const;
 
+template<typename T>
+constexpr auto is_const_v = is_const<T>::value;
+
 } // namespace Type_Traits_Type_Properties
 
 inline namespace Type_Traits_Type_Relationships {

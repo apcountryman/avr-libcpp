@@ -22,6 +22,8 @@
 #ifndef STD_TYPE_TRAITS_H
 #define STD_TYPE_TRAITS_H
 
+#include <cstddef>
+
 namespace std {
 
 //---------- declarations ----------//
@@ -38,6 +40,12 @@ using true_type = bool_constant<true>;
 using false_type = bool_constant<false>;
 
 } // namespace Type_Traits_Helper_Constants
+
+inline namespace Type_Traits_Primary_Type_Categories {
+template<typename T>
+struct is_array;
+
+} // namespace Type_Traits_Primary_Type_Categories
 
 inline namespace Type_Traits_Type_Relationships {
 template<typename T, typename U>
@@ -86,6 +94,21 @@ struct integral_constant {
 };
 
 } // namespace Type_Traits_Helper_Constants
+
+inline namespace Type_Traits_Primary_Type_Categories {
+template<typename T>
+struct is_array : false_type {
+};
+
+template<typename T>
+struct is_array<T[]> : true_type {
+};
+
+template<typename T, size_t N>
+struct is_array<T[ N ]> : true_type {
+};
+
+} // namespace Type_Traits_Primary_Type_Categories
 
 inline namespace Type_Traits_Type_Relationships {
 template<typename T, typename U>

@@ -50,6 +50,12 @@ constexpr auto is_array_v = is_array<T>::value;
 
 } // namespace Type_Traits_Primary_Type_Categories
 
+inline namespace Type_Traits_Composite_Type_Categories {
+template<typename T>
+struct is_reference;
+
+} // namespace Type_Traits_Composite_Type_Categories
+
 inline namespace Type_Traits_Type_Relationships {
 template<typename T, typename U>
 struct is_same;
@@ -112,6 +118,21 @@ struct is_array<T[ N ]> : true_type {
 };
 
 } // namespace Type_Traits_Primary_Type_Categories
+
+inline namespace Type_Traits_Composite_Type_Categories {
+template<typename T>
+struct is_reference : false_type {
+};
+
+template<typename T>
+struct is_reference<T &> : true_type {
+};
+
+template<typename T>
+struct is_reference<T &&> : true_type {
+};
+
+} // namespace Type_Traits_Composite_Type_Categories
 
 inline namespace Type_Traits_Type_Relationships {
 template<typename T, typename U>

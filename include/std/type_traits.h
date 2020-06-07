@@ -59,6 +59,12 @@ constexpr auto is_reference_v = is_reference<T>::value;
 
 } // namespace Type_Traits_Composite_Type_Categories
 
+inline namespace Type_Traits_Type_Properties {
+template<typename T>
+struct is_const;
+
+} // namespace Type_Traits_Type_Properties
+
 inline namespace Type_Traits_Type_Relationships {
 template<typename T, typename U>
 struct is_same;
@@ -136,6 +142,17 @@ struct is_reference<T &&> : true_type {
 };
 
 } // namespace Type_Traits_Composite_Type_Categories
+
+inline namespace Type_Traits_Type_Properties {
+template<typename T>
+struct is_const : false_type {
+};
+
+template<typename T>
+struct is_const<T const> : true_type {
+};
+
+} // namespace Type_Traits_Type_Properties
 
 inline namespace Type_Traits_Type_Relationships {
 template<typename T, typename U>

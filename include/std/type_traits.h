@@ -84,6 +84,9 @@ struct remove_const;
 template<typename T>
 using remove_const_t = typename remove_const<T>::type;
 
+template<typename T>
+struct remove_volatile;
+
 } // namespace Type_Traits_Const_Volatility_Specifiers
 
 inline namespace Miscellaneous_Transformations {
@@ -185,6 +188,16 @@ struct remove_const {
 
 template<typename T>
 struct remove_const<T const> {
+    using type = T;
+};
+
+template<typename T>
+struct remove_volatile {
+    using type = T;
+};
+
+template<typename T>
+struct remove_volatile<T volatile> {
     using type = T;
 };
 

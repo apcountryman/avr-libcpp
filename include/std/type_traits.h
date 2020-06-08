@@ -77,6 +77,12 @@ constexpr auto is_same_v = is_same<T, U>::value;
 
 } // namespace Type_Traits_Type_Relationships
 
+inline namespace Type_Traits_Const_Volatility_Specifiers {
+template<typename T>
+struct remove_const;
+
+} // namespace Type_Traits_Const_Volatility_Specifiers
+
 inline namespace Miscellaneous_Transformations {
 template<bool b, typename T = void>
 struct enable_if;
@@ -167,6 +173,19 @@ struct is_same<T, T> : true_type {
 };
 
 } // namespace Type_Traits_Type_Relationships
+
+inline namespace Type_Traits_Const_Volatility_Specifiers {
+template<typename T>
+struct remove_const {
+    using type = T;
+};
+
+template<typename T>
+struct remove_const<T const> {
+    using type = T;
+};
+
+} // namespace Type_Traits_Const_Volatility_Specifiers
 
 inline namespace Miscellaneous_Transformations {
 template<bool b, typename T>

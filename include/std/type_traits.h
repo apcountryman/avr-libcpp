@@ -125,6 +125,9 @@ inline namespace Arrays {
 template<typename T>
 struct remove_extent;
 
+template<typename T>
+using remove_extent_t = typename remove_extent<T>::type;
+
 } // namespace Arrays
 
 inline namespace Miscellaneous_Transformations {

@@ -137,6 +137,9 @@ struct enable_if;
 template<bool B, typename T = void>
 using enable_if_t = typename enable_if<B, T>::type;
 
+template<bool B, typename T, typename F>
+struct conditional;
+
 template<typename T>
 struct underlying_type;
 
@@ -290,6 +293,14 @@ struct enable_if {
 
 template<typename T>
 struct enable_if<true, T> : type_identity<T> {
+};
+
+template<bool B, typename T, typename F>
+struct conditional : type_identity<T> {
+};
+
+template<typename T, typename F>
+struct conditional<false, T, F> : type_identity<F> {
 };
 
 template<typename T>

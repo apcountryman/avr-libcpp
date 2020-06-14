@@ -223,46 +223,38 @@ struct is_same<T, T> : true_type {
 
 inline namespace Type_Traits_Const_Volatility_Specifiers {
 template<typename T>
-struct remove_const {
-    using type = T;
+struct remove_const : type_identity<T> {
 };
 
 template<typename T>
-struct remove_const<T const> {
-    using type = T;
+struct remove_const<T const> : type_identity<T> {
 };
 
 template<typename T>
-struct remove_volatile {
-    using type = T;
+struct remove_volatile : type_identity<T> {
 };
 
 template<typename T>
-struct remove_volatile<T volatile> {
-    using type = T;
+struct remove_volatile<T volatile> : type_identity<T> {
 };
 
 template<typename T>
-struct remove_cv {
-    using type = remove_const_t<remove_volatile_t<T>>;
+struct remove_cv : type_identity<remove_const_t<remove_volatile_t<T>>> {
 };
 
 } // namespace Type_Traits_Const_Volatility_Specifiers
 
 inline namespace References {
 template<typename T>
-struct remove_reference {
-    using type = T;
+struct remove_reference : type_identity<T> {
 };
 
 template<typename T>
-struct remove_reference<T &> {
-    using type = T;
+struct remove_reference<T &> : type_identity<T> {
 };
 
 template<typename T>
-struct remove_reference<T &&> {
-    using type = T;
+struct remove_reference<T &&> : type_identity<T> {
 };
 
 } // namespace References
@@ -273,13 +265,11 @@ struct enable_if {
 };
 
 template<typename T>
-struct enable_if<true, T> {
-    using type = T;
+struct enable_if<true, T> : type_identity<T> {
 };
 
 template<typename T>
-struct underlying_type {
-    using type = __underlying_type( T );
+struct underlying_type : type_identity<__underlying_type( T )> {
 };
 
 } // namespace Miscellaneous_Transformations

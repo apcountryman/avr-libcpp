@@ -108,6 +108,9 @@ inline namespace References {
 template<typename T>
 struct remove_reference;
 
+template<typename T>
+using remove_reference_t = typename remove_reference<T>::type;
+
 } // namespace References
 
 inline namespace Miscellaneous_Transformations {

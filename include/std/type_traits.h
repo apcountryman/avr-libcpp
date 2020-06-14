@@ -48,6 +48,9 @@ struct is_array;
 template<typename T>
 constexpr auto is_array_v = is_array<T>::value;
 
+template<typename T>
+struct is_function;
+
 } // namespace Type_Traits_Primary_Type_Categories
 
 inline namespace Type_Traits_Composite_Type_Categories {
@@ -148,6 +151,10 @@ struct is_array<T[]> : true_type {
 
 template<typename T, size_t N>
 struct is_array<T[ N ]> : true_type {
+};
+
+template<typename T>
+struct is_function : bool_constant<not is_const_v<T const> and not is_reference_v<T>> {
 };
 
 } // namespace Type_Traits_Primary_Type_Categories

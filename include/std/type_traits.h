@@ -140,6 +140,9 @@ using enable_if_t = typename enable_if<B, T>::type;
 template<bool B, typename T, typename F>
 struct conditional;
 
+template<bool B, typename T, typename F>
+using conditional_t = typename conditional<B, T, F>::type;
+
 template<typename T>
 struct underlying_type;
 

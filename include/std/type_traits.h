@@ -104,6 +104,12 @@ using remove_cv_t = typename remove_cv<T>::type;
 
 } // namespace Type_Traits_Const_Volatility_Specifiers
 
+inline namespace References {
+template<typename T>
+struct remove_reference;
+
+} // namespace References
+
 inline namespace Miscellaneous_Transformations {
 template<bool b, typename T = void>
 struct enable_if;
@@ -226,6 +232,24 @@ struct remove_cv {
 };
 
 } // namespace Type_Traits_Const_Volatility_Specifiers
+
+inline namespace References {
+template<typename T>
+struct remove_reference {
+    using type = T;
+};
+
+template<typename T>
+struct remove_reference<T &> {
+    using type = T;
+};
+
+template<typename T>
+struct remove_reference<T &&> {
+    using type = T;
+};
+
+} // namespace References
 
 inline namespace Miscellaneous_Transformations {
 template<bool b, typename T>

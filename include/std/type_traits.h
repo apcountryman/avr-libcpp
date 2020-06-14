@@ -28,7 +28,11 @@ namespace std {
 
 //---------- declarations ----------//
 
-inline namespace Type_Traits_Helper_Constants {
+inline namespace Type_Traits_Helper_Classes {
+// C++20
+template<typename T>
+struct type_identity;
+
 template<typename T, T v>
 struct integral_constant;
 
@@ -39,7 +43,7 @@ using true_type = bool_constant<true>;
 
 using false_type = bool_constant<false>;
 
-} // namespace Type_Traits_Helper_Constants
+} // namespace Type_Traits_Helper_Classes
 
 inline namespace Type_Traits_Primary_Type_Categories {
 template<typename T>
@@ -130,7 +134,12 @@ using underlying_type_t = typename underlying_type<T>::type;
 
 //---------- definitions ----------//
 
-inline namespace Type_Traits_Helper_Constants {
+inline namespace Type_Traits_Helper_Classes {
+template<typename T>
+struct type_identity {
+    using type = T;
+};
+
 template<typename T, T v>
 struct integral_constant {
     using value_type = T;
@@ -150,7 +159,7 @@ struct integral_constant {
     }
 };
 
-} // namespace Type_Traits_Helper_Constants
+} // namespace Type_Traits_Helper_Classes
 
 inline namespace Type_Traits_Primary_Type_Categories {
 template<typename T>

@@ -121,6 +121,12 @@ using remove_reference_t = typename remove_reference<T>::type;
 
 } // namespace Type_Traits_References
 
+inline namespace Type_Traits_Pointers {
+template<typename T>
+struct add_pointer;
+
+} // namespace Type_Traits_Pointers
+
 inline namespace Type_Traits_Arrays {
 template<typename T>
 struct remove_extent;
@@ -273,6 +279,23 @@ struct remove_reference<T &&> : type_identity<T> {
 };
 
 } // namespace Type_Traits_References
+
+inline namespace Type_Traits_Pointers {
+namespace Implementation {
+
+template<typename T>
+auto add_pointer( int ) -> type_identity<remove_reference_t<T> *>;
+
+template<typename T>
+auto add_pointer( ... ) -> type_identity<T>;
+
+} // namespace Implementation
+
+template<typename T>
+struct add_pointer : decltype( Implementation::add_pointer<T>( 0 ) ) {
+};
+
+} // namespace Type_Traits_Pointers
 
 inline namespace Type_Traits_Arrays {
 template<typename T>

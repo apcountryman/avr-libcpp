@@ -125,6 +125,9 @@ inline namespace Type_Traits_Pointers {
 template<typename T>
 struct add_pointer;
 
+template<typename T>
+using add_pointer_t = typename add_pointer<T>::type;
+
 } // namespace Type_Traits_Pointers
 
 inline namespace Type_Traits_Arrays {

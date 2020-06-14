@@ -121,6 +121,12 @@ using remove_reference_t = typename remove_reference<T>::type;
 
 } // namespace References
 
+inline namespace Arrays {
+template<typename T>
+struct remove_extent;
+
+} // namespace Arrays
+
 inline namespace Miscellaneous_Transformations {
 template<bool b, typename T = void>
 struct enable_if;
@@ -258,6 +264,21 @@ struct remove_reference<T &&> : type_identity<T> {
 };
 
 } // namespace References
+
+inline namespace Arrays {
+template<typename T>
+struct remove_extent : type_identity<T> {
+};
+
+template<typename T>
+struct remove_extent<T[]> : type_identity<T> {
+};
+
+template<typename T, std::size_t N>
+struct remove_extent<T[ N ]> : type_identity<T> {
+};
+
+} // namespace Arrays
 
 inline namespace Miscellaneous_Transformations {
 template<bool b, typename T>

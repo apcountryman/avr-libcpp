@@ -140,6 +140,9 @@ using remove_extent_t = typename remove_extent<T>::type;
 } // namespace Type_Traits_Arrays
 
 inline namespace Type_Traits_Miscellaneous_Transformations {
+template<typename T>
+struct decay;
+
 template<bool B, typename T = void>
 struct enable_if;
 
@@ -316,6 +319,14 @@ struct remove_extent<T[ N ]> : type_identity<T> {
 } // namespace Type_Traits_Arrays
 
 inline namespace Type_Traits_Miscellaneous_Transformations {
+template<typename T>
+struct decay
+    : type_identity<conditional_t<
+          is_array_v<remove_reference_t<T>>,
+          remove_extent_t<remove_reference_t<T>> *,
+          conditional_t<is_function_v<remove_reference_t<T>>, add_pointer_t<remove_reference_t<T>>, remove_cv_t<remove_reference_t<T>>>>> {
+};
+
 template<bool B, typename T>
 struct enable_if {
 };

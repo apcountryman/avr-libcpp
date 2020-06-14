@@ -51,6 +51,9 @@ constexpr auto is_array_v = is_array<T>::value;
 template<typename T>
 struct is_function;
 
+template<typename T>
+constexpr auto is_function_v = is_function<T>::value;
+
 } // namespace Type_Traits_Primary_Type_Categories
 
 inline namespace Type_Traits_Composite_Type_Categories {

@@ -33,6 +33,10 @@ inline namespace Type_Traits_Helper_Classes {
 template<typename T>
 struct type_identity;
 
+// C++20
+template<typename T>
+using type_identity_t = typename type_identity<T>::type;
+
 template<typename T, T v>
 struct integral_constant;
 

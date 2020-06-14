@@ -112,25 +112,25 @@ using remove_cv_t = typename remove_cv<T>::type;
 
 } // namespace Type_Traits_Const_Volatility_Specifiers
 
-inline namespace References {
+inline namespace Type_Traits_References {
 template<typename T>
 struct remove_reference;
 
 template<typename T>
 using remove_reference_t = typename remove_reference<T>::type;
 
-} // namespace References
+} // namespace Type_Traits_References
 
-inline namespace Arrays {
+inline namespace Type_Traits_Arrays {
 template<typename T>
 struct remove_extent;
 
 template<typename T>
 using remove_extent_t = typename remove_extent<T>::type;
 
-} // namespace Arrays
+} // namespace Type_Traits_Arrays
 
-inline namespace Miscellaneous_Transformations {
+inline namespace Type_Traits_Miscellaneous_Transformations {
 template<bool b, typename T = void>
 struct enable_if;
 
@@ -143,7 +143,7 @@ struct underlying_type;
 template<typename T>
 using underlying_type_t = typename underlying_type<T>::type;
 
-} // namespace Miscellaneous_Transformations
+} // namespace Type_Traits_Miscellaneous_Transformations
 
 //---------- definitions ----------//
 
@@ -253,7 +253,7 @@ struct remove_cv : type_identity<remove_const_t<remove_volatile_t<T>>> {
 
 } // namespace Type_Traits_Const_Volatility_Specifiers
 
-inline namespace References {
+inline namespace Type_Traits_References {
 template<typename T>
 struct remove_reference : type_identity<T> {
 };
@@ -266,9 +266,9 @@ template<typename T>
 struct remove_reference<T &&> : type_identity<T> {
 };
 
-} // namespace References
+} // namespace Type_Traits_References
 
-inline namespace Arrays {
+inline namespace Type_Traits_Arrays {
 template<typename T>
 struct remove_extent : type_identity<T> {
 };
@@ -281,9 +281,9 @@ template<typename T, std::size_t N>
 struct remove_extent<T[ N ]> : type_identity<T> {
 };
 
-} // namespace Arrays
+} // namespace Type_Traits_Arrays
 
-inline namespace Miscellaneous_Transformations {
+inline namespace Type_Traits_Miscellaneous_Transformations {
 template<bool b, typename T>
 struct enable_if {
 };
@@ -296,7 +296,7 @@ template<typename T>
 struct underlying_type : type_identity<__underlying_type( T )> {
 };
 
-} // namespace Miscellaneous_Transformations
+} // namespace Type_Traits_Miscellaneous_Transformations
 
 } // namespace std
 

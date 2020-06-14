@@ -143,6 +143,9 @@ inline namespace Type_Traits_Miscellaneous_Transformations {
 template<typename T>
 struct decay;
 
+template<typename T>
+using decay_t = typename decay<T>::type;
+
 template<bool B, typename T = void>
 struct enable_if;
 

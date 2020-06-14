@@ -37,11 +37,11 @@ struct type_identity;
 template<typename T>
 using type_identity_t = typename type_identity<T>::type;
 
-template<typename T, T v>
+template<typename T, T V>
 struct integral_constant;
 
-template<bool b>
-using bool_constant = integral_constant<bool, b>;
+template<bool B>
+using bool_constant = integral_constant<bool, B>;
 
 using true_type = bool_constant<true>;
 
@@ -131,11 +131,11 @@ using remove_extent_t = typename remove_extent<T>::type;
 } // namespace Type_Traits_Arrays
 
 inline namespace Type_Traits_Miscellaneous_Transformations {
-template<bool b, typename T = void>
+template<bool B, typename T = void>
 struct enable_if;
 
-template<bool b, typename T = void>
-using enable_if_t = typename enable_if<b, T>::type;
+template<bool B, typename T = void>
+using enable_if_t = typename enable_if<B, T>::type;
 
 template<typename T>
 struct underlying_type;
@@ -153,13 +153,13 @@ struct type_identity {
     using type = T;
 };
 
-template<typename T, T v>
+template<typename T, T V>
 struct integral_constant {
     using value_type = T;
 
     using type = integral_constant;
 
-    static constexpr auto value = value_type{ v };
+    static constexpr auto value = value_type{ V };
 
     constexpr operator value_type() const noexcept
     {
@@ -284,7 +284,7 @@ struct remove_extent<T[ N ]> : type_identity<T> {
 } // namespace Type_Traits_Arrays
 
 inline namespace Type_Traits_Miscellaneous_Transformations {
-template<bool b, typename T>
+template<bool B, typename T>
 struct enable_if {
 };
 

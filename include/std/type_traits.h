@@ -54,6 +54,9 @@ template<typename T>
 struct is_void;
 
 template<typename T>
+constexpr auto is_void_v = is_void<T>::value;
+
+template<typename T>
 struct is_array;
 
 template<typename T>

@@ -51,6 +51,9 @@ using false_type = bool_constant<false>;
 
 inline namespace Type_Traits_Primary_Type_Categories {
 template<typename T>
+struct is_void;
+
+template<typename T>
 struct is_array;
 
 template<typename T>
@@ -196,6 +199,10 @@ struct integral_constant {
 } // namespace Type_Traits_Helper_Classes
 
 inline namespace Type_Traits_Primary_Type_Categories {
+template<typename T>
+struct is_void : is_same<void, remove_cv_t<T>> {
+};
+
 template<typename T>
 struct is_array : false_type {
 };

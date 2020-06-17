@@ -125,6 +125,9 @@ struct remove_reference;
 template<typename T>
 using remove_reference_t = typename remove_reference<T>::type;
 
+template<typename T>
+struct add_lvalue_reference;
+
 } // namespace Type_Traits_References
 
 inline namespace Type_Traits_Pointers {
@@ -295,6 +298,20 @@ struct remove_reference<T &> : type_identity<T> {
 
 template<typename T>
 struct remove_reference<T &&> : type_identity<T> {
+};
+
+namespace Implementation {
+
+template<typename T>
+auto add_lvalue_reference( int ) -> type_identity<T &>;
+
+template<typename T>
+auto add_lvalue_reference( ... ) -> type_identity<T>;
+
+} // namespace Implementation
+
+template<typename T>
+struct add_lvalue_reference : decltype( Implementation::add_lvalue_reference<T>( 0 ) ) {
 };
 
 } // namespace Type_Traits_References

@@ -128,6 +128,9 @@ using remove_reference_t = typename remove_reference<T>::type;
 template<typename T>
 struct add_lvalue_reference;
 
+template<typename T>
+using add_lvalue_reference_t = typename add_lvalue_reference<T>::type;
+
 } // namespace Type_Traits_References
 
 inline namespace Type_Traits_Pointers {

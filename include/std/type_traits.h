@@ -131,6 +131,9 @@ struct add_lvalue_reference;
 template<typename T>
 using add_lvalue_reference_t = typename add_lvalue_reference<T>::type;
 
+template<typename T>
+struct add_rvalue_reference;
+
 } // namespace Type_Traits_References
 
 inline namespace Type_Traits_Pointers {
@@ -315,6 +318,20 @@ auto add_lvalue_reference( ... ) -> type_identity<T>;
 
 template<typename T>
 struct add_lvalue_reference : decltype( Implementation::add_lvalue_reference<T>( 0 ) ) {
+};
+
+namespace Implementation {
+
+template<typename T>
+auto add_rvalue_reference( int ) -> type_identity<T &>;
+
+template<typename T>
+auto add_rvalue_reference( ... ) -> type_identity<T>;
+
+} // namespace Implementation
+
+template<typename T>
+struct add_rvalue_reference : decltype( Implementation::add_rvalue_reference<T>( 0 ) ) {
 };
 
 } // namespace Type_Traits_References

@@ -98,6 +98,9 @@ constexpr auto is_same_v = is_same<T, U>::value;
 template<typename From, typename To>
 struct is_convertible;
 
+template<typename From, typename To>
+constexpr auto is_convertible_v = is_convertible<From, To>::value;
+
 } // namespace Type_Traits_Type_Relationships
 
 inline namespace Type_Traits_Const_Volatility_Specifiers {

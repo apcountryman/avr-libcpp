@@ -95,6 +95,9 @@ struct is_same;
 template<typename T, typename U>
 constexpr auto is_same_v = is_same<T, U>::value;
 
+template<typename From, typename To>
+struct is_convertible;
+
 } // namespace Type_Traits_Type_Relationships
 
 inline namespace Type_Traits_Const_Volatility_Specifiers {
@@ -184,6 +187,11 @@ using underlying_type_t = typename underlying_type<T>::type;
 
 } // namespace Type_Traits_Miscellaneous_Transformations
 
+//---------- supporting declarations ----------//
+
+template<typename T>
+auto declval() noexcept -> add_rvalue_reference_t<T>;
+
 //---------- definitions ----------//
 
 inline namespace Type_Traits_Helper_Classes {
@@ -269,6 +277,34 @@ struct is_same : false_type {
 
 template<typename T>
 struct is_same<T, T> : true_type {
+};
+
+namespace Implementation {
+
+template<typename>
+using true_type_if_substitution_succeeds = true_type;
+
+template<typename T>
+auto is_returnable( int ) -> true_type_if_substitution_succeeds<T()>;
+
+template<typename T>
+auto is_returnable( ... ) -> false_type;
+
+template<typename From, typename To>
+auto is_convertible( int )
+    -> true_type_if_substitution_succeeds<decltype( declval<void ( & )( To )>()( declval<From>() ) )>;
+
+template<typename From, typename To>
+auto is_convertible( ... ) -> false_type;
+
+} // namespace Implementation
+
+template<typename From, typename To>
+struct is_convertible
+    : bool_constant<
+          (is_void_v<From> and is_void_v<To>)
+          or ( decltype( Implementation::is_returnable<To>( 0 ) )::value and decltype(
+                 Implementation::is_convertible<From, To>( 0 ) )::value )> {
 };
 
 } // namespace Type_Traits_Type_Relationships

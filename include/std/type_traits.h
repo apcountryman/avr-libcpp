@@ -72,6 +72,9 @@ template<typename T>
 struct is_floating_point;
 
 template<typename T>
+constexpr auto is_floating_point_v = is_floating_point<T>::value;
+
+template<typename T>
 struct is_array;
 
 template<typename T>

@@ -162,6 +162,12 @@ constexpr auto is_unbounded_array_v = is_unbounded_array<T>::value;
 
 } // namespace Type_Traits_Type_Properties
 
+inline namespace Type_Traits_Supported_Operations {
+template<typename T>
+struct is_destructible;
+
+} // namespace Type_Traits_Supported_Operations
+
 inline namespace Type_Traits_Type_Relationships {
 template<typename T, typename U>
 struct is_same;
@@ -526,6 +532,37 @@ struct is_unbounded_array<T[]> : true_type {
 };
 
 } // namespace Type_Traits_Type_Properties
+
+inline namespace Type_Traits_Supported_Operations {
+namespace Implementation {
+template<typename T, typename = decltype( declval<T &>().~T() )>
+auto has_destructor( int ) -> true_type;
+
+template<typename T>
+auto has_destructor( ... ) -> false_type;
+
+template<typename T, bool = is_reference_v<T>, bool = is_void_v<T> or is_function_v<T> or is_unbounded_array_v<T>>
+struct is_destructible;
+
+template<typename T>
+struct is_destructible<T, true, false> : true_type {
+};
+
+template<typename T>
+struct is_destructible<T, false, true> : false_type {
+};
+
+template<typename T>
+struct is_destructible<T, false, false> : decltype( has_destructor<T>( 0 ) ) {
+};
+
+} // namespace Implementation
+
+template<typename T>
+struct is_destructible : Implementation::is_destructible<T> {
+};
+
+} // namespace Type_Traits_Supported_Operations
 
 inline namespace Type_Traits_Type_Relationships {
 template<typename T, typename U>

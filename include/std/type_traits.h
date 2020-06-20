@@ -81,6 +81,9 @@ template<typename T>
 constexpr auto is_array_v = is_array<T>::value;
 
 template<typename T>
+struct is_enum;
+
+template<typename T>
 struct is_function;
 
 template<typename T>
@@ -373,6 +376,10 @@ struct is_array<T[]> : true_type {
 
 template<typename T, size_t N>
 struct is_array<T[ N ]> : true_type {
+};
+
+template<typename T>
+struct is_enum : bool_constant<__is_enum( T )> {
 };
 
 template<typename T>

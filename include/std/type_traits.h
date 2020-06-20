@@ -114,6 +114,9 @@ constexpr auto is_pointer_v = is_pointer<T>::value;
 
 inline namespace Type_Traits_Composite_Type_Categories {
 template<typename T>
+struct is_arithmetic;
+
+template<typename T>
 struct is_reference;
 
 template<typename T>
@@ -434,6 +437,10 @@ struct is_pointer : Implementation::is_pointer<remove_cv_t<T>> {
 } // namespace Type_Traits_Primary_Type_Categories
 
 inline namespace Type_Traits_Composite_Type_Categories {
+template<typename T>
+struct is_arithmetic : bool_constant<is_integral_v<T> or is_floating_point_v<T>> {
+};
+
 template<typename T>
 struct is_reference : false_type {
 };

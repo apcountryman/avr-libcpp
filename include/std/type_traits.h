@@ -123,6 +123,9 @@ template<typename T>
 struct is_scalar;
 
 template<typename T>
+constexpr auto is_scalar_v = is_scalar<T>::value;
+
+template<typename T>
 struct is_reference;
 
 template<typename T>

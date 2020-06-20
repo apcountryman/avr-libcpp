@@ -235,6 +235,9 @@ struct remove_extent;
 template<typename T>
 using remove_extent_t = typename remove_extent<T>::type;
 
+template<typename T>
+struct remove_all_extents;
+
 } // namespace Type_Traits_Arrays
 
 inline namespace Type_Traits_Miscellaneous_Transformations {
@@ -654,6 +657,18 @@ struct remove_extent<T[]> : type_identity<T> {
 
 template<typename T, size_t N>
 struct remove_extent<T[ N ]> : type_identity<T> {
+};
+
+template<typename T>
+struct remove_all_extents : type_identity<T> {
+};
+
+template<typename T>
+struct remove_all_extents<T[]> : type_identity<typename remove_all_extents<T>::type> {
+};
+
+template<typename T, size_t N>
+struct remove_all_extents<T[ N ]> : type_identity<typename remove_all_extents<T>::type> {
 };
 
 } // namespace Type_Traits_Arrays

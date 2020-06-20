@@ -32,12 +32,11 @@ add_library(
     "std/cstddef.cc"
     "std/cstdint.cc"
     "std/new.cc"
+    "std/type_traits.cc"
+    "type_traits.cc"
 )
 target_include_directories(
     avr-libcpp
     PUBLIC "${PROJECT_SOURCE_DIR}/include"
-)
-target_include_directories(
-    avr-libcpp SYSTEM BEFORE
     PUBLIC "${PROJECT_SOURCE_DIR}/system"
 )

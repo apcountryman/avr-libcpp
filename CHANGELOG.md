@@ -22,3 +22,4 @@ UTC is used when determining release dates.
 - [`cstdint`](https://github.com/apcountryman/avr-libcpp/issues/12).
 - [Partial `cstddef`](https://github.com/apcountryman/avr-libcpp/issues/26).
 - [Partial `new`](https://github.com/apcountryman/avr-libcpp/issues/28).
+- [Partial `type_traits`](https://github.com/apcountryman/avr-libcpp/issues/34).

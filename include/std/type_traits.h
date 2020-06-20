@@ -66,6 +66,9 @@ template<typename T>
 struct is_integral;
 
 template<typename T>
+constexpr auto is_integral_v = is_integral<T>::value;
+
+template<typename T>
 struct is_array;
 
 template<typename T>

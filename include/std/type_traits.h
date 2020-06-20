@@ -104,6 +104,9 @@ struct is_function;
 template<typename T>
 constexpr auto is_function_v = is_function<T>::value;
 
+template<typename T>
+struct is_pointer;
+
 } // namespace Type_Traits_Primary_Type_Categories
 
 inline namespace Type_Traits_Composite_Type_Categories {
@@ -407,6 +410,22 @@ struct is_class : bool_constant<__is_class( T )> {
 
 template<typename T>
 struct is_function : bool_constant<not is_const_v<T const> and not is_reference_v<T>> {
+};
+
+namespace Implementation {
+
+template<typename T>
+struct is_pointer : false_type {
+};
+
+template<typename T>
+struct is_pointer<T *> : true_type {
+};
+
+} // namespace Implementation
+
+template<typename T>
+struct is_pointer : Implementation::is_pointer<remove_cv_t<T>> {
 };
 
 } // namespace Type_Traits_Primary_Type_Categories

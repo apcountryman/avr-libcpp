@@ -125,6 +125,9 @@ struct is_reference;
 template<typename T>
 constexpr auto is_reference_v = is_reference<T>::value;
 
+template<typename T>
+struct is_member_pointer;
+
 } // namespace Type_Traits_Composite_Type_Categories
 
 inline namespace Type_Traits_Type_Properties {
@@ -454,6 +457,22 @@ struct is_reference<T &> : true_type {
 
 template<typename T>
 struct is_reference<T &&> : true_type {
+};
+
+namespace Implementation {
+
+template<typename T>
+struct is_member_pointer : false_type {
+};
+
+template<typename T, typename U>
+struct is_member_pointer<T U::*> : true_type {
+};
+
+} // namespace Implementation
+
+template<typename T>
+struct is_member_pointer : Implementation::is_member_pointer<remove_cv_t<T>> {
 };
 
 } // namespace Type_Traits_Composite_Type_Categories

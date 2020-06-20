@@ -117,6 +117,9 @@ template<typename T>
 struct is_arithmetic;
 
 template<typename T>
+constexpr auto is_arithmetic_v = is_arithmetic<T>::value;
+
+template<typename T>
 struct is_reference;
 
 template<typename T>

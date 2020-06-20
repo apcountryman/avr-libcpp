@@ -86,6 +86,10 @@ struct is_const;
 template<typename T>
 constexpr auto is_const_v = is_const<T>::value;
 
+// C++20
+template<typename T>
+struct is_unbounded_array;
+
 } // namespace Type_Traits_Type_Properties
 
 inline namespace Type_Traits_Type_Relationships {
@@ -269,6 +273,14 @@ struct is_const : false_type {
 
 template<typename T>
 struct is_const<T const> : true_type {
+};
+
+template<typename T>
+struct is_unbounded_array : false_type {
+};
+
+template<typename T>
+struct is_unbounded_array<T[]> : true_type {
 };
 
 } // namespace Type_Traits_Type_Properties

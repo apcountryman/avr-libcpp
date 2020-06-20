@@ -93,6 +93,9 @@ template<typename T>
 constexpr auto is_union_v = is_union<T>::value;
 
 template<typename T>
+struct is_class;
+
+template<typename T>
 struct is_function;
 
 template<typename T>
@@ -393,6 +396,10 @@ struct is_enum : bool_constant<__is_enum( T )> {
 
 template<typename T>
 struct is_union : bool_constant<__is_union( T )> {
+};
+
+template<typename T>
+struct is_class : bool_constant<__is_class( T )> {
 };
 
 template<typename T>

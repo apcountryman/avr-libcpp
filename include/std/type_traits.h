@@ -128,6 +128,9 @@ constexpr auto is_reference_v = is_reference<T>::value;
 template<typename T>
 struct is_member_pointer;
 
+template<typename T>
+constexpr auto is_member_pointer_v = is_member_pointer<T>::value;
+
 } // namespace Type_Traits_Composite_Type_Categories
 
 inline namespace Type_Traits_Type_Properties {

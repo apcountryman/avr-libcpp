@@ -60,6 +60,9 @@ template<typename T>
 struct is_null_pointer;
 
 template<typename T>
+constexpr auto is_null_pointer_v = is_null_pointer<T>::value;
+
+template<typename T>
 struct is_array;
 
 template<typename T>

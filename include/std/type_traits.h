@@ -90,6 +90,9 @@ template<typename T>
 struct is_union;
 
 template<typename T>
+constexpr auto is_union_v = is_union<T>::value;
+
+template<typename T>
 struct is_function;
 
 template<typename T>

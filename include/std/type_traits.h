@@ -129,6 +129,9 @@ template<typename T>
 struct is_object;
 
 template<typename T>
+constexpr auto is_object_v = is_object<T>::value;
+
+template<typename T>
 struct is_reference;
 
 template<typename T>

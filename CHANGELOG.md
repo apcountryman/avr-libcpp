@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 UTC is used when determining release dates.
 
 ## [Unreleased](https://github.com/apcountryman/avr-libcpp/compare/master...develop)
+
+## [0.1.0](https://github.com/apcountryman/avr-libcpp/compare/0.0.0...0.1.0)
 ### Added
 - Repository Git ignore rules.
 - Repository Git hooks install script.
@@ -23,3 +25,4 @@ UTC is used when determining release dates.
 - [Partial `cstddef`](https://github.com/apcountryman/avr-libcpp/issues/26).
 - [Partial `new`](https://github.com/apcountryman/avr-libcpp/issues/28).
 - [Partial `type_traits`](https://github.com/apcountryman/avr-libcpp/issues/34).
+- [Partial `utility`](https://github.com/apcountryman/avr-libcpp/issues/35).

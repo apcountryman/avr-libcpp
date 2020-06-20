@@ -69,6 +69,9 @@ template<typename T>
 constexpr auto is_integral_v = is_integral<T>::value;
 
 template<typename T>
+struct is_floating_point;
+
+template<typename T>
 struct is_array;
 
 template<typename T>
@@ -331,6 +334,30 @@ struct is_integral<__uint24> : true_type {
 
 template<typename T>
 struct is_integral : Implementation::is_integral<remove_cv_t<T>> {
+};
+
+namespace Implementation {
+
+template<typename T>
+struct is_floating_point : false_type {
+};
+
+template<>
+struct is_floating_point<float> : true_type {
+};
+
+template<>
+struct is_floating_point<double> : true_type {
+};
+
+template<>
+struct is_floating_point<long double> : true_type {
+};
+
+} // namespace Implementation
+
+template<typename T>
+struct is_floating_point : Implementation::is_floating_point<remove_cv_t<T>> {
 };
 
 template<typename T>

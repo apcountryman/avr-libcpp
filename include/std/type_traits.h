@@ -120,6 +120,9 @@ template<typename T>
 constexpr auto is_arithmetic_v = is_arithmetic<T>::value;
 
 template<typename T>
+struct is_scalar;
+
+template<typename T>
 struct is_reference;
 
 template<typename T>
@@ -448,6 +451,11 @@ struct is_pointer : Implementation::is_pointer<remove_cv_t<T>> {
 inline namespace Type_Traits_Composite_Type_Categories {
 template<typename T>
 struct is_arithmetic : bool_constant<is_integral_v<T> or is_floating_point_v<T>> {
+};
+
+template<typename T>
+struct is_scalar
+    : bool_constant<is_arithmetic_v<T> or is_enum_v<T> or is_pointer_v<T> or is_member_pointer_v<T> or is_null_pointer_v<T>> {
 };
 
 template<typename T>

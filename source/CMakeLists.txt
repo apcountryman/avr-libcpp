@@ -33,7 +33,9 @@ add_library(
     "std/cstdint.cc"
     "std/new.cc"
     "std/type_traits.cc"
+    "std/utility.cc"
     "type_traits.cc"
+    "utility.cc"
 )
 target_include_directories(
     avr-libcpp

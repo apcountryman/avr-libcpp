@@ -57,6 +57,9 @@ template<typename T>
 constexpr auto is_void_v = is_void<T>::value;
 
 template<typename T>
+struct is_null_pointer;
+
+template<typename T>
 struct is_array;
 
 template<typename T>
@@ -235,6 +238,10 @@ struct integral_constant {
 inline namespace Type_Traits_Primary_Type_Categories {
 template<typename T>
 struct is_void : is_same<void, remove_cv_t<T>> {
+};
+
+template<typename T>
+struct is_null_pointer : is_same<nullptr_t, remove_cv_t<T>> {
 };
 
 template<typename T>

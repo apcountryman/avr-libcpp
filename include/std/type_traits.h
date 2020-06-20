@@ -63,6 +63,9 @@ template<typename T>
 constexpr auto is_null_pointer_v = is_null_pointer<T>::value;
 
 template<typename T>
+struct is_integral;
+
+template<typename T>
 struct is_array;
 
 template<typename T>
@@ -245,6 +248,86 @@ struct is_void : is_same<void, remove_cv_t<T>> {
 
 template<typename T>
 struct is_null_pointer : is_same<nullptr_t, remove_cv_t<T>> {
+};
+
+namespace Implementation {
+
+template<typename T>
+struct is_integral : false_type {
+};
+
+template<>
+struct is_integral<bool> : true_type {
+};
+
+template<>
+struct is_integral<char> : true_type {
+};
+
+template<>
+struct is_integral<signed char> : true_type {
+};
+
+template<>
+struct is_integral<unsigned char> : true_type {
+};
+
+template<>
+struct is_integral<char16_t> : true_type {
+};
+
+template<>
+struct is_integral<char32_t> : true_type {
+};
+
+template<>
+struct is_integral<wchar_t> : true_type {
+};
+
+template<>
+struct is_integral<signed short> : true_type {
+};
+
+template<>
+struct is_integral<unsigned short> : true_type {
+};
+
+template<>
+struct is_integral<signed int> : true_type {
+};
+
+template<>
+struct is_integral<unsigned int> : true_type {
+};
+
+template<>
+struct is_integral<signed long> : true_type {
+};
+
+template<>
+struct is_integral<unsigned long> : true_type {
+};
+
+template<>
+struct is_integral<signed long long> : true_type {
+};
+
+template<>
+struct is_integral<unsigned long long> : true_type {
+};
+
+template<>
+struct is_integral<__int24> : true_type {
+};
+
+template<>
+struct is_integral<__uint24> : true_type {
+};
+
+} // namespace Implementation
+
+template<typename T>
+struct is_integral : Implementation::is_integral<remove_cv_t<T>> {
 };
 
 template<typename T>

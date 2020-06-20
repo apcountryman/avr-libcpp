@@ -126,6 +126,9 @@ template<typename T>
 constexpr auto is_scalar_v = is_scalar<T>::value;
 
 template<typename T>
+struct is_object;
+
+template<typename T>
 struct is_reference;
 
 template<typename T>
@@ -459,6 +462,11 @@ struct is_arithmetic : bool_constant<is_integral_v<T> or is_floating_point_v<T>>
 template<typename T>
 struct is_scalar
     : bool_constant<is_arithmetic_v<T> or is_enum_v<T> or is_pointer_v<T> or is_member_pointer_v<T> or is_null_pointer_v<T>> {
+};
+
+template<typename T>
+struct is_object
+    : bool_constant<is_scalar_v<T> or is_array_v<T> or is_union_v<T> or is_class_v<T>> {
 };
 
 template<typename T>

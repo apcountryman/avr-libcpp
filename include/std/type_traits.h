@@ -84,6 +84,9 @@ template<typename T>
 struct is_enum;
 
 template<typename T>
+constexpr auto is_enum_v = is_enum<T>::value;
+
+template<typename T>
 struct is_function;
 
 template<typename T>

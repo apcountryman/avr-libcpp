@@ -96,6 +96,9 @@ template<typename T>
 struct is_class;
 
 template<typename T>
+constexpr auto is_class_v = is_class<T>::value;
+
+template<typename T>
 struct is_function;
 
 template<typename T>

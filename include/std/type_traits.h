@@ -169,6 +169,9 @@ struct is_destructible;
 template<typename T>
 constexpr auto is_destructible_v = is_destructible<T>::value;
 
+template<typename T>
+struct is_trivially_destructible;
+
 } // namespace Type_Traits_Supported_Operations
 
 inline namespace Type_Traits_Type_Relationships {
@@ -563,6 +566,11 @@ struct is_destructible<T, false, false> : decltype( has_destructor<T>( 0 ) ) {
 
 template<typename T>
 struct is_destructible : Implementation::is_destructible<T> {
+};
+
+template<typename T>
+struct is_trivially_destructible
+    : bool_constant<is_destructible_v<T> and __has_trivial_destructor( T )> {
 };
 
 } // namespace Type_Traits_Supported_Operations

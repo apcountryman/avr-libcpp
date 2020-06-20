@@ -172,6 +172,9 @@ constexpr auto is_destructible_v = is_destructible<T>::value;
 template<typename T>
 struct is_trivially_destructible;
 
+template<typename T>
+constexpr auto is_trivially_destructible_v = is_trivially_destructible<T>::value;
+
 } // namespace Type_Traits_Supported_Operations
 
 inline namespace Type_Traits_Type_Relationships {

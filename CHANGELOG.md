@@ -6,7 +6,7 @@ UTC is used when determining release dates.
 
 ## [Unreleased](https://github.com/apcountryman/avr-libcpp/compare/master...develop)
 
-## [0.1.0](https://github.com/apcountryman/avr-libcpp/compare/0.0.0...0.1.0)
+## [0.1.0](https://github.com/apcountryman/avr-libcpp/compare/0.0.0...0.1.0) - 2020-06-21
 ### Added
 - Repository Git ignore rules.
 - Repository Git hooks install script.

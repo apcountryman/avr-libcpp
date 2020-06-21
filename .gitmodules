@@ -12,8 +12,20 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: .gitignore
-# Description: Git ignore rules for the avr-libcpp repository.
+# File: .gitmodules
+# Description: Git submodules of the avr-libcpp repository.
 
-# ignore the build directory
-build/
+# AVR CMake toolchain
+[submodule "toolchain-avr-gcc"]
+	path = toolchain-avr-gcc
+	url = ../toolchain-avr-gcc
+
+# CMake modules
+[submodule "cmake/modules/apcountryman-cmake-utilities"]
+	path = cmake/modules/apcountryman-cmake-utilities
+	url = ../cmake-utilities
+
+# lizard
+[submodule "lizard"]
+	path = lizard
+	url = ../terryyin-lizard

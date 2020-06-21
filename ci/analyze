@@ -1,0 +1,198 @@
+#!/usr/bin/env bash
+
+# avr-libcpp
+#
+# Copyright 2020 Andrew Countryman <apcountryman@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+# file except in compliance with the License. You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software distributed under
+# the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied. See the License for the specific language governing
+# permissions and limitations under the License.
+
+# File: ci/analyze
+# Description: avr-libcpp repository CI static analysis script.
+
+function error()
+{
+    local -r message="$1"
+
+    ( >&2 echo "$mnemonic: $message" )
+}
+
+function abort()
+{
+    if [[ "$#" -gt 0 ]]; then
+        local -r message="$1"
+
+        error "$message, aborting"
+    fi
+
+    exit 1
+}
+
+function display_help_text()
+{
+    echo "NAME"
+    echo "    $mnemonic - Run a static analyzer against avr-libcpp."
+    echo "SYNOPSIS"
+    echo "    $mnemonic --help"
+    echo "    $mnemonic --version"
+    echo "    $mnemonic --analyzer <analyzer>"
+    echo "OPTIONS"
+    echo "    --analyzer <analyzer>"
+    echo "        Specify the analyzer to run against avr-libcpp. The following analyzers"
+    echo "        are supported:"
+    echo "            clang-tidy"
+    echo "            cppcheck"
+    echo "            lizard"
+    echo "            shellcheck"
+    echo "    --help"
+    echo "        Display this help text."
+    echo "    --version"
+    echo "        Display the version of this script."
+    echo "EXAMPLES"
+    echo "    $mnemonic --help"
+    echo "    $mnemonic --version"
+    echo "    $mnemonic --analyzer clang-tidy"
+    echo "    $mnemonic --analyzer cppcheck"
+    echo "    $mnemonic --analyzer lizard"
+    echo "    $mnemonic --analyzer shellcheck"
+}
+
+function display_version()
+{
+    echo "$mnemonic, version $version"
+}
+
+function generate_compilation_database()
+{
+    local -r build_configuration="$repository/configuration/CMakeLists.txt.analysis"
+
+    if ! mkdir -p "$build_directory"; then
+        abort
+    fi
+
+    if ! cd "$build_directory"; then
+        abort
+    fi
+
+    if ! cmake -C "$build_configuration" "$repository"; then
+        abort
+    fi
+}
+
+function run_cppcheck()
+{
+    generate_compilation_database
+
+    local -r cppcheck_options=(
+        "--template=gcc"
+        "--project=$repository/build/analysis/compile_commands.json"
+    )
+
+    if ! cppcheck "${cppcheck_options[@]}"; then
+        abort
+    fi
+}
+
+function run_clang-tidy()
+{
+    generate_compilation_database
+
+    if ! run-clang-tidy -p "$build_directory"; then
+        abort
+    fi
+}
+
+function run_lizard()
+{
+    local source_files; mapfile -t source_files < <( git -C "$repository" ls-files '*.h' '*.cc' '*.cc.in' | xargs -r -d '\n' -I '{}' echo "$repository/{}" ); readonly source_files
+
+    local -r lizard_options=(
+        "--languages" "cpp"
+
+        "--modified"
+
+        "--arguments" "5"
+        "--length"    "25"
+        "--CCN"       "10"
+    )
+
+    if ! "$repository/lizard/lizard.py" "${lizard_options[@]}" "${source_files[@]}"; then
+        abort
+    fi
+}
+
+function run_shellcheck()
+{
+    local scripts; mapfile -t scripts < <( git -C "$repository" ls-files ':!:cmake/modules/' ':!:lizard/' ':!:toolchain-avr-gcc/' | xargs -r -d '\n' -I '{}' find "$repository/{}" -executable ); readonly scripts
+
+    if ! shellcheck "${scripts[@]}"; then
+        abort
+    fi
+}
+
+function ensure_no_static_analysis_errors_are_present()
+{
+    "run_$analyzer"
+}
+
+function main()
+{
+    local -r script=$( readlink -f "$0" )
+    local -r mnemonic=$( basename "$script" )
+    local -r repository=$( readlink -f "$( dirname "$script" )/.." )
+    local -r version=$( git -C "$repository" describe --always --dirty --broken )
+    local -r build_directory="$repository/build/analysis"
+
+    while [[ "$#" -gt 0 ]]; do
+        local argument="$1"; shift
+
+        case "$argument" in
+            --help)
+                display_help_text
+                exit
+                ;;
+            --version)
+                display_version
+                exit
+                ;;
+            --analyzer)
+                if [[ -n "$analyzer" ]]; then
+                    abort "analyzer already specified"
+                fi
+
+                if [[ "$#" -le 0 ]]; then
+                    abort "analyzer not specified"
+                fi
+
+                local -r analyzer="$1"; shift
+
+                if [[ "$analyzer" != "clang-tidy" && "$analyzer" != "cppcheck" && "$analyzer" != "lizard" && "$analyzer" != "shellcheck" ]]; then
+                    abort "'$analyzer' is not a supported analyzer"
+                fi
+                ;;
+            --*)
+                ;&
+            -*)
+                abort "'$argument' is not a supported option"
+                ;;
+            *)
+                abort "'$argument' is not a valid argument"
+                ;;
+        esac
+    done
+
+    if [[ -z "$analyzer" ]]; then
+        abort "'--analyzer' must be specified"
+    fi
+
+    ensure_no_static_analysis_errors_are_present
+}
+
+main "$@"

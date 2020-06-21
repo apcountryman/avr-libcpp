@@ -38,6 +38,14 @@ See the `pre-commit` script's help text for usage details
 Additional checks, such as static analysis, are performed by this project's Travis CI
 jobs.
 
+## Versioning
+Post version 0.1.0, `avr-libcpp` will follow the [Abseil Live at Head
+philosophy](https://abseil.io/about/philosophy).
+
+## Workflow
+`avr-libcpp` uses the [GitHub flow](https://guides.github.com/introduction/flow/)
+workflow.
+
 ## Git Hooks
 To install this repository's Git hooks, execute the `install` script located in the
 `git/hooks` directory.

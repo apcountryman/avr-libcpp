@@ -71,7 +71,7 @@ endif( NOT ${AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS} )
 include( git-utilities )
 execute_git_command(
     AVRLIBCPP_VERSION
-    COMMAND describe --always --dirty --broken
+    COMMAND describe --match=none --always --dirty --broken
 )
 
 # build the library

@@ -110,6 +110,9 @@ struct is_pointer;
 template<typename T>
 constexpr auto is_pointer_v = is_pointer<T>::value;
 
+template<typename T>
+struct is_lvalue_reference;
+
 } // namespace Type_Traits_Primary_Type_Categories
 
 inline namespace Type_Traits_Composite_Type_Categories {
@@ -468,6 +471,14 @@ struct is_pointer : false_type {
 
 template<typename T>
 struct is_pointer<T *> : true_type {
+};
+
+template<typename T>
+struct is_lvalue_reference : false_type {
+};
+
+template<typename T>
+struct is_lvalue_reference<T &> : true_type {
 };
 
 } // namespace Implementation

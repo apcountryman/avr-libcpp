@@ -116,6 +116,9 @@ struct is_lvalue_reference;
 template<typename T>
 constexpr auto is_lvalue_reference_v = is_lvalue_reference<T>::value;
 
+template<typename T>
+struct is_rvalue_reference;
+
 } // namespace Type_Traits_Primary_Type_Categories
 
 inline namespace Type_Traits_Composite_Type_Categories {
@@ -482,6 +485,14 @@ struct is_lvalue_reference : false_type {
 
 template<typename T>
 struct is_lvalue_reference<T &> : true_type {
+};
+
+template<typename T>
+struct is_rvalue_reference : false_type {
+};
+
+template<typename T>
+struct is_rvalue_reference<T &&> : true_type {
 };
 
 } // namespace Implementation

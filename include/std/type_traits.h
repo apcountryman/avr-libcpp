@@ -482,6 +482,12 @@ template<typename T>
 struct is_pointer<T *> : true_type {
 };
 
+} // namespace Implementation
+
+template<typename T>
+struct is_pointer : Implementation::is_pointer<remove_cv_t<T>> {
+};
+
 template<typename T>
 struct is_lvalue_reference : false_type {
 };
@@ -496,12 +502,6 @@ struct is_rvalue_reference : false_type {
 
 template<typename T>
 struct is_rvalue_reference<T &&> : true_type {
-};
-
-} // namespace Implementation
-
-template<typename T>
-struct is_pointer : Implementation::is_pointer<remove_cv_t<T>> {
 };
 
 } // namespace Type_Traits_Primary_Type_Categories

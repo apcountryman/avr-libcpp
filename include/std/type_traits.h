@@ -304,6 +304,9 @@ struct conjunction;
 template<typename... B>
 constexpr auto conjunction_v = conjunction<B...>::value;
 
+template<typename... B>
+struct disjunction;
+
 } // namespace Operations_On_Traits
 
 //---------- supporting declarations ----------//
@@ -807,6 +810,19 @@ struct conjunction<B1> : B1 {
 template<typename B1, typename... BN>
 struct conjunction<B1, BN...>
     : conditional_t<static_cast<bool>( B1::value ), conjunction<BN...>, B1> {
+};
+
+template<typename...>
+struct disjunction : false_type {
+};
+
+template<typename B1>
+struct disjunction<B1> : B1 {
+};
+
+template<typename B1, typename... BN>
+struct disjunction<B1, BN...>
+    : conditional_t<static_cast<bool>( B1::value ), B1, disjunction<BN...>> {
 };
 
 } // namespace Operations_On_Traits

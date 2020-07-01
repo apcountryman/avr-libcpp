@@ -490,7 +490,7 @@ struct is_class : bool_constant<__is_class( T )> {
 };
 
 template<typename T>
-struct is_function : bool_constant<not is_const_v<T const> and not is_reference_v<T>> {
+struct is_function : conjunction<negation<is_const<T const>>, negation<is_reference<T>>> {
 };
 
 namespace Implementation {
@@ -529,17 +529,16 @@ struct is_rvalue_reference<T &&> : true_type {
 
 inline namespace Type_Traits_Composite_Type_Categories {
 template<typename T>
-struct is_arithmetic : bool_constant<is_integral_v<T> or is_floating_point_v<T>> {
+struct is_arithmetic : disjunction<is_integral<T>, is_floating_point<T>> {
 };
 
 template<typename T>
 struct is_scalar
-    : bool_constant<is_arithmetic_v<T> or is_enum_v<T> or is_pointer_v<T> or is_member_pointer_v<T> or is_null_pointer_v<T>> {
+    : disjunction<is_arithmetic<T>, is_enum<T>, is_pointer<T>, is_member_pointer<T>, is_null_pointer<T>> {
 };
 
 template<typename T>
-struct is_object
-    : bool_constant<is_scalar_v<T> or is_array_v<T> or is_union_v<T> or is_class_v<T>> {
+struct is_object : disjunction<is_scalar<T>, is_array<T>, is_union<T>, is_class<T>> {
 };
 
 template<typename T>
@@ -622,7 +621,7 @@ struct is_destructible : Implementation::is_destructible<T> {
 
 template<typename T>
 struct is_trivially_destructible
-    : bool_constant<is_destructible_v<T> and __has_trivial_destructor( T )> {
+    : conjunction<is_destructible<T>, bool_constant<__has_trivial_destructor( T )>> {
 };
 
 } // namespace Type_Traits_Supported_Operations
@@ -658,10 +657,9 @@ auto is_convertible( ... ) -> false_type;
 
 template<typename From, typename To>
 struct is_convertible
-    : bool_constant<
-          (is_void_v<From> and is_void_v<To>)
-          or ( decltype( Implementation::is_returnable<To>( 0 ) )::value and decltype(
-                 Implementation::is_convertible<From, To>( 0 ) )::value )> {
+    : disjunction<
+          conjunction<is_void<From>, is_void<To>>,
+          conjunction<decltype( Implementation::is_returnable<To>( 0 ) ), decltype( Implementation::is_convertible<From, To>( 0 ) )>> {
 };
 
 } // namespace Type_Traits_Type_Relationships

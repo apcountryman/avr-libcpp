@@ -179,6 +179,9 @@ constexpr auto is_const_v = is_const<T>::value;
 template<typename T>
 struct is_volatile;
 
+template<typename T>
+constexpr auto is_volatile_v = is_volatile<T>::value;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;

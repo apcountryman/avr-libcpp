@@ -129,6 +129,9 @@ template<typename T>
 struct is_fundamental;
 
 template<typename T>
+constexpr auto is_fundamental_v = is_fundamental<T>::value;
+
+template<typename T>
 struct is_arithmetic;
 
 template<typename T>

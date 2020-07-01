@@ -313,6 +313,9 @@ constexpr auto disjunction_v = disjunction<B...>::value;
 template<typename B>
 struct negation;
 
+template<typename B>
+constexpr auto negation_v = negation<B>::value;
+
 } // namespace Operations_On_Traits
 
 //---------- supporting declarations ----------//

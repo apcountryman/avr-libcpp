@@ -188,6 +188,9 @@ struct is_trivial;
 template<typename T>
 constexpr auto is_trivial_v = is_trivial<T>::value;
 
+template<typename T>
+struct is_trivially_copyable;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;
@@ -622,6 +625,10 @@ struct is_volatile<T volatile> : true_type {
 
 template<typename T>
 struct is_trivial : bool_constant<__is_trivial( T )> {
+};
+
+template<typename T>
+struct is_trivially_copyable : bool_constant<__is_trivially_copyable( T )> {
 };
 
 template<typename T>

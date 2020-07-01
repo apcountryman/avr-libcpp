@@ -153,6 +153,9 @@ template<typename T>
 struct is_compound;
 
 template<typename T>
+constexpr auto is_compound_v = is_compound<T>::value;
+
+template<typename T>
 struct is_reference;
 
 template<typename T>

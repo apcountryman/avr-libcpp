@@ -194,6 +194,9 @@ struct is_trivially_copyable;
 template<typename T>
 constexpr auto is_trivially_copyable_v = is_trivially_copyable<T>::value;
 
+template<typename T>
+struct is_standard_layout;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;
@@ -632,6 +635,10 @@ struct is_trivial : bool_constant<__is_trivial( T )> {
 
 template<typename T>
 struct is_trivially_copyable : bool_constant<__is_trivially_copyable( T )> {
+};
+
+template<typename T>
+struct is_standard_layout : bool_constant<__is_standard_layout( T )> {
 };
 
 template<typename T>

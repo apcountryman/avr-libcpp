@@ -197,6 +197,9 @@ constexpr auto is_trivially_copyable_v = is_trivially_copyable<T>::value;
 template<typename T>
 struct is_standard_layout;
 
+template<typename T>
+constexpr auto is_standard_layout_v = is_standard_layout<T>::value;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;

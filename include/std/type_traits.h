@@ -206,6 +206,9 @@ struct is_pod;
 template<typename T>
 constexpr auto is_pod_v = is_pod<T>::value;
 
+template<typename T>
+struct has_unique_object_representations;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;
@@ -652,6 +655,11 @@ struct is_standard_layout : bool_constant<__is_standard_layout( T )> {
 
 template<typename T>
 struct is_pod : bool_constant<__is_pod( T )> {
+};
+
+template<typename T>
+struct has_unique_object_representations
+    : bool_constant<__has_unique_object_representations( remove_cv_t<remove_all_extents_t<T>> )> {
 };
 
 template<typename T>

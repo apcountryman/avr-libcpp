@@ -301,6 +301,9 @@ inline namespace Operations_On_Traits {
 template<typename... B>
 struct conjunction;
 
+template<typename... B>
+constexpr auto conjunction_v = conjunction<B...>::value;
+
 } // namespace Operations_On_Traits
 
 //---------- supporting declarations ----------//

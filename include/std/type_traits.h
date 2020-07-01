@@ -310,6 +310,9 @@ struct disjunction;
 template<typename... B>
 constexpr auto disjunction_v = disjunction<B...>::value;
 
+template<typename B>
+struct negation;
+
 } // namespace Operations_On_Traits
 
 //---------- supporting declarations ----------//
@@ -826,6 +829,10 @@ struct disjunction<B1> : B1 {
 template<typename B1, typename... BN>
 struct disjunction<B1, BN...>
     : conditional_t<static_cast<bool>( B1::value ), B1, disjunction<BN...>> {
+};
+
+template<typename B>
+struct negation : bool_constant<not static_cast<bool>( B::value )> {
 };
 
 } // namespace Operations_On_Traits

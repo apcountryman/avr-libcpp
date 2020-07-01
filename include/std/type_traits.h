@@ -297,6 +297,12 @@ using underlying_type_t = typename underlying_type<T>::type;
 
 } // namespace Type_Traits_Miscellaneous_Transformations
 
+inline namespace Operations_On_Traits {
+template<typename... B>
+struct conjunction;
+
+} // namespace Operations_On_Traits
+
 //---------- supporting declarations ----------//
 
 template<typename T>
@@ -785,6 +791,22 @@ struct underlying_type : type_identity<__underlying_type( T )> {
 };
 
 } // namespace Type_Traits_Miscellaneous_Transformations
+
+inline namespace Operations_On_Traits {
+template<typename...>
+struct conjuction : true_type {
+};
+
+template<typename B1>
+struct conjunction<B1> : B1 {
+};
+
+template<typename B1, typename... BN>
+struct conjunction<B1, BN...>
+    : conditional_t<static_cast<bool>( B1::value ), conjunction<BN...>, B1> {
+};
+
+} // namespace Operations_On_Traits
 
 } // namespace std
 

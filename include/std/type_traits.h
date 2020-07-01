@@ -150,6 +150,9 @@ template<typename T>
 constexpr auto is_object_v = is_object<T>::value;
 
 template<typename T>
+struct is_compound;
+
+template<typename T>
 struct is_reference;
 
 template<typename T>
@@ -549,6 +552,10 @@ struct is_scalar
 
 template<typename T>
 struct is_object : disjunction<is_scalar<T>, is_array<T>, is_union<T>, is_class<T>> {
+};
+
+template<typename T>
+struct is_compound : negation<is_fundamental<T>> {
 };
 
 template<typename T>

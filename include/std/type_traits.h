@@ -203,6 +203,9 @@ constexpr auto is_standard_layout_v = is_standard_layout<T>::value;
 template<typename T>
 struct is_pod;
 
+template<typename T>
+constexpr auto is_pod_v = is_pod<T>::value;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;

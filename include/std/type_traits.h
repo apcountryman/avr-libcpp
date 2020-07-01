@@ -307,6 +307,9 @@ constexpr auto conjunction_v = conjunction<B...>::value;
 template<typename... B>
 struct disjunction;
 
+template<typename... B>
+constexpr auto disjunction_v = disjunction<B...>::value;
+
 } // namespace Operations_On_Traits
 
 //---------- supporting declarations ----------//

@@ -126,6 +126,9 @@ constexpr auto is_rvalue_reference_v = is_rvalue_reference<T>::value;
 
 inline namespace Type_Traits_Composite_Type_Categories {
 template<typename T>
+struct is_fundamental;
+
+template<typename T>
 struct is_arithmetic;
 
 template<typename T>
@@ -528,6 +531,10 @@ struct is_rvalue_reference<T &&> : true_type {
 } // namespace Type_Traits_Primary_Type_Categories
 
 inline namespace Type_Traits_Composite_Type_Categories {
+template<typename T>
+struct is_fundamental : disjunction<is_arithmetic<T>, is_void<T>, is_null_pointer<T>> {
+};
+
 template<typename T>
 struct is_arithmetic : disjunction<is_integral<T>, is_floating_point<T>> {
 };

@@ -200,6 +200,9 @@ struct is_standard_layout;
 template<typename T>
 constexpr auto is_standard_layout_v = is_standard_layout<T>::value;
 
+template<typename T>
+struct is_pod;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;
@@ -642,6 +645,10 @@ struct is_trivially_copyable : bool_constant<__is_trivially_copyable( T )> {
 
 template<typename T>
 struct is_standard_layout : bool_constant<__is_standard_layout( T )> {
+};
+
+template<typename T>
+struct is_pod : bool_constant<__is_pod( T )> {
 };
 
 template<typename T>

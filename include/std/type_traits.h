@@ -209,6 +209,9 @@ constexpr auto is_pod_v = is_pod<T>::value;
 template<typename T>
 struct has_unique_object_representations;
 
+template<typename T>
+constexpr auto has_unique_object_representations_v = has_unique_object_representations<T>::value;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;

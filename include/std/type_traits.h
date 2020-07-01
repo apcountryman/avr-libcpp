@@ -176,6 +176,9 @@ struct is_const;
 template<typename T>
 constexpr auto is_const_v = is_const<T>::value;
 
+template<typename T>
+struct is_volatile;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;
@@ -598,6 +601,14 @@ struct is_const : false_type {
 
 template<typename T>
 struct is_const<T const> : true_type {
+};
+
+template<typename T>
+struct is_volatile : false_type {
+};
+
+template<typename T>
+struct is_volatile<T volatile> : true_type {
 };
 
 template<typename T>

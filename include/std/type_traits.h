@@ -251,6 +251,9 @@ constexpr auto is_signed_v = is_signed<T>::value;
 template<typename T>
 struct is_unsigned;
 
+template<typename T>
+constexpr auto is_unsigned_v = is_unsigned<T>::value;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;

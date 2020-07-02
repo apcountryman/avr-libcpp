@@ -291,6 +291,9 @@ inline namespace Property_queries {
 template<typename T>
 struct alignment_of;
 
+template<typename T>
+constexpr auto alignment_of_v = alignment_of<T>::value;
+
 } // namespace Property_queries
 
 inline namespace Type_Traits_Type_Relationships {

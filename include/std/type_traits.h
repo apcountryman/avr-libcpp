@@ -315,6 +315,12 @@ struct is_same;
 template<typename T, typename U>
 constexpr auto is_same_v = is_same<T, U>::value;
 
+template<typename Base, typename Derived>
+struct is_base_of;
+
+template<typename Base, typename Derived>
+constexpr auto is_base_of_v = is_base_of<Base, Derived>::value;
+
 template<typename From, typename To>
 struct is_convertible;
 
@@ -888,6 +894,10 @@ struct is_same : false_type {
 
 template<typename T>
 struct is_same<T, T> : true_type {
+};
+
+template<typename Base, typename Derived>
+struct is_base_of : bool_constant<__is_base_of( Base, Derived )> {
 };
 
 namespace Implementation {

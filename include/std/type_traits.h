@@ -242,6 +242,9 @@ struct is_aggregate;
 template<typename T>
 constexpr auto is_aggregate_v = is_aggregate<T>::value;
 
+template<typename T>
+struct is_signed;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;
@@ -713,6 +716,22 @@ struct is_final : bool_constant<__is_final( T )> {
 
 template<typename T>
 struct is_aggregate : bool_constant<__is_aggregate( remove_cv_t<T> )> {
+};
+
+namespace Implementation {
+
+template<typename T, bool = std::is_arithmetic_v<T>>
+struct is_signed : bool_constant<static_cast<T>( -1 ) < static_cast<T>( 0 )> {
+};
+
+template<typename T>
+struct is_signed<T, false> : false_type {
+};
+
+} // namespace Implementation
+
+template<typename T>
+struct is_signed : Implementation::is_signed<T> {
 };
 
 template<typename T>

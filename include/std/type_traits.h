@@ -287,6 +287,12 @@ constexpr auto is_trivially_destructible_v = is_trivially_destructible<T>::value
 
 } // namespace Type_Traits_Supported_Operations
 
+inline namespace Property_queries {
+template<typename T>
+struct alignment_of;
+
+} // namespace Property_queries
+
 inline namespace Type_Traits_Type_Relationships {
 template<typename T, typename U>
 struct is_same;
@@ -820,6 +826,13 @@ struct is_trivially_destructible
 };
 
 } // namespace Type_Traits_Supported_Operations
+
+inline namespace Property_Queries {
+template<typename T>
+struct alignment_of : integral_constant<size_t, alignof( T )> {
+};
+
+} // namespace Property_Queries
 
 inline namespace Type_Traits_Type_Relationships {
 template<typename T, typename U>

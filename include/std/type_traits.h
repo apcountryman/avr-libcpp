@@ -221,6 +221,9 @@ constexpr auto is_empty_v = is_empty<T>::value;
 template<typename T>
 struct is_polymorphic;
 
+template<typename T>
+constexpr auto is_polymorphic_v = is_polymorphic<T>::value;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;

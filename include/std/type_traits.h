@@ -248,6 +248,9 @@ struct is_signed;
 template<typename T>
 constexpr auto is_signed_v = is_signed<T>::value;
 
+template<typename T>
+struct is_unsigned;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;
@@ -735,6 +738,22 @@ struct is_signed<T, false> : false_type {
 
 template<typename T>
 struct is_signed : Implementation::is_signed<T> {
+};
+
+namespace Implementation {
+
+template<typename T, bool = std::is_arithmetic_v<T>>
+struct is_unsigned : bool_constant<static_cast<T>( 0 ) < static_cast<T>( -1 )> {
+};
+
+template<typename T>
+struct is_unsigned<T, false> : false_type {
+};
+
+} // namespace Implementation
+
+template<typename T>
+struct is_unsigned : Implementation::is_unsigned<T> {
 };
 
 template<typename T>

@@ -245,6 +245,9 @@ constexpr auto is_aggregate_v = is_aggregate<T>::value;
 template<typename T>
 struct is_signed;
 
+template<typename T>
+constexpr auto is_signed_v = is_signed<T>::value;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;

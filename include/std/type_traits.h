@@ -360,6 +360,12 @@ struct add_volatile;
 template<typename T>
 using add_volatile_t = typename add_volatile<T>::type;
 
+template<typename T>
+struct add_cv;
+
+template<typename T>
+using add_cv_t = typename add_cv<T>::type;
+
 } // namespace Type_Traits_Const_Volatility_Specifiers
 
 inline namespace Type_Traits_References {
@@ -968,6 +974,10 @@ struct add_const : type_identity<T const> {
 
 template<typename T>
 struct add_volatile : type_identity<T volatile> {
+};
+
+template<typename T>
+struct add_cv : type_identity<add_const_t<add_volatile_t<T>>> {
 };
 
 } // namespace Type_Traits_Const_Volatility_Specifiers

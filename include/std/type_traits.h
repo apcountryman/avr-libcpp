@@ -391,6 +391,12 @@ using add_rvalue_reference_t = typename add_rvalue_reference<T>::type;
 
 inline namespace Type_Traits_Pointers {
 template<typename T>
+struct remove_pointer;
+
+template<typename T>
+using remove_pointer_t = typename remove_pointer<T>::type;
+
+template<typename T>
 struct add_pointer;
 
 template<typename T>
@@ -1026,6 +1032,26 @@ struct add_rvalue_reference : decltype( Implementation::add_rvalue_reference<T>(
 } // namespace Type_Traits_References
 
 inline namespace Type_Traits_Pointers {
+template<typename T>
+struct remove_pointer : type_identity<T> {
+};
+
+template<typename T>
+struct remove_pointer<T *> : type_identity<T> {
+};
+
+template<typename T>
+struct remove_pointer<T * const> : type_identity<T> {
+};
+
+template<typename T>
+struct remove_pointer<T * volatile> : type_identity<T> {
+};
+
+template<typename T>
+struct remove_pointer<T * const volatile> : type_identity<T> {
+};
+
 namespace Implementation {
 
 template<typename T>

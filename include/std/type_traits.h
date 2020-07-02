@@ -128,6 +128,12 @@ struct is_member_object_pointer;
 template<typename T>
 constexpr auto is_member_object_pointer_v = is_member_object_pointer<T>::value;
 
+template<typename T>
+struct is_member_function_pointer;
+
+template<typename T>
+constexpr auto is_member_function_pointer_v = is_member_function_pointer<T>::value;
+
 } // namespace Type_Traits_Primary_Type_Categories
 
 inline namespace Type_Traits_Composite_Type_Categories {
@@ -694,6 +700,22 @@ struct is_member_object_pointer<T C::*> : negation<is_function<T>> {
 
 template<typename T>
 struct is_member_object_pointer : Implementation::is_member_object_pointer<remove_cv_t<T>> {
+};
+
+namespace Implementation {
+
+template<typename T>
+struct is_member_function_pointer : false_type {
+};
+
+template<typename T, typename C>
+struct is_member_function_pointer<T C::*> : is_function<T> {
+};
+
+} // namespace Implementation
+
+template<typename T>
+struct is_member_function_pointer : Implementation::is_member_function_pointer<remove_cv_t<T>> {
 };
 
 } // namespace Type_Traits_Primary_Type_Categories

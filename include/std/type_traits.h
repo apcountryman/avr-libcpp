@@ -233,6 +233,9 @@ constexpr auto is_abstract_v = is_abstract<T>::value;
 template<typename T>
 struct is_final;
 
+template<typename T>
+constexpr auto is_final_v = is_final<T>::value;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;

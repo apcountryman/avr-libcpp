@@ -227,6 +227,9 @@ constexpr auto is_polymorphic_v = is_polymorphic<T>::value;
 template<typename T>
 struct is_abstract;
 
+template<typename T>
+constexpr auto is_abstract_v = is_abstract<T>::value;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;

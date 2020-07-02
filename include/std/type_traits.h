@@ -256,6 +256,10 @@ constexpr auto is_unsigned_v = is_unsigned<T>::value;
 
 // C++20
 template<typename T>
+struct is_bounded_array;
+
+// C++20
+template<typename T>
 struct is_unbounded_array;
 
 // C++20
@@ -757,6 +761,14 @@ struct is_unsigned<T, false> : false_type {
 
 template<typename T>
 struct is_unsigned : Implementation::is_unsigned<T> {
+};
+
+template<typename T>
+struct is_bounded_array : false_type {
+};
+
+template<typename T, size_t N>
+struct is_bounded_array<T[ N ]> : true_type {
 };
 
 template<typename T>

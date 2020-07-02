@@ -236,6 +236,9 @@ struct is_final;
 template<typename T>
 constexpr auto is_final_v = is_final<T>::value;
 
+template<typename T>
+struct is_aggregate;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;
@@ -703,6 +706,10 @@ struct is_abstract : bool_constant<__is_abstract( T )> {
 
 template<typename T>
 struct is_final : bool_constant<__is_final( T )> {
+};
+
+template<typename T>
+struct is_aggregate : bool_constant<__is_aggregate( remove_cv_t<T> )> {
 };
 
 template<typename T>

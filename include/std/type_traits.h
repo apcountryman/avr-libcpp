@@ -218,6 +218,9 @@ struct is_empty;
 template<typename T>
 constexpr auto is_empty_v = is_empty<T>::value;
 
+template<typename T>
+struct is_polymorphic;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;
@@ -673,6 +676,10 @@ struct has_unique_object_representations
 
 template<typename T>
 struct is_empty : bool_constant<__is_empty( T )> {
+};
+
+template<typename T>
+struct is_polymorphic : bool_constant<__is_polymorphic( T )> {
 };
 
 template<typename T>

@@ -260,6 +260,10 @@ struct is_bounded_array;
 
 // C++20
 template<typename T>
+constexpr auto is_bounded_array_v = is_bounded_array<T>::value;
+
+// C++20
+template<typename T>
 struct is_unbounded_array;
 
 // C++20

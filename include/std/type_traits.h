@@ -212,6 +212,9 @@ struct has_unique_object_representations;
 template<typename T>
 constexpr auto has_unique_object_representations_v = has_unique_object_representations<T>::value;
 
+template<typename T>
+struct is_empty;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;
@@ -663,6 +666,10 @@ struct is_pod : bool_constant<__is_pod( T )> {
 template<typename T>
 struct has_unique_object_representations
     : bool_constant<__has_unique_object_representations( remove_cv_t<remove_all_extents_t<T>> )> {
+};
+
+template<typename T>
+struct is_empty : bool_constant<__is_empty( T )> {
 };
 
 template<typename T>

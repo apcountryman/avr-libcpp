@@ -300,6 +300,12 @@ struct rank;
 template<typename T>
 constexpr auto rank_v = rank<T>::value;
 
+template<typename T, unsigned int N = 0>
+struct extent;
+
+template<typename T, unsigned int N = 0>
+constexpr auto extent_v = extent<T>::value;
+
 } // namespace Property_queries
 
 inline namespace Type_Traits_Type_Relationships {
@@ -851,6 +857,26 @@ struct rank<T[]> : integral_constant<size_t, rank_v<T> + 1> {
 
 template<typename T, size_t N>
 struct rank<T[ N ]> : integral_constant<size_t, rank_v<T> + 1> {
+};
+
+template<typename T, unsigned int N = 0>
+struct extent : integral_constant<size_t, 0> {
+};
+
+template<typename T>
+struct extent<T[], 0> : integral_constant<size_t, 0> {
+};
+
+template<typename T, unsigned int N>
+struct extent<T[], N> : extent<T, N - 1> {
+};
+
+template<typename T, size_t I>
+struct extent<T[ I ], 0> : integral_constant<size_t, I> {
+};
+
+template<typename T, size_t I, unsigned int N>
+struct extent<T[ I ], N> : extent<T, N - 1> {
 };
 
 } // namespace Property_Queries

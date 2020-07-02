@@ -215,6 +215,9 @@ constexpr auto has_unique_object_representations_v = has_unique_object_represent
 template<typename T>
 struct is_empty;
 
+template<typename T>
+constexpr auto is_empty_v = is_empty<T>::value;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;

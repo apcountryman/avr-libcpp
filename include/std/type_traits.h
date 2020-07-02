@@ -224,6 +224,9 @@ struct is_polymorphic;
 template<typename T>
 constexpr auto is_polymorphic_v = is_polymorphic<T>::value;
 
+template<typename T>
+struct is_abstract;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;
@@ -683,6 +686,10 @@ struct is_empty : bool_constant<__is_empty( T )> {
 
 template<typename T>
 struct is_polymorphic : bool_constant<__is_polymorphic( T )> {
+};
+
+template<typename T>
+struct is_abstract : bool_constant<__is_abstract( T )> {
 };
 
 template<typename T>

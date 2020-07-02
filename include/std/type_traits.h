@@ -294,6 +294,12 @@ struct alignment_of;
 template<typename T>
 constexpr auto alignment_of_v = alignment_of<T>::value;
 
+template<typename T>
+struct rank;
+
+template<typename T>
+constexpr auto rank_v = rank<T>::value;
+
 } // namespace Property_queries
 
 inline namespace Type_Traits_Type_Relationships {
@@ -833,6 +839,18 @@ struct is_trivially_destructible
 inline namespace Property_Queries {
 template<typename T>
 struct alignment_of : integral_constant<size_t, alignof( T )> {
+};
+
+template<typename T>
+struct rank : integral_constant<size_t, 0> {
+};
+
+template<typename T>
+struct rank<T[]> : integral_constant<size_t, rank_v<T> + 1> {
+};
+
+template<typename T, size_t N>
+struct rank<T[ N ]> : integral_constant<size_t, rank_v<T> + 1> {
 };
 
 } // namespace Property_Queries

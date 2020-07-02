@@ -348,6 +348,12 @@ struct remove_cv;
 template<typename T>
 using remove_cv_t = typename remove_cv<T>::type;
 
+template<typename T>
+struct add_const;
+
+template<typename T>
+using add_const_t = typename add_const<T>::type;
+
 } // namespace Type_Traits_Const_Volatility_Specifiers
 
 inline namespace Type_Traits_References {
@@ -948,6 +954,10 @@ struct remove_volatile<T volatile> : type_identity<T> {
 
 template<typename T>
 struct remove_cv : type_identity<remove_const_t<remove_volatile_t<T>>> {
+};
+
+template<typename T>
+struct add_const : type_identity<T const> {
 };
 
 } // namespace Type_Traits_Const_Volatility_Specifiers

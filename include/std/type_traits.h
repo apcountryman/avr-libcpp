@@ -737,7 +737,7 @@ struct is_aggregate : bool_constant<__is_aggregate( remove_cv_t<T> )> {
 
 namespace Implementation {
 
-template<typename T, bool = std::is_arithmetic_v<T>>
+template<typename T, bool = is_arithmetic_v<T>>
 struct is_signed : bool_constant<static_cast<T>( -1 ) < static_cast<T>( 0 )> {
 };
 
@@ -753,7 +753,7 @@ struct is_signed : Implementation::is_signed<T> {
 
 namespace Implementation {
 
-template<typename T, bool = std::is_arithmetic_v<T>>
+template<typename T, bool = is_arithmetic_v<T>>
 struct is_unsigned : bool_constant<static_cast<T>( 0 ) < static_cast<T>( -1 )> {
 };
 

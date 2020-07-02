@@ -239,6 +239,9 @@ constexpr auto is_final_v = is_final<T>::value;
 template<typename T>
 struct is_aggregate;
 
+template<typename T>
+constexpr auto is_aggregate_v = is_aggregate<T>::value;
+
 // C++20
 template<typename T>
 struct is_unbounded_array;

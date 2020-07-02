@@ -122,6 +122,12 @@ struct is_rvalue_reference;
 template<typename T>
 constexpr auto is_rvalue_reference_v = is_rvalue_reference<T>::value;
 
+template<typename T>
+struct is_member_object_pointer;
+
+template<typename T>
+constexpr auto is_member_object_pointer_v = is_member_object_pointer<T>::value;
+
 } // namespace Type_Traits_Primary_Type_Categories
 
 inline namespace Type_Traits_Composite_Type_Categories {
@@ -672,6 +678,22 @@ struct is_rvalue_reference : false_type {
 
 template<typename T>
 struct is_rvalue_reference<T &&> : true_type {
+};
+
+namespace Implementation {
+
+template<typename T>
+struct is_member_object_pointer : false_type {
+};
+
+template<typename T, typename C>
+struct is_member_object_pointer<T C::*> : negation<is_function<T>> {
+};
+
+} // namespace Implementation
+
+template<typename T>
+struct is_member_object_pointer : Implementation::is_member_object_pointer<remove_cv_t<T>> {
 };
 
 } // namespace Type_Traits_Primary_Type_Categories

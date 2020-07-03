@@ -456,6 +456,9 @@ struct underlying_type;
 template<typename T>
 using underlying_type_t = typename underlying_type<T>::type;
 
+template<typename T>
+using void_t = void;
+
 } // namespace Type_Traits_Miscellaneous_Transformations
 
 inline namespace Operations_On_Traits {

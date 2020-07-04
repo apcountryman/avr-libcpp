@@ -456,6 +456,12 @@ struct underlying_type;
 template<typename T>
 using underlying_type_t = typename underlying_type<T>::type;
 
+template<typename Functor, typename... Arguments>
+struct invoke_result;
+
+template<typename Functor, typename... Arguments>
+using invoke_result_t = typename invoke_result<Functor, Arguments...>::type;
+
 template<typename T>
 using void_t = void;
 
@@ -1181,6 +1187,61 @@ struct conditional<false, T, F> : type_identity<F> {
 
 template<typename T>
 struct underlying_type : type_identity<__underlying_type( T )> {
+};
+
+namespace Implementation {
+
+template<typename T>
+struct is_reference_wrapper : false_type {
+};
+
+template<typename T>
+constexpr auto is_reference_wrapper_v = is_reference_wrapper<T>::value;
+
+template<typename Free_Function>
+struct invocations {
+    template<typename Functor, typename... Arguments>
+    static auto invoke( Functor && functor, Arguments &&... arguments )
+        -> decltype( forward<Functor>( functor )( forward<Arguments>( arguments )... ) );
+};
+
+template<typename Class, typename Member>
+struct invocations<Member Class::*> {
+    template<typename T, typename = enable_if_t<is_base_of_v<Class, decay_t<T>>>>
+    static auto get( T && t ) -> T &&;
+
+    template<typename T, typename = enable_if_t<is_reference_wrapper_v<decay_t<T>>>>
+    static auto get( T && t ) -> decltype( t.get() );
+
+    template<typename T, typename = enable_if_t<negation_v<is_base_of<Class, decay_t<T>>>>, typename = enable_if_t<negation_v<is_reference_wrapper<decay_t<T>>>>>
+    static auto get( T && t ) -> decltype( *std::forward<T>( t ) );
+
+    template<typename T, typename... Arguments, typename Member_1, typename = enable_if_t<is_function_v<Member_1>>>
+    static auto invoke( Member_1 Class::*function, T && t, Arguments &&... arguments )
+        -> decltype( ( invocations::get( forward<T>( t ) ).*function )( forward<Arguments>( arguments )... ) );
+
+    template<typename T>
+    static auto invoke( Member Class::*data, T && t )
+        -> decltype( invocations::get( forward<T>( t ) ).*data );
+};
+
+template<typename Functor, typename... Arguments, typename Decayed_Functor = decay_t<Functor>>
+auto INVOKE( Functor && functor, Arguments &&... arguments )
+    -> decltype( invocations<Decayed_Functor>::invoke( forward<Functor>( functor ), forward<Arguments>( arguments )... ) );
+
+template<typename Invocable_Test, typename Functor, typename... Arguments>
+struct invoke_result {
+};
+
+template<typename Functor, typename... Arguments>
+struct invoke_result<void_t<decltype( INVOKE( declval<Functor>(), declval<Arguments>()... ) )>, Functor, Arguments...>
+    : type_identity<decltype( INVOKE( declval<Functor>(), declval<Arguments>()... ) )> {
+};
+
+} // namespace Implementation
+
+template<typename Functor, typename... Arguments>
+struct invoke_result : Implementation::invoke_result<void, Functor, Arguments...> {
 };
 
 } // namespace Type_Traits_Miscellaneous_Transformations

@@ -909,7 +909,7 @@ auto has_destructor( int ) -> true_type;
 template<typename T>
 auto has_destructor( ... ) -> false_type;
 
-template<typename T, bool = is_reference_v<T>, bool = is_void_v<T> or is_function_v<T> or is_unbounded_array_v<T>>
+template<typename T, bool = is_reference_v<T>, bool = disjunction_v<is_void<T>, is_function<T>, is_unbounded_array<T>>>
 struct is_destructible;
 
 template<typename T>

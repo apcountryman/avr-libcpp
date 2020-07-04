@@ -110,9 +110,39 @@ struct is_pointer;
 template<typename T>
 constexpr auto is_pointer_v = is_pointer<T>::value;
 
+template<typename T>
+struct is_lvalue_reference;
+
+template<typename T>
+constexpr auto is_lvalue_reference_v = is_lvalue_reference<T>::value;
+
+template<typename T>
+struct is_rvalue_reference;
+
+template<typename T>
+constexpr auto is_rvalue_reference_v = is_rvalue_reference<T>::value;
+
+template<typename T>
+struct is_member_object_pointer;
+
+template<typename T>
+constexpr auto is_member_object_pointer_v = is_member_object_pointer<T>::value;
+
+template<typename T>
+struct is_member_function_pointer;
+
+template<typename T>
+constexpr auto is_member_function_pointer_v = is_member_function_pointer<T>::value;
+
 } // namespace Type_Traits_Primary_Type_Categories
 
 inline namespace Type_Traits_Composite_Type_Categories {
+template<typename T>
+struct is_fundamental;
+
+template<typename T>
+constexpr auto is_fundamental_v = is_fundamental<T>::value;
+
 template<typename T>
 struct is_arithmetic;
 
@@ -130,6 +160,12 @@ struct is_object;
 
 template<typename T>
 constexpr auto is_object_v = is_object<T>::value;
+
+template<typename T>
+struct is_compound;
+
+template<typename T>
+constexpr auto is_compound_v = is_compound<T>::value;
 
 template<typename T>
 struct is_reference;
@@ -151,6 +187,92 @@ struct is_const;
 
 template<typename T>
 constexpr auto is_const_v = is_const<T>::value;
+
+template<typename T>
+struct is_volatile;
+
+template<typename T>
+constexpr auto is_volatile_v = is_volatile<T>::value;
+
+template<typename T>
+struct is_trivial;
+
+template<typename T>
+constexpr auto is_trivial_v = is_trivial<T>::value;
+
+template<typename T>
+struct is_trivially_copyable;
+
+template<typename T>
+constexpr auto is_trivially_copyable_v = is_trivially_copyable<T>::value;
+
+template<typename T>
+struct is_standard_layout;
+
+template<typename T>
+constexpr auto is_standard_layout_v = is_standard_layout<T>::value;
+
+template<typename T>
+struct is_pod;
+
+template<typename T>
+constexpr auto is_pod_v = is_pod<T>::value;
+
+template<typename T>
+struct has_unique_object_representations;
+
+template<typename T>
+constexpr auto has_unique_object_representations_v = has_unique_object_representations<T>::value;
+
+template<typename T>
+struct is_empty;
+
+template<typename T>
+constexpr auto is_empty_v = is_empty<T>::value;
+
+template<typename T>
+struct is_polymorphic;
+
+template<typename T>
+constexpr auto is_polymorphic_v = is_polymorphic<T>::value;
+
+template<typename T>
+struct is_abstract;
+
+template<typename T>
+constexpr auto is_abstract_v = is_abstract<T>::value;
+
+template<typename T>
+struct is_final;
+
+template<typename T>
+constexpr auto is_final_v = is_final<T>::value;
+
+template<typename T>
+struct is_aggregate;
+
+template<typename T>
+constexpr auto is_aggregate_v = is_aggregate<T>::value;
+
+template<typename T>
+struct is_signed;
+
+template<typename T>
+constexpr auto is_signed_v = is_signed<T>::value;
+
+template<typename T>
+struct is_unsigned;
+
+template<typename T>
+constexpr auto is_unsigned_v = is_unsigned<T>::value;
+
+// C++20
+template<typename T>
+struct is_bounded_array;
+
+// C++20
+template<typename T>
+constexpr auto is_bounded_array_v = is_bounded_array<T>::value;
 
 // C++20
 template<typename T>
@@ -177,12 +299,39 @@ constexpr auto is_trivially_destructible_v = is_trivially_destructible<T>::value
 
 } // namespace Type_Traits_Supported_Operations
 
+inline namespace Property_queries {
+template<typename T>
+struct alignment_of;
+
+template<typename T>
+constexpr auto alignment_of_v = alignment_of<T>::value;
+
+template<typename T>
+struct rank;
+
+template<typename T>
+constexpr auto rank_v = rank<T>::value;
+
+template<typename T, unsigned int N = 0>
+struct extent;
+
+template<typename T, unsigned int N = 0>
+constexpr auto extent_v = extent<T>::value;
+
+} // namespace Property_queries
+
 inline namespace Type_Traits_Type_Relationships {
 template<typename T, typename U>
 struct is_same;
 
 template<typename T, typename U>
 constexpr auto is_same_v = is_same<T, U>::value;
+
+template<typename Base, typename Derived>
+struct is_base_of;
+
+template<typename Base, typename Derived>
+constexpr auto is_base_of_v = is_base_of<Base, Derived>::value;
 
 template<typename From, typename To>
 struct is_convertible;
@@ -211,6 +360,24 @@ struct remove_cv;
 template<typename T>
 using remove_cv_t = typename remove_cv<T>::type;
 
+template<typename T>
+struct add_const;
+
+template<typename T>
+using add_const_t = typename add_const<T>::type;
+
+template<typename T>
+struct add_volatile;
+
+template<typename T>
+using add_volatile_t = typename add_volatile<T>::type;
+
+template<typename T>
+struct add_cv;
+
+template<typename T>
+using add_cv_t = typename add_cv<T>::type;
+
 } // namespace Type_Traits_Const_Volatility_Specifiers
 
 inline namespace Type_Traits_References {
@@ -235,6 +402,12 @@ using add_rvalue_reference_t = typename add_rvalue_reference<T>::type;
 } // namespace Type_Traits_References
 
 inline namespace Type_Traits_Pointers {
+template<typename T>
+struct remove_pointer;
+
+template<typename T>
+using remove_pointer_t = typename remove_pointer<T>::type;
+
 template<typename T>
 struct add_pointer;
 
@@ -283,12 +456,54 @@ struct underlying_type;
 template<typename T>
 using underlying_type_t = typename underlying_type<T>::type;
 
+template<typename Functor, typename... Arguments>
+struct invoke_result;
+
+template<typename Functor, typename... Arguments>
+using invoke_result_t = typename invoke_result<Functor, Arguments...>::type;
+
+template<typename T>
+using void_t = void;
+
 } // namespace Type_Traits_Miscellaneous_Transformations
 
-//---------- supporting declarations ----------//
+inline namespace Operations_On_Traits {
+template<typename... B>
+struct conjunction;
+
+template<typename... B>
+constexpr auto conjunction_v = conjunction<B...>::value;
+
+template<typename... B>
+struct disjunction;
+
+template<typename... B>
+constexpr auto disjunction_v = disjunction<B...>::value;
+
+template<typename B>
+struct negation;
+
+template<typename B>
+constexpr auto negation_v = negation<B>::value;
+
+} // namespace Operations_On_Traits
+
+//---------- supporting declarations/definitions ----------//
 
 template<typename T>
 auto declval() noexcept -> add_rvalue_reference_t<T>;
+
+template<typename T>
+constexpr auto forward( std::remove_reference_t<T> && t ) noexcept
+{
+    return static_cast<T &&>( t );
+}
+
+template<typename T>
+constexpr auto forward( std::remove_reference_t<T> & t ) noexcept
+{
+    return static_cast<T &&>( t );
+}
 
 //---------- definitions ----------//
 
@@ -457,7 +672,7 @@ struct is_class : bool_constant<__is_class( T )> {
 };
 
 template<typename T>
-struct is_function : bool_constant<not is_const_v<T const> and not is_reference_v<T>> {
+struct is_function : conjunction<negation<is_const<T const>>, negation<is_reference<T>>> {
 };
 
 namespace Implementation {
@@ -476,21 +691,76 @@ template<typename T>
 struct is_pointer : Implementation::is_pointer<remove_cv_t<T>> {
 };
 
+template<typename T>
+struct is_lvalue_reference : false_type {
+};
+
+template<typename T>
+struct is_lvalue_reference<T &> : true_type {
+};
+
+template<typename T>
+struct is_rvalue_reference : false_type {
+};
+
+template<typename T>
+struct is_rvalue_reference<T &&> : true_type {
+};
+
+namespace Implementation {
+
+template<typename T>
+struct is_member_object_pointer : false_type {
+};
+
+template<typename T, typename C>
+struct is_member_object_pointer<T C::*> : negation<is_function<T>> {
+};
+
+} // namespace Implementation
+
+template<typename T>
+struct is_member_object_pointer : Implementation::is_member_object_pointer<remove_cv_t<T>> {
+};
+
+namespace Implementation {
+
+template<typename T>
+struct is_member_function_pointer : false_type {
+};
+
+template<typename T, typename C>
+struct is_member_function_pointer<T C::*> : is_function<T> {
+};
+
+} // namespace Implementation
+
+template<typename T>
+struct is_member_function_pointer : Implementation::is_member_function_pointer<remove_cv_t<T>> {
+};
+
 } // namespace Type_Traits_Primary_Type_Categories
 
 inline namespace Type_Traits_Composite_Type_Categories {
 template<typename T>
-struct is_arithmetic : bool_constant<is_integral_v<T> or is_floating_point_v<T>> {
+struct is_fundamental : disjunction<is_arithmetic<T>, is_void<T>, is_null_pointer<T>> {
+};
+
+template<typename T>
+struct is_arithmetic : disjunction<is_integral<T>, is_floating_point<T>> {
 };
 
 template<typename T>
 struct is_scalar
-    : bool_constant<is_arithmetic_v<T> or is_enum_v<T> or is_pointer_v<T> or is_member_pointer_v<T> or is_null_pointer_v<T>> {
+    : disjunction<is_arithmetic<T>, is_enum<T>, is_pointer<T>, is_member_pointer<T>, is_null_pointer<T>> {
 };
 
 template<typename T>
-struct is_object
-    : bool_constant<is_scalar_v<T> or is_array_v<T> or is_union_v<T> or is_class_v<T>> {
+struct is_object : disjunction<is_scalar<T>, is_array<T>, is_union<T>, is_class<T>> {
+};
+
+template<typename T>
+struct is_compound : negation<is_fundamental<T>> {
 };
 
 template<typename T>
@@ -533,6 +803,95 @@ struct is_const<T const> : true_type {
 };
 
 template<typename T>
+struct is_volatile : false_type {
+};
+
+template<typename T>
+struct is_volatile<T volatile> : true_type {
+};
+
+template<typename T>
+struct is_trivial : bool_constant<__is_trivial( T )> {
+};
+
+template<typename T>
+struct is_trivially_copyable : bool_constant<__is_trivially_copyable( T )> {
+};
+
+template<typename T>
+struct is_standard_layout : bool_constant<__is_standard_layout( T )> {
+};
+
+template<typename T>
+struct is_pod : bool_constant<__is_pod( T )> {
+};
+
+template<typename T>
+struct has_unique_object_representations
+    : bool_constant<__has_unique_object_representations( remove_cv_t<remove_all_extents_t<T>> )> {
+};
+
+template<typename T>
+struct is_empty : bool_constant<__is_empty( T )> {
+};
+
+template<typename T>
+struct is_polymorphic : bool_constant<__is_polymorphic( T )> {
+};
+
+template<typename T>
+struct is_abstract : bool_constant<__is_abstract( T )> {
+};
+
+template<typename T>
+struct is_final : bool_constant<__is_final( T )> {
+};
+
+template<typename T>
+struct is_aggregate : bool_constant<__is_aggregate( remove_cv_t<T> )> {
+};
+
+namespace Implementation {
+
+template<typename T, bool = is_arithmetic_v<T>>
+struct is_signed : bool_constant<static_cast<T>( -1 ) < static_cast<T>( 0 )> {
+};
+
+template<typename T>
+struct is_signed<T, false> : false_type {
+};
+
+} // namespace Implementation
+
+template<typename T>
+struct is_signed : Implementation::is_signed<T> {
+};
+
+namespace Implementation {
+
+template<typename T, bool = is_arithmetic_v<T>>
+struct is_unsigned : bool_constant<static_cast<T>( 0 ) < static_cast<T>( -1 )> {
+};
+
+template<typename T>
+struct is_unsigned<T, false> : false_type {
+};
+
+} // namespace Implementation
+
+template<typename T>
+struct is_unsigned : Implementation::is_unsigned<T> {
+};
+
+template<typename T>
+struct is_bounded_array : false_type {
+};
+
+template<typename T, size_t N>
+struct is_bounded_array<T[ N ]> : true_type {
+};
+
+template<typename T>
 struct is_unbounded_array : false_type {
 };
 
@@ -550,7 +909,7 @@ auto has_destructor( int ) -> true_type;
 template<typename T>
 auto has_destructor( ... ) -> false_type;
 
-template<typename T, bool = is_reference_v<T>, bool = is_void_v<T> or is_function_v<T> or is_unbounded_array_v<T>>
+template<typename T, bool = is_reference_v<T>, bool = disjunction_v<is_void<T>, is_function<T>, is_unbounded_array<T>>>
 struct is_destructible;
 
 template<typename T>
@@ -573,10 +932,49 @@ struct is_destructible : Implementation::is_destructible<T> {
 
 template<typename T>
 struct is_trivially_destructible
-    : bool_constant<is_destructible_v<T> and __has_trivial_destructor( T )> {
+    : conjunction<is_destructible<T>, bool_constant<__has_trivial_destructor( T )>> {
 };
 
 } // namespace Type_Traits_Supported_Operations
+
+inline namespace Property_Queries {
+template<typename T>
+struct alignment_of : integral_constant<size_t, alignof( T )> {
+};
+
+template<typename T>
+struct rank : integral_constant<size_t, 0> {
+};
+
+template<typename T>
+struct rank<T[]> : integral_constant<size_t, rank_v<T> + 1> {
+};
+
+template<typename T, size_t N>
+struct rank<T[ N ]> : integral_constant<size_t, rank_v<T> + 1> {
+};
+
+template<typename T, unsigned int N = 0>
+struct extent : integral_constant<size_t, 0> {
+};
+
+template<typename T>
+struct extent<T[], 0> : integral_constant<size_t, 0> {
+};
+
+template<typename T, unsigned int N>
+struct extent<T[], N> : extent<T, N - 1> {
+};
+
+template<typename T, size_t I>
+struct extent<T[ I ], 0> : integral_constant<size_t, I> {
+};
+
+template<typename T, size_t I, unsigned int N>
+struct extent<T[ I ], N> : extent<T, N - 1> {
+};
+
+} // namespace Property_Queries
 
 inline namespace Type_Traits_Type_Relationships {
 template<typename T, typename U>
@@ -585,6 +983,10 @@ struct is_same : false_type {
 
 template<typename T>
 struct is_same<T, T> : true_type {
+};
+
+template<typename Base, typename Derived>
+struct is_base_of : bool_constant<__is_base_of( Base, Derived )> {
 };
 
 namespace Implementation {
@@ -609,10 +1011,9 @@ auto is_convertible( ... ) -> false_type;
 
 template<typename From, typename To>
 struct is_convertible
-    : bool_constant<
-          (is_void_v<From> and is_void_v<To>)
-          or ( decltype( Implementation::is_returnable<To>( 0 ) )::value and decltype(
-                 Implementation::is_convertible<From, To>( 0 ) )::value )> {
+    : disjunction<
+          conjunction<is_void<From>, is_void<To>>,
+          conjunction<decltype( Implementation::is_returnable<To>( 0 ) ), decltype( Implementation::is_convertible<From, To>( 0 ) )>> {
 };
 
 } // namespace Type_Traits_Type_Relationships
@@ -636,6 +1037,18 @@ struct remove_volatile<T volatile> : type_identity<T> {
 
 template<typename T>
 struct remove_cv : type_identity<remove_const_t<remove_volatile_t<T>>> {
+};
+
+template<typename T>
+struct add_const : type_identity<T const> {
+};
+
+template<typename T>
+struct add_volatile : type_identity<T volatile> {
+};
+
+template<typename T>
+struct add_cv : type_identity<add_const_t<add_volatile_t<T>>> {
 };
 
 } // namespace Type_Traits_Const_Volatility_Specifiers
@@ -684,6 +1097,26 @@ struct add_rvalue_reference : decltype( Implementation::add_rvalue_reference<T>(
 } // namespace Type_Traits_References
 
 inline namespace Type_Traits_Pointers {
+template<typename T>
+struct remove_pointer : type_identity<T> {
+};
+
+template<typename T>
+struct remove_pointer<T *> : type_identity<T> {
+};
+
+template<typename T>
+struct remove_pointer<T * const> : type_identity<T> {
+};
+
+template<typename T>
+struct remove_pointer<T * volatile> : type_identity<T> {
+};
+
+template<typename T>
+struct remove_pointer<T * const volatile> : type_identity<T> {
+};
+
 namespace Implementation {
 
 template<typename T>
@@ -756,7 +1189,95 @@ template<typename T>
 struct underlying_type : type_identity<__underlying_type( T )> {
 };
 
+namespace Implementation {
+
+template<typename T>
+struct is_reference_wrapper : false_type {
+};
+
+template<typename T>
+constexpr auto is_reference_wrapper_v = is_reference_wrapper<T>::value;
+
+template<typename Free_Function>
+struct invocations {
+    template<typename Functor, typename... Arguments>
+    static auto invoke( Functor && functor, Arguments &&... arguments )
+        -> decltype( forward<Functor>( functor )( forward<Arguments>( arguments )... ) );
+};
+
+template<typename Class, typename Member>
+struct invocations<Member Class::*> {
+    template<typename T, typename = enable_if_t<is_base_of_v<Class, decay_t<T>>>>
+    static auto get( T && t ) -> T &&;
+
+    template<typename T, typename = enable_if_t<is_reference_wrapper_v<decay_t<T>>>>
+    static auto get( T && t ) -> decltype( t.get() );
+
+    template<typename T, typename = enable_if_t<negation_v<is_base_of<Class, decay_t<T>>>>, typename = enable_if_t<negation_v<is_reference_wrapper<decay_t<T>>>>>
+    static auto get( T && t ) -> decltype( *std::forward<T>( t ) );
+
+    template<typename T, typename... Arguments, typename Member_1, typename = enable_if_t<is_function_v<Member_1>>>
+    static auto invoke( Member_1 Class::*function, T && t, Arguments &&... arguments )
+        -> decltype( ( invocations::get( forward<T>( t ) ).*function )( forward<Arguments>( arguments )... ) );
+
+    template<typename T>
+    static auto invoke( Member Class::*data, T && t )
+        -> decltype( invocations::get( forward<T>( t ) ).*data );
+};
+
+template<typename Functor, typename... Arguments, typename Decayed_Functor = decay_t<Functor>>
+auto INVOKE( Functor && functor, Arguments &&... arguments )
+    -> decltype( invocations<Decayed_Functor>::invoke( forward<Functor>( functor ), forward<Arguments>( arguments )... ) );
+
+template<typename Invocable_Test, typename Functor, typename... Arguments>
+struct invoke_result {
+};
+
+template<typename Functor, typename... Arguments>
+struct invoke_result<void_t<decltype( INVOKE( declval<Functor>(), declval<Arguments>()... ) )>, Functor, Arguments...>
+    : type_identity<decltype( INVOKE( declval<Functor>(), declval<Arguments>()... ) )> {
+};
+
+} // namespace Implementation
+
+template<typename Functor, typename... Arguments>
+struct invoke_result : Implementation::invoke_result<void, Functor, Arguments...> {
+};
+
 } // namespace Type_Traits_Miscellaneous_Transformations
+
+inline namespace Operations_On_Traits {
+template<typename...>
+struct conjuction : true_type {
+};
+
+template<typename B1>
+struct conjunction<B1> : B1 {
+};
+
+template<typename B1, typename... BN>
+struct conjunction<B1, BN...>
+    : conditional_t<static_cast<bool>( B1::value ), conjunction<BN...>, B1> {
+};
+
+template<typename...>
+struct disjunction : false_type {
+};
+
+template<typename B1>
+struct disjunction<B1> : B1 {
+};
+
+template<typename B1, typename... BN>
+struct disjunction<B1, BN...>
+    : conditional_t<static_cast<bool>( B1::value ), B1, disjunction<BN...>> {
+};
+
+template<typename B>
+struct negation : bool_constant<not static_cast<bool>( B::value )> {
+};
+
+} // namespace Operations_On_Traits
 
 } // namespace std
 

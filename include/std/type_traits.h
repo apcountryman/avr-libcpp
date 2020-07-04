@@ -482,10 +482,22 @@ constexpr auto negation_v = negation<B>::value;
 
 } // namespace Operations_On_Traits
 
-//---------- supporting declarations ----------//
+//---------- supporting declarations/definitions ----------//
 
 template<typename T>
 auto declval() noexcept -> add_rvalue_reference_t<T>;
+
+template<typename T>
+constexpr auto forward( std::remove_reference_t<T> && t ) noexcept
+{
+    return static_cast<T &&>( t );
+}
+
+template<typename T>
+constexpr auto forward( std::remove_reference_t<T> & t ) noexcept
+{
+    return static_cast<T &&>( t );
+}
 
 //---------- definitions ----------//
 

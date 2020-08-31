@@ -23,6 +23,15 @@
 #define STD_LIMITS_H
 
 namespace std {
+
+enum float_round_style {
+    round_indeterminate       = -1,
+    round_toward_zero         = 0,
+    round_to_nearest          = 1,
+    round_toward_infinity     = 2,
+    round_toward_neg_infinity = 3,
+};
+
 } // namespace std
 
 #endif // STD_LIMITS_H

@@ -32,6 +32,12 @@ enum float_round_style {
     round_toward_neg_infinity = 3,
 };
 
+enum float_denorm_style {
+    denorm_indeterminate = -1,
+    denorm_absent        = 0,
+    denorm_present       = 1,
+};
+
 } // namespace std
 
 #endif // STD_LIMITS_H

@@ -38,6 +38,100 @@ enum float_denorm_style {
     denorm_present       = 1,
 };
 
+template<typename T>
+struct numeric_limits {
+    static constexpr auto is_specialized = false;
+
+    static constexpr auto is_signed = false;
+
+    static constexpr auto is_integer = false;
+
+    static constexpr auto is_exact = false;
+
+    static constexpr auto has_infinity = false;
+
+    static constexpr auto has_quiet_NaN = false;
+
+    static constexpr auto has_signaling_NaN = false;
+
+    static constexpr auto has_denorm = denorm_absent;
+
+    static constexpr auto has_denorm_loss = false;
+
+    static constexpr auto round_style = round_toward_zero;
+
+    static constexpr auto is_iec559 = false;
+
+    static constexpr auto is_bounded = false;
+
+    static constexpr auto is_modulo = false;
+
+    static constexpr auto digits = 0;
+
+    static constexpr auto digits10 = 0;
+
+    static constexpr auto max_digits10 = 0;
+
+    static constexpr auto radix = 0;
+
+    static constexpr auto min_exponent = 0;
+
+    static constexpr auto min_exponent10 = 0;
+
+    static constexpr auto max_exponent = 0;
+
+    static constexpr auto max_exponent10 = 0;
+
+    static constexpr auto traps = false;
+
+    static constexpr auto tinyness_before = false;
+
+    static constexpr auto min() noexcept
+    {
+        return T{};
+    }
+
+    static constexpr auto lowest() noexcept
+    {
+        return T{};
+    }
+
+    static constexpr auto max() noexcept
+    {
+        return T{};
+    }
+
+    static constexpr auto epsilon() noexcept
+    {
+        return T{};
+    }
+
+    static constexpr auto round_error() noexcept
+    {
+        return T{};
+    }
+
+    static constexpr auto infinity() noexcept
+    {
+        return T{};
+    }
+
+    static constexpr auto quiet_NaN() noexcept
+    {
+        return T{};
+    }
+
+    static constexpr auto signaling_NaN() noexcept
+    {
+        return T{};
+    }
+
+    static constexpr auto denorm_min() noexcept
+    {
+        return T{};
+    }
+};
+
 } // namespace std
 
 #endif // STD_LIMITS_H

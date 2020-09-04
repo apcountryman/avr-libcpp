@@ -25,11 +25,13 @@ add_library(
     avr-libcpp STATIC
     "${CMAKE_CURRENT_BINARY_DIR}/avr-libcpp/version.cc"
     "avr-libcpp.cc"
+    "climits.cc"
     "cstddef.cc"
     "cstdint.cc"
     "limits.cc"
     "new.cc"
     "std.cc"
+    "std/climits.cc"
     "std/cstddef.cc"
     "std/cstdint.cc"
     "std/limits.cc"

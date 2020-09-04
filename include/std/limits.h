@@ -22,6 +22,10 @@
 #ifndef STD_LIMITS_H
 #define STD_LIMITS_H
 
+#include <climits>
+#include <cmath>
+#include <type_traits>
+
 namespace std {
 
 enum float_round_style {
@@ -223,6 +227,100 @@ struct numeric_limits<bool> {
     static constexpr auto denorm_min() noexcept
     {
         return false;
+    }
+};
+
+template<>
+struct numeric_limits<char> {
+    static constexpr auto is_specialized = true;
+
+    static constexpr auto is_signed = is_signed_v<char>;
+
+    static constexpr auto is_integer = true;
+
+    static constexpr auto is_exact = true;
+
+    static constexpr auto has_infinity = false;
+
+    static constexpr auto has_quiet_NaN = false;
+
+    static constexpr auto has_signaling_NaN = false;
+
+    static constexpr auto has_denorm = denorm_absent;
+
+    static constexpr auto has_denorm_loss = false;
+
+    static constexpr auto round_style = round_toward_zero;
+
+    static constexpr auto is_iec559 = false;
+
+    static constexpr auto is_bounded = true;
+
+    static constexpr auto is_modulo = not is_signed;
+
+    static constexpr auto digits = static_cast<int>( CHAR_BIT - is_signed );
+
+    static constexpr auto digits10 = static_cast<int>( digits * log10( 2 ) );
+
+    static constexpr auto max_digits10 = 0;
+
+    static constexpr auto radix = 2;
+
+    static constexpr auto min_exponent = 0;
+
+    static constexpr auto min_exponent10 = 0;
+
+    static constexpr auto max_exponent = 0;
+
+    static constexpr auto max_exponent10 = 0;
+
+    static constexpr auto traps = false;
+
+    static constexpr auto tinyness_before = false;
+
+    static constexpr auto min() noexcept -> char
+    {
+        return CHAR_MIN;
+    }
+
+    static constexpr auto lowest() noexcept -> char
+    {
+        return CHAR_MIN;
+    }
+
+    static constexpr auto max() noexcept -> char
+    {
+        return CHAR_MAX;
+    }
+
+    static constexpr auto epsilon() noexcept -> char
+    {
+        return 0;
+    }
+
+    static constexpr auto round_error() noexcept -> char
+    {
+        return 0;
+    }
+
+    static constexpr auto infinity() noexcept -> char
+    {
+        return 0;
+    }
+
+    static constexpr auto quiet_NaN() noexcept -> char
+    {
+        return 0;
+    }
+
+    static constexpr auto signaling_NaN() noexcept -> char
+    {
+        return 0;
+    }
+
+    static constexpr auto denorm_min() noexcept -> char
+    {
+        return 0;
     }
 };
 

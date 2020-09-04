@@ -24,4 +24,10 @@
 
 #include <math.h>
 
+namespace std {
+
+using ::log10;
+
+} // namespace std
+
 #endif // STD_CMATH_H

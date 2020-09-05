@@ -137,6 +137,10 @@ struct numeric_limits {
     }
 };
 
+template<typename T>
+struct numeric_limits<T const> : numeric_limits<T> {
+};
+
 template<>
 struct numeric_limits<bool> {
     static constexpr auto is_specialized = true;

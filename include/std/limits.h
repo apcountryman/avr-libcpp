@@ -258,7 +258,7 @@ struct numeric_limits<char> {
 
     static constexpr auto is_modulo = not is_signed;
 
-    static constexpr auto digits = static_cast<int>( CHAR_BIT - is_signed );
+    static constexpr auto digits = int{ CHAR_BIT - is_signed };
 
     static constexpr auto digits10 = static_cast<int>( digits * log10( 2 ) );
 
@@ -352,7 +352,7 @@ struct numeric_limits<signed char> {
 
     static constexpr auto is_modulo = false;
 
-    static constexpr auto digits = static_cast<int>( CHAR_BIT - 1 );
+    static constexpr auto digits = int{ CHAR_BIT - 1 };
 
     static constexpr auto digits10 = static_cast<int>( digits * log10( 2 ) );
 

@@ -1453,6 +1453,100 @@ struct numeric_limits<signed long long> {
     }
 };
 
+template<>
+struct numeric_limits<unsigned long long> {
+    static constexpr auto is_specialized = true;
+
+    static constexpr auto is_signed = false;
+
+    static constexpr auto is_integer = true;
+
+    static constexpr auto is_exact = true;
+
+    static constexpr auto has_infinity = false;
+
+    static constexpr auto has_quiet_NaN = false;
+
+    static constexpr auto has_signaling_NaN = false;
+
+    static constexpr auto has_denorm = denorm_absent;
+
+    static constexpr auto has_denorm_loss = false;
+
+    static constexpr auto round_style = round_toward_zero;
+
+    static constexpr auto is_iec559 = false;
+
+    static constexpr auto is_bounded = true;
+
+    static constexpr auto is_modulo = true;
+
+    static constexpr auto digits = int{ CHAR_BIT * sizeof( unsigned long long ) };
+
+    static constexpr auto digits10 = static_cast<int>( digits * log10( 2 ) );
+
+    static constexpr auto max_digits10 = 0;
+
+    static constexpr auto radix = 2;
+
+    static constexpr auto min_exponent = 0;
+
+    static constexpr auto min_exponent10 = 0;
+
+    static constexpr auto max_exponent = 0;
+
+    static constexpr auto max_exponent10 = 0;
+
+    static constexpr auto traps = false;
+
+    static constexpr auto tinyness_before = false;
+
+    static constexpr auto min() noexcept -> unsigned long long
+    {
+        return 0;
+    }
+
+    static constexpr auto lowest() noexcept -> unsigned long long
+    {
+        return 0;
+    }
+
+    static constexpr auto max() noexcept -> unsigned long long
+    {
+        return ULLONG_MAX;
+    }
+
+    static constexpr auto epsilon() noexcept -> unsigned long long
+    {
+        return 0;
+    }
+
+    static constexpr auto round_error() noexcept -> unsigned long long
+    {
+        return 0;
+    }
+
+    static constexpr auto infinity() noexcept -> unsigned long long
+    {
+        return 0;
+    }
+
+    static constexpr auto quiet_NaN() noexcept -> unsigned long long
+    {
+        return 0;
+    }
+
+    static constexpr auto signaling_NaN() noexcept -> unsigned long long
+    {
+        return 0;
+    }
+
+    static constexpr auto denorm_min() noexcept -> unsigned long long
+    {
+        return 0;
+    }
+};
+
 } // namespace std
 
 #endif // STD_LIMITS_H

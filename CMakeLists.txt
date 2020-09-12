@@ -32,10 +32,10 @@ list(
 
 # configure compilation and linking
 if( NOT ${AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS} )
+    set( CMAKE_CXX_STANDARD 17 )
     set(
         CMAKE_CXX_FLAGS
         "${CMAKE_CXX_FLAGS} \
-        -std=c++17 \
         -Werror -Wall -Wextra \
         -Wcast-qual \
         -Wextra-semi \

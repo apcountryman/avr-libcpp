@@ -19,9 +19,9 @@
  * \brief cmath interface.
  */
 
-#ifndef CMATH_H
-#define CMATH_H
+#ifndef SYSTEM_CMATH_H
+#define SYSTEM_CMATH_H
 
 #include "std/cmath.h"
 
-#endif // CMATH_H
+#endif // SYSTEM_CMATH_H

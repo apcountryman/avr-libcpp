@@ -19,9 +19,9 @@
  * \brief climits interface.
  */
 
-#ifndef CLIMITS_H
-#define CLIMITS_H
+#ifndef SYSTEM_CLIMITS_H
+#define SYSTEM_CLIMITS_H
 
 #include "std/climits.h"
 
-#endif // CLIMITS_H
+#endif // SYSTEM_CLIMITS_H

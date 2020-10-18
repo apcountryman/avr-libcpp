@@ -19,9 +19,9 @@
  * \brief new interface.
  */
 
-#ifndef NEW_H
-#define NEW_H
+#ifndef SYSTEM_NEW_H
+#define SYSTEM_NEW_H
 
 #include "std/new.h"
 
-#endif // NEW_H
+#endif // SYSTEM_NEW_H

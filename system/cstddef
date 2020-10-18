@@ -19,9 +19,9 @@
  * \brief cstddef interface.
  */
 
-#ifndef CSTDDEF_H
-#define CSTDDEF_H
+#ifndef SYSTEM_CSTDDEF_H
+#define SYSTEM_CSTDDEF_H
 
 #include "std/cstddef.h"
 
-#endif // CSTDDEF_H
+#endif // SYSTEM_CSTDDEF_H

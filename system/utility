@@ -19,9 +19,9 @@
  * \brief utility interface.
  */
 
-#ifndef UTILITY_H
-#define UTILITY_H
+#ifndef SYSTEM_UTILITY_H
+#define SYSTEM_UTILITY_H
 
 #include "std/utility.h"
 
-#endif // UTILITY_H
+#endif // SYSTEM_UTILITY_H

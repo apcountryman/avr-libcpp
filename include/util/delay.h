@@ -22,7 +22,13 @@
 #ifndef UTIL_DELAY_H
 #define UTIL_DELAY_H
 
+#include <util/delay.h>
+
 namespace util {
+
+using ::_delay_ms;
+using ::_delay_us;
+
 } // namespace util
 
 #endif // UTIL_DELAY_H

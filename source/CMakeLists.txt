@@ -41,6 +41,7 @@ add_library(
     "std/type_traits.cc"
     "std/utility.cc"
     "type_traits.cc"
+    "util.cc"
     "utility.cc"
 )
 target_include_directories(

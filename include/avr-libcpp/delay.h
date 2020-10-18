@@ -22,7 +22,14 @@
 #ifndef AVRLIBCPP_DELAY_H
 #define AVRLIBCPP_DELAY_H
 
+#include <util/delay.h>
+
 namespace avrlibcpp {
+
+constexpr auto delay_ms = ::_delay_ms;
+
+constexpr auto delay_us = ::_delay_us;
+
 } // namespace avrlibcpp
 
 #endif // AVRLIBCPP_DELAY_H

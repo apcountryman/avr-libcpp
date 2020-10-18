@@ -56,6 +56,7 @@ if( NOT ${AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS} )
             CMAKE_CXX_FLAGS
             "${CMAKE_CXX_FLAGS} \
             -mmcu=${AVRLIBCPP_MCU} \
+            -DF_CPU=1000000 \
             -Wcast-align=strict \
             -Wduplicated-cond \
             -Wimplicit-fallthrough=5 \

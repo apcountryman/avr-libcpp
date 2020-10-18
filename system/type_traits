@@ -19,9 +19,9 @@
  * \brief type_traits interface.
  */
 
-#ifndef TYPE_TRAITS_H
-#define TYPE_TRAITS_H
+#ifndef SYSTEM_TYPE_TRAITS_H
+#define SYSTEM_TYPE_TRAITS_H
 
 #include "std/type_traits.h"
 
-#endif // TYPE_TRAITS_H
+#endif // SYSTEM_TYPE_TRAITS_H

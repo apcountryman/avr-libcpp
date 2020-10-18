@@ -19,9 +19,9 @@
  * \brief limits interface.
  */
 
-#ifndef LIMITS_H
-#define LIMITS_H
+#ifndef SYSTEM_LIMITS_H
+#define SYSTEM_LIMITS_H
 
 #include "std/limits.h"
 
-#endif // LIMITS_H
+#endif // SYSTEM_LIMITS_H

@@ -16,12 +16,20 @@
 
 /**
  * \file
- * \brief climits interface.
+ * \brief avr-libcpp/delay interface.
  */
 
-#ifndef SYSTEM_CLIMITS_H
-#define SYSTEM_CLIMITS_H
+#ifndef AVRLIBCPP_DELAY_H
+#define AVRLIBCPP_DELAY_H
 
-#include "std/climits.h"
+#include <util/delay.h>
 
-#endif // SYSTEM_CLIMITS_H
+namespace avrlibcpp {
+
+constexpr auto delay_ms = ::_delay_ms;
+
+constexpr auto delay_us = ::_delay_us;
+
+} // namespace avrlibcpp
+
+#endif // AVRLIBCPP_DELAY_H

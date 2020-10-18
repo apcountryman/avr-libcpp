@@ -16,12 +16,9 @@
 
 /**
  * \file
- * \brief climits interface.
+ * \brief avr-libcpp/delay implementation.
  */
 
-#ifndef SYSTEM_CLIMITS_H
-#define SYSTEM_CLIMITS_H
+#include "avr-libcpp/delay.h"
 
-#include "std/climits.h"
-
-#endif // SYSTEM_CLIMITS_H
+#include <avr-libcpp/delay>

@@ -19,9 +19,9 @@
  * \brief cstdint interface.
  */
 
-#ifndef CSTDINT_H
-#define CSTDINT_H
+#ifndef SYSTEM_CSTDINT_H
+#define SYSTEM_CSTDINT_H
 
 #include "std/cstdint.h"
 
-#endif // CSTDINT_H
+#endif // SYSTEM_CSTDINT_H

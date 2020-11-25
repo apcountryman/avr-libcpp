@@ -47,7 +47,6 @@ function display_help_text()
     echo "    --analyzer <analyzer>"
     echo "        Specify the analyzer to run against avr-libcpp. The following analyzers"
     echo "        are supported:"
-    echo "            clang-tidy"
     echo "            cppcheck"
     echo "            lizard"
     echo "            shellcheck"
@@ -58,7 +57,6 @@ function display_help_text()
     echo "EXAMPLES"
     echo "    $mnemonic --help"
     echo "    $mnemonic --version"
-    echo "    $mnemonic --analyzer clang-tidy"
     echo "    $mnemonic --analyzer cppcheck"
     echo "    $mnemonic --analyzer lizard"
     echo "    $mnemonic --analyzer shellcheck"
@@ -96,15 +94,6 @@ function run_cppcheck()
     )
 
     if ! cppcheck "${cppcheck_options[@]}"; then
-        abort
-    fi
-}
-
-function run_clang-tidy()
-{
-    generate_compilation_database
-
-    if ! run-clang-tidy -p "$build_directory"; then
         abort
     fi
 }
@@ -173,7 +162,7 @@ function main()
 
                 local -r analyzer="$1"; shift
 
-                if [[ "$analyzer" != "clang-tidy" && "$analyzer" != "cppcheck" && "$analyzer" != "lizard" && "$analyzer" != "shellcheck" ]]; then
+                if [[ "$analyzer" != "cppcheck" && "$analyzer" != "lizard" && "$analyzer" != "shellcheck" ]]; then
                     abort "'$analyzer' is not a supported analyzer"
                 fi
                 ;;

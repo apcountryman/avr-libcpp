@@ -1,5 +1,5 @@
 # avr-libcpp
-[![Build Status](https://travis-ci.com/apcountryman/avr-libcpp.svg?branch=master)](https://travis-ci.com/apcountryman/avr-libcpp)
+![CI](https://github.com/apcountryman/avr-libcpp/workflows/CI/badge.svg)
 
 A partial implementation of the C++ standard library (C++17 only) for use with
 avr-gcc/avr-libc.
@@ -35,8 +35,8 @@ See the `pre-commit` script's help text for usage details
 ./git/hooks/pre-commit --help
 ```
 
-Additional checks, such as static analysis, are performed by this project's Travis CI
-jobs.
+Additional checks, such as static analysis, are performed by this project's GitHub Actions
+CI workflow.
 
 ## Versioning
 Post version 0.1.0, `avr-libcpp` will follow the [Abseil Live at Head

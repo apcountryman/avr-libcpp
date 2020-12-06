@@ -22,7 +22,12 @@
 #ifndef STD_CSTRING_H
 #define STD_CSTRING_H
 
+#include <string.h>
+
 namespace std {
+
+using ::memcpy;
+
 } // namespace std
 
 #endif // STD_CSTRING_H

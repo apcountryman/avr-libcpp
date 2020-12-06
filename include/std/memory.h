@@ -23,6 +23,16 @@
 #define STD_MEMORY_H
 
 namespace std {
+
+template<typename T>
+constexpr auto addressof( T & object ) noexcept -> T *
+{
+    return __builtin_addressof( object );
+}
+
+template<typename T>
+constexpr auto addressof( T const && ) -> T const * = delete;
+
 } // namespace std
 
 #endif // STD_MEMORY_H

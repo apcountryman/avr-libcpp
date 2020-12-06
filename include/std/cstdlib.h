@@ -22,7 +22,29 @@
 #ifndef STD_CSTDLIB_H
 #define STD_CSTDLIB_H
 
+#include <stdlib.h>
+
 namespace std {
+
+using ::abs;
+
+using ::labs;
+
+inline auto llabs( long long n ) noexcept
+{
+    return n >= 0 ? n : -n;
+}
+
+inline auto abs( long n ) noexcept
+{
+    return labs( n );
+}
+
+inline auto abs( long long n ) noexcept
+{
+    return llabs( n );
+}
+
 } // namespace std
 
 #endif // STD_CSTDLIB_H

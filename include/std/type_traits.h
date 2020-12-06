@@ -462,7 +462,7 @@ struct invoke_result;
 template<typename Functor, typename... Arguments>
 using invoke_result_t = typename invoke_result<Functor, Arguments...>::type;
 
-template<typename T>
+template<typename...>
 using void_t = void;
 
 } // namespace Type_Traits_Miscellaneous_Transformations

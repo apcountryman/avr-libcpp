@@ -416,6 +416,15 @@ using add_pointer_t = typename add_pointer<T>::type;
 
 } // namespace Type_Traits_Pointers
 
+inline namespace Type_Traits_Sign_Modifiers {
+template<typename T>
+struct make_unsigned;
+
+template<typename T>
+using make_unsigned_t = typename make_unsigned<T>::type;
+
+} // namespace Type_Traits_Sign_Modifiers
+
 inline namespace Type_Traits_Arrays {
 template<typename T>
 struct remove_extent;
@@ -1132,6 +1141,106 @@ struct add_pointer : decltype( Implementation::add_pointer<T>( 0 ) ) {
 };
 
 } // namespace Type_Traits_Pointers
+
+inline namespace Type_Traits_Sign_Modifiers {
+namespace Implementation {
+
+template<typename T>
+struct make_unsigned_integral : type_identity<T> {
+};
+
+template<>
+struct make_unsigned_integral<signed char> : type_identity<unsigned char> {
+};
+
+template<>
+struct make_unsigned_integral<signed short> : type_identity<unsigned short> {
+};
+
+template<>
+struct make_unsigned_integral<signed int> : type_identity<unsigned int> {
+};
+
+template<>
+struct make_unsigned_integral<signed long> : type_identity<unsigned long> {
+};
+
+template<>
+struct make_unsigned_integral<signed long long> : type_identity<unsigned long long> {
+};
+
+template<>
+struct make_unsigned_integral<char> : type_identity<unsigned char> {
+};
+
+static_assert( sizeof( wchar_t ) == sizeof( unsigned int ) );
+
+template<>
+struct make_unsigned_integral<wchar_t> : type_identity<unsigned int> {
+};
+
+static_assert( sizeof( char16_t ) == sizeof( unsigned int ) );
+
+template<>
+struct make_unsigned_integral<char16_t> : type_identity<unsigned int> {
+};
+
+static_assert( sizeof( char32_t ) == sizeof( unsigned long ) );
+
+template<>
+struct make_unsigned_integral<char32_t> : type_identity<unsigned long> {
+};
+
+template<typename T>
+using make_unsigned_integral_t = typename make_unsigned_integral<T>::type;
+
+template<typename T, bool = is_integral_v<T> and not is_same_v<T, bool>, bool = is_enum_v<T>>
+struct make_unsigned;
+
+template<typename T>
+struct make_unsigned<T, true, false> : type_identity<make_unsigned_integral_t<T>> {
+};
+
+template<typename T>
+struct make_unsigned<T const, true, false> : type_identity<make_unsigned_integral_t<T> const> {
+};
+
+template<typename T>
+struct make_unsigned<T volatile, true, false> : type_identity<make_unsigned_integral_t<T> volatile> {
+};
+
+template<typename T>
+struct make_unsigned<T const volatile, true, false>
+    : type_identity<make_unsigned_integral_t<T> const volatile> {
+};
+
+template<typename T>
+struct make_unsigned<T, false, true>
+    : type_identity<make_unsigned_integral<underlying_type_t<T>>> {
+};
+
+template<typename T>
+struct make_unsigned<T const, false, true>
+    : type_identity<make_unsigned_integral<underlying_type_t<T>> const> {
+};
+
+template<typename T>
+struct make_unsigned<T volatile, false, true>
+    : type_identity<make_unsigned_integral<underlying_type_t<T>> volatile> {
+};
+
+template<typename T>
+struct make_unsigned<T const volatile, false, true>
+    : type_identity<make_unsigned_integral<underlying_type_t<T>> const volatile> {
+};
+
+} // namespace Implementation
+
+template<typename T>
+struct make_unsigned : Implementation::make_unsigned<T> {
+};
+
+} // namespace Type_Traits_Sign_Modifiers
 
 inline namespace Type_Traits_Arrays {
 template<typename T>

@@ -420,6 +420,9 @@ inline namespace Type_Traits_Sign_Modifiers {
 template<typename T>
 struct make_unsigned;
 
+template<typename T>
+using make_unsigned_t = typename make_unsigned<T>::type;
+
 } // namespace Type_Traits_Sign_Modifiers
 
 inline namespace Type_Traits_Arrays {

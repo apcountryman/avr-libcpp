@@ -761,8 +761,8 @@ struct is_arithmetic : disjunction<is_integral<T>, is_floating_point<T>> {
 };
 
 template<typename T>
-struct is_scalar
-    : disjunction<is_arithmetic<T>, is_enum<T>, is_pointer<T>, is_member_pointer<T>, is_null_pointer<T>> {
+struct is_scalar :
+    disjunction<is_arithmetic<T>, is_enum<T>, is_pointer<T>, is_member_pointer<T>, is_null_pointer<T>> {
 };
 
 template<typename T>
@@ -837,8 +837,8 @@ struct is_pod : bool_constant<__is_pod( T )> {
 };
 
 template<typename T>
-struct has_unique_object_representations
-    : bool_constant<__has_unique_object_representations( remove_cv_t<remove_all_extents_t<T>> )> {
+struct has_unique_object_representations :
+    bool_constant<__has_unique_object_representations( remove_cv_t<remove_all_extents_t<T>> )> {
 };
 
 template<typename T>
@@ -941,8 +941,8 @@ struct is_destructible : Implementation::is_destructible<T> {
 };
 
 template<typename T>
-struct is_trivially_destructible
-    : conjunction<is_destructible<T>, bool_constant<__has_trivial_destructor( T )>> {
+struct is_trivially_destructible :
+    conjunction<is_destructible<T>, bool_constant<__has_trivial_destructor( T )>> {
 };
 
 } // namespace Type_Traits_Supported_Operations
@@ -1020,10 +1020,10 @@ auto is_convertible( ... ) -> false_type;
 } // namespace Implementation
 
 template<typename From, typename To>
-struct is_convertible
-    : disjunction<
-          conjunction<is_void<From>, is_void<To>>,
-          conjunction<decltype( Implementation::is_returnable<To>( 0 ) ), decltype( Implementation::is_convertible<From, To>( 0 ) )>> {
+struct is_convertible :
+    disjunction<
+        conjunction<is_void<From>, is_void<To>>,
+        conjunction<decltype( Implementation::is_returnable<To>( 0 ) ), decltype( Implementation::is_convertible<From, To>( 0 ) )>> {
 };
 
 } // namespace Type_Traits_Type_Relationships
@@ -1207,32 +1207,33 @@ struct make_unsigned<T const, true, false> : type_identity<make_unsigned_integra
 };
 
 template<typename T>
-struct make_unsigned<T volatile, true, false> : type_identity<make_unsigned_integral_t<T> volatile> {
+struct make_unsigned<T volatile, true, false> :
+    type_identity<make_unsigned_integral_t<T> volatile> {
 };
 
 template<typename T>
-struct make_unsigned<T const volatile, true, false>
-    : type_identity<make_unsigned_integral_t<T> const volatile> {
+struct make_unsigned<T const volatile, true, false> :
+    type_identity<make_unsigned_integral_t<T> const volatile> {
 };
 
 template<typename T>
-struct make_unsigned<T, false, true>
-    : type_identity<make_unsigned_integral<underlying_type_t<T>>> {
+struct make_unsigned<T, false, true> :
+    type_identity<make_unsigned_integral<underlying_type_t<T>>> {
 };
 
 template<typename T>
-struct make_unsigned<T const, false, true>
-    : type_identity<make_unsigned_integral<underlying_type_t<T>> const> {
+struct make_unsigned<T const, false, true> :
+    type_identity<make_unsigned_integral<underlying_type_t<T>> const> {
 };
 
 template<typename T>
-struct make_unsigned<T volatile, false, true>
-    : type_identity<make_unsigned_integral<underlying_type_t<T>> volatile> {
+struct make_unsigned<T volatile, false, true> :
+    type_identity<make_unsigned_integral<underlying_type_t<T>> volatile> {
 };
 
 template<typename T>
-struct make_unsigned<T const volatile, false, true>
-    : type_identity<make_unsigned_integral<underlying_type_t<T>> const volatile> {
+struct make_unsigned<T const volatile, false, true> :
+    type_identity<make_unsigned_integral<underlying_type_t<T>> const volatile> {
 };
 
 } // namespace Implementation
@@ -1272,11 +1273,11 @@ struct remove_all_extents<T[ N ]> : type_identity<remove_all_extents_t<T>> {
 
 inline namespace Type_Traits_Miscellaneous_Transformations {
 template<typename T>
-struct decay
-    : type_identity<conditional_t<
-          is_array_v<remove_reference_t<T>>,
-          remove_extent_t<remove_reference_t<T>> *,
-          conditional_t<is_function_v<remove_reference_t<T>>, add_pointer_t<remove_reference_t<T>>, remove_cv_t<remove_reference_t<T>>>>> {
+struct decay :
+    type_identity<conditional_t<
+        is_array_v<remove_reference_t<T>>,
+        remove_extent_t<remove_reference_t<T>> *,
+        conditional_t<is_function_v<remove_reference_t<T>>, add_pointer_t<remove_reference_t<T>>, remove_cv_t<remove_reference_t<T>>>>> {
 };
 
 template<bool B, typename T>
@@ -1344,8 +1345,8 @@ struct invoke_result {
 };
 
 template<typename Functor, typename... Arguments>
-struct invoke_result<void_t<decltype( INVOKE( declval<Functor>(), declval<Arguments>()... ) )>, Functor, Arguments...>
-    : type_identity<decltype( INVOKE( declval<Functor>(), declval<Arguments>()... ) )> {
+struct invoke_result<void_t<decltype( INVOKE( declval<Functor>(), declval<Arguments>()... ) )>, Functor, Arguments...> :
+    type_identity<decltype( INVOKE( declval<Functor>(), declval<Arguments>()... ) )> {
 };
 
 } // namespace Implementation
@@ -1366,8 +1367,8 @@ struct conjunction<B1> : B1 {
 };
 
 template<typename B1, typename... BN>
-struct conjunction<B1, BN...>
-    : conditional_t<static_cast<bool>( B1::value ), conjunction<BN...>, B1> {
+struct conjunction<B1, BN...> :
+    conditional_t<static_cast<bool>( B1::value ), conjunction<BN...>, B1> {
 };
 
 template<typename...>
@@ -1379,8 +1380,8 @@ struct disjunction<B1> : B1 {
 };
 
 template<typename B1, typename... BN>
-struct disjunction<B1, BN...>
-    : conditional_t<static_cast<bool>( B1::value ), B1, disjunction<BN...>> {
+struct disjunction<B1, BN...> :
+    conditional_t<static_cast<bool>( B1::value ), B1, disjunction<BN...>> {
 };
 
 template<typename B>

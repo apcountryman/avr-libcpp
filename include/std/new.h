@@ -33,7 +33,7 @@ inline void * operator new( std::size_t, void * location ) noexcept
     return location;
 }
 
-inline void operator delete(void *, void *)noexcept
+inline void operator delete( void *, void * ) noexcept
 {
 }
 

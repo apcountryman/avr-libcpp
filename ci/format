@@ -15,7 +15,7 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: utility/format
+# File: ci/format
 # Description: avr-libcpp repository formatting script.
 
 function error()
@@ -62,7 +62,7 @@ function display_version()
 
 function ensure_formatting_style_is_consistent()
 {
-    local cpp_files; mapfile -t cpp_files < <( git -C "$repository" ls-files '*.h' '*.h.in' '*.cc' '*.cc.in' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly cpp_files
+    local cpp_files; mapfile -t cpp_files < <( git -C "$repository" ls-files '*.h' '*.h.in' '*.cc' '*.cc.in' 'system/*' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly cpp_files
 
     if ! ( cd "$repository" && clang-format -i --verbose "${cpp_files[@]}" && git -C "$repository" diff --exit-code ); then
         abort

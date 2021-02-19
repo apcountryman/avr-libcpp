@@ -1023,6 +1023,7 @@ template<typename From, typename To>
 struct is_convertible :
     disjunction<
         conjunction<is_void<From>, is_void<To>>,
+        is_same<From, To>,
         conjunction<decltype( Implementation::is_returnable<To>( 0 ) ), decltype( Implementation::is_convertible<From, To>( 0 ) )>> {
 };
 

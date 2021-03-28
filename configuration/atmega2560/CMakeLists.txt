@@ -13,7 +13,7 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: configuration/CMakeLists.txt.atmega2560
+# File: configuration/atmega2560/CMakeLists.txt
 # Description: avr-libcpp ATmega2560 configuration.
 
 # install prefix is not applicable

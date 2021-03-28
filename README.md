@@ -1,5 +1,5 @@
 # avr-libcpp
-![CI](https://github.com/apcountryman/avr-libcpp/workflows/CI/badge.svg)
+[![CI](https://github.com/apcountryman/avr-libcpp/actions/workflows/ci.yml/badge.svg)](https://github.com/apcountryman/avr-libcpp/actions/workflows/ci.yml)
 
 A partial implementation of the C++ standard library (C++17 only) for use with
 avr-gcc/avr-libc.

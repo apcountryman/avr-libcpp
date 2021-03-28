@@ -13,16 +13,16 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: configuration/CMakeLists.txt.analysis
-# Description: avr-libcpp static analysis configuration.
+# File: configuration/atmega328p/CMakeLists.txt
+# Description: avr-libcpp ATmega328P configuration.
 
 # install prefix is not applicable
 mark_as_advanced( CMAKE_INSTALL_PREFIX )
 
 # build configuration
-set( AVRLIBCPP_MCU                            "atmega2560" CACHE STRING "" FORCE )
+set( AVRLIBCPP_MCU                            "atmega328p" CACHE STRING "" FORCE )
 set( AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS OFF          CACHE BOOL   "" FORCE )
-set( CMAKE_BUILD_TYPE                         "Release"    CACHE STRING "" FORCE )
+set( CMAKE_BUILD_TYPE                         "MinSizeRel" CACHE STRING "" FORCE )
 set( CMAKE_EXPORT_COMPILE_COMMANDS            ON           CACHE BOOL   "" FORCE )
 mark_as_advanced(
     AVRLIBCPP_MCU

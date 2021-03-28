@@ -70,7 +70,7 @@ function display_version()
 
 function generate_compilation_database()
 {
-    local -r build_configuration="$repository/configuration/CMakeLists.txt.analysis"
+    local -r build_configuration="$repository/configuration/analysis/CMakeLists.txt"
 
     if ! cmake -C "$build_configuration" -S "$repository" -B "$build_directory"; then
         abort

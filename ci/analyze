@@ -72,15 +72,7 @@ function generate_compilation_database()
 {
     local -r build_configuration="$repository/configuration/CMakeLists.txt.analysis"
 
-    if ! mkdir -p "$build_directory"; then
-        abort
-    fi
-
-    if ! cd "$build_directory"; then
-        abort
-    fi
-
-    if ! cmake -C "$build_configuration" "$repository"; then
+    if ! cmake -C "$build_configuration" -S "$repository" -B "$build_directory"; then
         abort
     fi
 }

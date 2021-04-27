@@ -24,6 +24,7 @@
 #define STD_TYPE_TRAITS_H
 
 #include <cstddef>
+#include <cstdint>
 
 namespace std {
 
@@ -442,6 +443,12 @@ using remove_all_extents_t = typename remove_all_extents<T>::type;
 } // namespace Type_Traits_Arrays
 
 inline namespace Type_Traits_Miscellaneous_Transformations {
+template<size_t LENGTH, size_t ALIGNMENT = alignof( char )>
+struct aligned_storage;
+
+template<size_t LENGTH, size_t ALIGNMENT = alignof( char )>
+using aligned_storage_t = typename aligned_storage<LENGTH, ALIGNMENT>::type;
+
 template<typename T>
 struct decay;
 
@@ -1273,6 +1280,13 @@ struct remove_all_extents<T[ N ]> : type_identity<remove_all_extents_t<T>> {
 } // namespace Type_Traits_Arrays
 
 inline namespace Type_Traits_Miscellaneous_Transformations {
+template<size_t LENGTH, size_t ALIGNMENT>
+struct aligned_storage {
+    struct type {
+        alignas( ALIGNMENT ) uint8_t storage[ LENGTH ];
+    };
+};
+
 template<typename T>
 struct decay :
     type_identity<conditional_t<

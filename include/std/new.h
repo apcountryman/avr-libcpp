@@ -26,6 +26,13 @@
 #include <cstddef>
 
 namespace std {
+
+template<typename T>
+constexpr T * launder( T * pointer ) noexcept
+{
+    return __builtin_launder( pointer );
+}
+
 } // namespace std
 
 inline void * operator new( std::size_t, void * location ) noexcept

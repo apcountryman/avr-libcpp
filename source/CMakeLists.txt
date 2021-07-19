@@ -27,6 +27,7 @@ add_library(
     "${CMAKE_CURRENT_BINARY_DIR}/avr-libcpp/version.cc"
     "avr-libcpp.cc"
     "avr-libcpp/delay.cc"
+    "avr-libcpp/interrupt.cc"
     "climits.cc"
     "cmath.cc"
     "cstddef.cc"

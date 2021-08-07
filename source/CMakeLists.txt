@@ -28,6 +28,10 @@ add_library(
     "avr-libcpp.cc"
     "avr-libcpp/delay.cc"
     "avr-libcpp/interrupt.cc"
+    "avr-libcpp/suppress_sfr_macros.cc"
+    "avr-libcpp/suppress_sfr_macros/atmega2560.cc"
+    "avr-libcpp/suppress_sfr_macros/atmega328p.cc"
+    "avr-libcpp/suppress_sfr_macros/atmega4809.cc"
     "climits.cc"
     "cmath.cc"
     "cstddef.cc"
@@ -56,4 +60,8 @@ target_include_directories(
     avr-libcpp
     PUBLIC "${PROJECT_SOURCE_DIR}/include"
     PUBLIC "${PROJECT_SOURCE_DIR}/system"
+)
+target_compile_definitions(
+    avr-libcpp
+    PUBLIC "$<IF:$<BOOL:${AVRLIBCPP_SUPPRESS_SFR_MACROS}>,AVRLIBCPP_SUPPRESS_SFR_MACROS,>"
 )

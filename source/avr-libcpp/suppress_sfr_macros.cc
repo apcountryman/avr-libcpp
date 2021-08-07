@@ -17,17 +17,7 @@
 
 /**
  * \file
- * \brief avr-libcpp/interrupt interface.
+ * \brief avr-libcpp/suppress_sfr_macros implementation.
  */
 
-#ifndef AVRLIBCPP_INTERRUPT_H
-#define AVRLIBCPP_INTERRUPT_H
-
-#include <avr/interrupt.h>
-
 #include "avr-libcpp/suppress_sfr_macros.h"
-
-namespace avrlibcpp {
-} // namespace avrlibcpp
-
-#endif // AVRLIBCPP_INTERRUPT_H

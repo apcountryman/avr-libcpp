@@ -23,7 +23,8 @@ project(
 )
 
 # project configuration
-option( AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS "avr-libcpp: use parent project's build flags" ON )
+option( AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS "avr-libcpp: use parent project's build flags" ON  )
+option( AVRLIBCPP_SUPPRESS_SFR_MACROS            "avr-libcpp: suppress SFR macros"              OFF )
 
 # load additional CMake modules
 list(

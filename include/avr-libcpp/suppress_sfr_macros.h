@@ -17,17 +17,14 @@
 
 /**
  * \file
- * \brief avr-libcpp/interrupt interface.
+ * \brief avr-libcpp/suppress_sfr_macros interface.
  */
 
-#ifndef AVRLIBCPP_INTERRUPT_H
-#define AVRLIBCPP_INTERRUPT_H
+#ifndef AVRLIBCPP_SUPPRESS_SFR_MACROS_H
+#define AVRLIBCPP_SUPPRESS_SFR_MACROS_H
 
-#include <avr/interrupt.h>
+#include "avr-libcpp/suppress_sfr_macros/atmega2560.h"
+#include "avr-libcpp/suppress_sfr_macros/atmega328p.h"
+#include "avr-libcpp/suppress_sfr_macros/atmega4809.h"
 
-#include "avr-libcpp/suppress_sfr_macros.h"
-
-namespace avrlibcpp {
-} // namespace avrlibcpp
-
-#endif // AVRLIBCPP_INTERRUPT_H
+#endif // AVRLIBCPP_SUPPRESS_SFR_MACROS_H

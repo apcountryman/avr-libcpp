@@ -27,7 +27,7 @@
 
 namespace std {
 
-[[noreturn]] inline void exit( int exit_code )
+[[noreturn]] inline void exit( int exit_code ) noexcept
 {
     ::exit( exit_code );
 }

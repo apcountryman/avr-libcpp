@@ -27,6 +27,11 @@
 
 namespace std {
 
+[[noreturn]] inline void exit( int exit_code )
+{
+    ::exit( exit_code );
+}
+
 using ::abs;
 
 using ::labs;

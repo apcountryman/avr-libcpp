@@ -27,6 +27,11 @@
 
 namespace std {
 
+[[noreturn]] inline void abort() noexcept
+{
+    ::abort();
+}
+
 [[noreturn]] inline void exit( int exit_code ) noexcept
 {
     ::exit( exit_code );

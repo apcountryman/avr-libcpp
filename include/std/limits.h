@@ -1560,6 +1560,194 @@ struct numeric_limits<unsigned long long> {
     }
 };
 
+template<>
+struct numeric_limits<__int24> {
+    static constexpr auto is_specialized = true;
+
+    static constexpr auto is_signed = true;
+
+    static constexpr auto is_integer = true;
+
+    static constexpr auto is_exact = true;
+
+    static constexpr auto has_infinity = false;
+
+    static constexpr auto has_quiet_NaN = false;
+
+    static constexpr auto has_signaling_NaN = false;
+
+    static constexpr auto has_denorm = denorm_absent;
+
+    static constexpr auto has_denorm_loss = false;
+
+    static constexpr auto round_style = round_toward_zero;
+
+    static constexpr auto is_iec559 = false;
+
+    static constexpr auto is_bounded = true;
+
+    static constexpr auto is_modulo = false;
+
+    static constexpr auto digits = int{ CHAR_BIT * sizeof( __int24 ) - 1 };
+
+    static constexpr auto digits10 = static_cast<int>( digits * log10( 2 ) );
+
+    static constexpr auto max_digits10 = 0;
+
+    static constexpr auto radix = 2;
+
+    static constexpr auto min_exponent = 0;
+
+    static constexpr auto min_exponent10 = 0;
+
+    static constexpr auto max_exponent = 0;
+
+    static constexpr auto max_exponent10 = 0;
+
+    static constexpr auto traps = false;
+
+    static constexpr auto tinyness_before = false;
+
+    static constexpr auto min() noexcept -> __int24
+    {
+        return __INT24_MIN__;
+    }
+
+    static constexpr auto lowest() noexcept -> __int24
+    {
+        return __INT24_MIN__;
+    }
+
+    static constexpr auto max() noexcept -> __int24
+    {
+        return __INT24_MAX__;
+    }
+
+    static constexpr auto epsilon() noexcept -> __int24
+    {
+        return 0;
+    }
+
+    static constexpr auto round_error() noexcept -> __int24
+    {
+        return 0;
+    }
+
+    static constexpr auto infinity() noexcept -> __int24
+    {
+        return 0;
+    }
+
+    static constexpr auto quiet_NaN() noexcept -> __int24
+    {
+        return 0;
+    }
+
+    static constexpr auto signaling_NaN() noexcept -> __int24
+    {
+        return 0;
+    }
+
+    static constexpr auto denorm_min() noexcept -> __int24
+    {
+        return 0;
+    }
+};
+
+template<>
+struct numeric_limits<__uint24> {
+    static constexpr auto is_specialized = true;
+
+    static constexpr auto is_signed = false;
+
+    static constexpr auto is_integer = true;
+
+    static constexpr auto is_exact = true;
+
+    static constexpr auto has_infinity = false;
+
+    static constexpr auto has_quiet_NaN = false;
+
+    static constexpr auto has_signaling_NaN = false;
+
+    static constexpr auto has_denorm = denorm_absent;
+
+    static constexpr auto has_denorm_loss = false;
+
+    static constexpr auto round_style = round_toward_zero;
+
+    static constexpr auto is_iec559 = false;
+
+    static constexpr auto is_bounded = true;
+
+    static constexpr auto is_modulo = true;
+
+    static constexpr auto digits = int{ CHAR_BIT * sizeof( __uint24 ) };
+
+    static constexpr auto digits10 = static_cast<int>( digits * log10( 2 ) );
+
+    static constexpr auto max_digits10 = 0;
+
+    static constexpr auto radix = 2;
+
+    static constexpr auto min_exponent = 0;
+
+    static constexpr auto min_exponent10 = 0;
+
+    static constexpr auto max_exponent = 0;
+
+    static constexpr auto max_exponent10 = 0;
+
+    static constexpr auto traps = false;
+
+    static constexpr auto tinyness_before = false;
+
+    static constexpr auto min() noexcept -> __uint24
+    {
+        return 0;
+    }
+
+    static constexpr auto lowest() noexcept -> __uint24
+    {
+        return 0;
+    }
+
+    static constexpr auto max() noexcept -> __uint24
+    {
+        return __UINT24_MAX__;
+    }
+
+    static constexpr auto epsilon() noexcept -> __uint24
+    {
+        return 0;
+    }
+
+    static constexpr auto round_error() noexcept -> __uint24
+    {
+        return 0;
+    }
+
+    static constexpr auto infinity() noexcept -> __uint24
+    {
+        return 0;
+    }
+
+    static constexpr auto quiet_NaN() noexcept -> __uint24
+    {
+        return 0;
+    }
+
+    static constexpr auto signaling_NaN() noexcept -> __uint24
+    {
+        return 0;
+    }
+
+    static constexpr auto denorm_min() noexcept -> __uint24
+    {
+        return 0;
+    }
+};
+
 } // namespace std
 
 #endif // STD_LIMITS_H

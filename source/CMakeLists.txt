@@ -32,6 +32,7 @@ add_library(
     "avr-libcpp/suppress_sfr_macros/atmega2560.cc"
     "avr-libcpp/suppress_sfr_macros/atmega328p.cc"
     "avr-libcpp/suppress_sfr_macros/atmega4809.cc"
+    "avr-libcpp/wdt.cc"
     "climits.cc"
     "cmath.cc"
     "cstddef.cc"

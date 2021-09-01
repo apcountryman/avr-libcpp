@@ -17,15 +17,18 @@
 
 /**
  * \file
- * \brief avr-libcpp/suppress_sfr_macros/atmega4809 interface.
+ * \brief avr-libcpp/suppress_sfr_macros/megaavr_0_series interface.
  */
 
-#ifndef AVRLIBCPP_SUPPRESS_SFR_MACROS_ATMEGA4809_H
-#define AVRLIBCPP_SUPPRESS_SFR_MACROS_ATMEGA4809_H
+#ifndef AVRLIBCPP_SUPPRESS_SFR_MACROS_MEGAAVR_0_SERIES_H
+#define AVRLIBCPP_SUPPRESS_SFR_MACROS_MEGAAVR_0_SERIES_H
 
 #include <avr/io.h>
 
-#ifdef __AVR_ATmega4809__
+#if defined( __AVR_ATmega808__ ) || defined( __AVR_ATmega809__ )      \
+    || defined( __AVR_ATmega1608__ ) || defined( __AVR_ATmega1609__ ) \
+    || defined( __AVR_ATmega3208__ ) || defined( __AVR_ATmega3209__ ) \
+    || defined( __AVR_ATmega4808__ ) || defined( __AVR_ATmega4809__ )
 #ifdef AVRLIBCPP_SUPPRESS_SFR_MACROS
 
 #ifdef AC0
@@ -349,6 +352,7 @@
 #endif // WDT
 
 #endif // AVRLIBCPP_SUPPRESS_SFR_MACROS
-#endif // __AVR_ATmega4809__
+#endif // defined( __AVR_ATmega808__ ) || defined( __AVR_ATmega809__ ) || defined( __AVR_ATmega1608__
+       // ) || defined( __AVR_ATmega1609__ ) || defined( __AVR_ATmega3208__ ) || defined( __AVR_ATmega3209__ ) || defined( __AVR_ATmega4808__ ) || defined( __AVR_ATmega4809__ )
 
-#endif // AVRLIBCPP_SUPPRESS_SFR_MACROS_ATMEGA4809_H
+#endif // AVRLIBCPP_SUPPRESS_SFR_MACROS_MEGAAVR_0_SERIES_H

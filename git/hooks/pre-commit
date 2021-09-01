@@ -225,6 +225,14 @@ function ensure_no_atmega3209_build_errors_are_present()
     ensure_no_build_errors_are_present "$build_type" "$ellipsis"
 }
 
+function ensure_no_atmega4808_build_errors_are_present()
+{
+    local -r build_type="atmega4808"
+    local -r ellipsis="............"
+
+    ensure_no_build_errors_are_present "$build_type" "$ellipsis"
+}
+
 function ensure_no_atmega4809_build_errors_are_present()
 {
     local -r build_type="atmega4809"
@@ -296,6 +304,7 @@ function main()
     ensure_no_atmega1609_build_errors_are_present
     ensure_no_atmega3208_build_errors_are_present
     ensure_no_atmega3209_build_errors_are_present
+    ensure_no_atmega4808_build_errors_are_present
     ensure_no_atmega4809_build_errors_are_present
 }
 

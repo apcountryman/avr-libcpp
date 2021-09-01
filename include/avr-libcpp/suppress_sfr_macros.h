@@ -25,6 +25,6 @@
 
 #include "avr-libcpp/suppress_sfr_macros/atmega2560.h"
 #include "avr-libcpp/suppress_sfr_macros/atmega328p.h"
-#include "avr-libcpp/suppress_sfr_macros/atmega4809.h"
+#include "avr-libcpp/suppress_sfr_macros/megaavr_0_series.h"
 
 #endif // AVRLIBCPP_SUPPRESS_SFR_MACROS_H

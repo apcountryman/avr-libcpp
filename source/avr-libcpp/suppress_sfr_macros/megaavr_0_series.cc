@@ -17,7 +17,7 @@
 
 /**
  * \file
- * \brief avr-libcpp/suppress_sfr_macros/atmega4809 implementation.
+ * \brief avr-libcpp/suppress_sfr_macros/megaavr_0_series implementation.
  */
 
-#include "avr-libcpp/suppress_sfr_macros/atmega4809.h"
+#include "avr-libcpp/suppress_sfr_macros/megaavr_0_series.h"

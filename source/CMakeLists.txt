@@ -24,7 +24,6 @@ configure_file(
 
 add_library(
     avr-libcpp STATIC
-    "${CMAKE_CURRENT_BINARY_DIR}/avr-libcpp/version.cc"
     "avr-libcpp.cc"
     "avr-libcpp/delay.cc"
     "avr-libcpp/interrupt.cc"
@@ -65,4 +64,13 @@ target_include_directories(
 target_compile_definitions(
     avr-libcpp
     PUBLIC "$<IF:$<BOOL:${AVRLIBCPP_SUPPRESS_SFR_MACROS}>,AVRLIBCPP_SUPPRESS_SFR_MACROS,>"
+)
+
+add_library(
+    avr-libcpp-version STATIC
+    "${CMAKE_CURRENT_BINARY_DIR}/avr-libcpp/version.cc"
+)
+target_include_directories(
+    avr-libcpp-version
+    PUBLIC "${PROJECT_SOURCE_DIR}/include"
 )

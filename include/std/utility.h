@@ -30,7 +30,7 @@ namespace std {
 template<typename T>
 constexpr auto move( T && t ) noexcept
 {
-    return static_cast<std::remove_reference_t<T> &&>( t );
+    return static_cast<remove_reference_t<T> &&>( t );
 }
 
 } // namespace std

@@ -511,13 +511,13 @@ template<typename T>
 auto declval() noexcept -> add_rvalue_reference_t<T>;
 
 template<typename T>
-constexpr auto forward( std::remove_reference_t<T> && t ) noexcept
+constexpr auto forward( remove_reference_t<T> && t ) noexcept
 {
     return static_cast<T &&>( t );
 }
 
 template<typename T>
-constexpr auto forward( std::remove_reference_t<T> & t ) noexcept
+constexpr auto forward( remove_reference_t<T> & t ) noexcept
 {
     return static_cast<T &&>( t );
 }
@@ -1340,7 +1340,7 @@ struct invocations<Member Class::*> {
     static auto get( T && t ) -> decltype( t.get() );
 
     template<typename T, typename = enable_if_t<negation_v<is_base_of<Class, decay_t<T>>>>, typename = enable_if_t<negation_v<is_reference_wrapper<decay_t<T>>>>>
-    static auto get( T && t ) -> decltype( *std::forward<T>( t ) );
+    static auto get( T && t ) -> decltype( *forward<T>( t ) );
 
     template<typename T, typename... Arguments, typename Member_1, typename = enable_if_t<is_function_v<Member_1>>>
     static auto invoke( Member_1 Class::*function, T && t, Arguments &&... arguments )

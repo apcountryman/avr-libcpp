@@ -23,6 +23,9 @@
 #ifndef STD_ITERATOR_H
 #define STD_ITERATOR_H
 
+#include <cstddef>
+#include <type_traits>
+
 namespace std {
 
 struct input_iterator_tag {
@@ -38,6 +41,49 @@ struct bidirectional_iterator_tag : forward_iterator_tag {
 };
 
 struct random_access_iterator_tag : bidirectional_iterator_tag {
+};
+
+template<typename Iterator, typename = void_t<>>
+struct iterator_traits {
+};
+
+template<typename Iterator>
+struct iterator_traits<Iterator, void_t<typename Iterator::difference_type, typename Iterator::value_type, typename Iterator::pointer, typename Iterator::reference, typename Iterator::iterator_category>> {
+    using difference_type = typename Iterator::difference_type;
+
+    using value_type = typename Iterator::value_type;
+
+    using pointer = typename Iterator::pointer;
+
+    using reference = typename Iterator::reference;
+
+    using iterator_category = typename Iterator::iterator_category;
+};
+
+template<typename T>
+struct iterator_traits<T *> {
+    using difference_type = ptrdiff_t;
+
+    using value_type = T;
+
+    using pointer = T *;
+
+    using reference = T &;
+
+    using iterator_category = random_access_iterator_tag;
+};
+
+template<typename T>
+struct iterator_traits<T const *> {
+    using difference_type = ptrdiff_t;
+
+    using value_type = T;
+
+    using pointer = T const *;
+
+    using reference = T const &;
+
+    using iterator_category = random_access_iterator_tag;
 };
 
 } // namespace std

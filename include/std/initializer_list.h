@@ -51,16 +51,16 @@ class initializer_list {
 
     constexpr auto begin() const noexcept -> const_iterator
     {
-        return m_array;
+        return m_begin;
     }
 
     constexpr auto end() const noexcept -> const_iterator
     {
-        return m_array + size;
+        return m_begin + size;
     }
 
   private:
-    iterator m_array{};
+    iterator m_begin{};
 
     size_type m_size{};
 
@@ -68,23 +68,23 @@ class initializer_list {
      * GCC appears to require a pointer + size based implementation, and is able to
      * call this private constructor
      */
-    constexpr initializer_list( const_iterator array, size_type size ) noexcept :
-        m_array{ array },
+    constexpr initializer_list( const_iterator begin, size_type size ) noexcept :
+        m_begin{ begin },
         m_size{ size }
     {
     }
 };
 
 template<typename T>
-constexpr auto begin( initializer_list<T> initializer ) noexcept -> T const *
+constexpr auto begin( initializer_list<T> initializer_list_ ) noexcept -> T const *
 {
-    return initializer.begin();
+    return initializer_list_.begin();
 }
 
 template<typename T>
-constexpr auto end( initializer_list<T> initializer ) noexcept -> T const *
+constexpr auto end( initializer_list<T> initializer_list_ ) noexcept -> T const *
 {
-    return initializer.end();
+    return initializer_list_.end();
 }
 
 } // namespace std

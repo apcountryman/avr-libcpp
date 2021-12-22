@@ -29,25 +29,11 @@
 
 namespace std {
 
-namespace Reference_Wrapper_Implementation {
-
-template<typename T>
-void test( T & ) noexcept;
-
-template<typename T>
-void test( T && ) = delete;
-
-} // namespace Reference_Wrapper_Implementation
-
 template<typename T>
 class reference_wrapper {
   public:
-    template<
-        typename U,
-        typename = decltype( Reference_Wrapper_Implementation::test<T>( declval<U>() ) ),
-        typename = enable_if_t<not is_same_v<decay_t<U>, reference_wrapper>>>
-    reference_wrapper( U && u ) noexcept(
-        noexcept( Reference_Wrapper_Implementation::test<T>( declval<U>() ) ) ) :
+    template<typename U, typename = decltype( FUN( declval<U>() ) ), typename = enable_if_t<not is_same_v<decay_t<U>, reference_wrapper>>>
+    reference_wrapper( U && u ) noexcept( noexcept( FUN( declval<U>() ) ) ) :
         m_pointer{ pointer( std::forward<U>( u ) ) }
     {
     }
@@ -73,7 +59,11 @@ class reference_wrapper {
     }
 
   private:
-    T * pointer( T & t ) noexcept
+    static void FUN( T & ) noexcept;
+
+    static void FUN( T && ) = delete;
+
+    static auto pointer( T & t ) noexcept -> T *
     {
         return addressof( t );
     }

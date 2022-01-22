@@ -27,6 +27,8 @@
 
 namespace std {
 
+using ::strlen;
+
 using ::memcpy;
 
 } // namespace std

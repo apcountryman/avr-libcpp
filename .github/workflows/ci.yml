@@ -36,7 +36,7 @@ jobs:
                   submodules: recursive
             - name: Install dependencies
               shell: bash
-              run: sudo apt install cppcheck
+              run: sudo apt update && sudo apt install cppcheck
             - name: Analyze
               shell: bash
               run: ./ci/analyze --analyzer cppcheck

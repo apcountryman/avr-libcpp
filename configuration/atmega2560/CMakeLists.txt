@@ -17,18 +17,11 @@
 # Description: avr-libcpp ATmega2560 configuration.
 
 # install prefix is not applicable
-mark_as_advanced( CMAKE_INSTALL_PREFIX )
+set( CMAKE_INSTALL_PREFIX "" CACHE INTERNAL "" )
 
 # build configuration
-set( AVRLIBCPP_MCU                            "atmega2560" CACHE STRING "" FORCE )
-set( AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS OFF          CACHE BOOL   "" FORCE )
-set( AVRLIBCPP_SUPPRESS_SFR_MACROS            OFF          CACHE BOOL   "" FORCE )
-set( CMAKE_BUILD_TYPE                         "MinSizeRel" CACHE STRING "" FORCE )
-set( CMAKE_EXPORT_COMPILE_COMMANDS            ON           CACHE BOOL   "" FORCE )
-mark_as_advanced(
-    AVRLIBCPP_MCU
-    AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS
-    AVRLIBCPP_SUPPRESS_SFR_MACROS
-    CMAKE_BUILD_TYPE
-    CMAKE_EXPORT_COMPILE_COMMANDS
-)
+set( AVRLIBCPP_MCU                            "atmega2560" CACHE INTERNAL "" )
+set( AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS OFF          CACHE INTERNAL "" )
+set( AVRLIBCPP_SUPPRESS_SFR_MACROS            OFF          CACHE INTERNAL "" )
+set( CMAKE_BUILD_TYPE                         "MinSizeRel" CACHE INTERNAL "" )
+set( CMAKE_EXPORT_COMPILE_COMMANDS            ON           CACHE INTERNAL "" )

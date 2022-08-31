@@ -36,27 +36,26 @@ list(
 if( NOT ${AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS} )
     set( CMAKE_CXX_STANDARD 17 )
     set( AVRLIBCPP_MCU "" CACHE STRING "avr-libcpp: MCU type" )
-    set(
-        CMAKE_CXX_FLAGS
-        "${CMAKE_CXX_FLAGS} \
-        -mmcu=${AVRLIBCPP_MCU} \
-        -DF_CPU=1000000 \
-        -Werror -Wall -Wextra \
-        -Wcast-align=strict \
-        -Wcast-qual \
-        -Wduplicated-cond \
-        -Wextra-semi \
-        -Wfloat-equal \
-        -Wimplicit-fallthrough=5 \
-        -Wlogical-op \
-        -Wmissing-field-initializers \
-        -Wmissing-include-dirs \
-        -Wold-style-cast \
-        -Wplacement-new=2 \
-        -Wpointer-arith \
-        -Wshadow \
-        -Wunsafe-loop-optimizations \
-        "
+    add_compile_options(
+        -mmcu=${AVRLIBCPP_MCU}
+        -Werror -Wall -Wextra
+        -Wcast-align=strict
+        -Wcast-qual
+        -Wduplicated-cond
+        -Wextra-semi
+        -Wfloat-equal
+        -Wimplicit-fallthrough=5
+        -Wlogical-op
+        -Wmissing-field-initializers
+        -Wmissing-include-dirs
+        -Wold-style-cast
+        -Wplacement-new=2
+        -Wpointer-arith
+        -Wshadow
+        -Wunsafe-loop-optimizations
+    )
+    add_compile_definitions(
+        F_CPU=1000000
     )
 endif( NOT ${AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS} )
 

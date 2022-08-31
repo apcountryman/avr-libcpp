@@ -28,6 +28,26 @@ target_link_libraries(
 )
 ```
 
+The `avr-libcpp` static library does not include `::avrlibcpp::VERSION`.
+To use `::avrlibcpp::VERSION`, link with the `avr-libcpp-version` static library.
+```cmake
+target_link_libraries(
+    foo
+    avr-libcpp
+    avr-libcpp-version
+)
+```
+
+### Configuration Options
+avr-libcpp supports the following project configuration options:
+- `AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS` (defaults to `ON`): use parent project's
+  build flags
+    - The following project configuration options are available if
+      `AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS` is `OFF`:
+        - `AVRLIBCPP_MCU`: MCU type
+- `AVRLIBCPP_SUPPRESS_SFR_MACROS` (defaults to `OFF`): suppress SFR macros
+
+
 ## Usage (Development)
 This repository's Git `pre-commit` hook script is the simplest way to configure, build,
 and test this project during development.

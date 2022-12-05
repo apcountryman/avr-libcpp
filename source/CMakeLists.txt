@@ -27,6 +27,7 @@ add_library(
     "avr-libcpp.cc"
     "avr-libcpp/delay.cc"
     "avr-libcpp/interrupt.cc"
+    "avr-libcpp/pgmspace.cc"
     "avr-libcpp/suppress_sfr_macros.cc"
     "avr-libcpp/suppress_sfr_macros/atmega2560.cc"
     "avr-libcpp/suppress_sfr_macros/atmega328p.cc"

@@ -56,7 +56,7 @@ class initializer_list {
 
     constexpr auto end() const noexcept -> const_iterator
     {
-        return m_begin + size;
+        return m_begin + m_size;
     }
 
   private:

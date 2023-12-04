@@ -20,8 +20,7 @@
 set( CMAKE_INSTALL_PREFIX "" CACHE INTERNAL "" )
 
 # build configuration
-set( AVRLIBCPP_MCU                            "atmega1608" CACHE INTERNAL "" )
-set( AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS OFF          CACHE INTERNAL "" )
-set( AVRLIBCPP_SUPPRESS_SFR_MACROS            OFF          CACHE INTERNAL "" )
-set( CMAKE_BUILD_TYPE                         "MinSizeRel" CACHE INTERNAL "" )
-set( CMAKE_EXPORT_COMPILE_COMMANDS            ON           CACHE INTERNAL "" )
+set( AVRLIBCPP_MCU                 "atmega1608" CACHE INTERNAL "" )
+set( AVRLIBCPP_SUPPRESS_SFR_MACROS OFF          CACHE INTERNAL "" )
+set( CMAKE_BUILD_TYPE              "MinSizeRel" CACHE INTERNAL "" )
+set( CMAKE_EXPORT_COMPILE_COMMANDS ON           CACHE INTERNAL "" )

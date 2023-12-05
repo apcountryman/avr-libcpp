@@ -23,8 +23,7 @@ project(
 )
 
 # project configuration
-option( AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS "avr-libcpp: use parent project's build flags" ON  )
-option( AVRLIBCPP_SUPPRESS_SFR_MACROS            "avr-libcpp: suppress SFR macros"              OFF )
+option( AVRLIBCPP_SUPPRESS_SFR_MACROS "avr-libcpp: suppress SFR macros" OFF )
 
 # load additional CMake modules
 list(
@@ -33,7 +32,7 @@ list(
 )
 
 # configure compilation and linking
-if( NOT ${AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS} )
+if( "${PROJECT_SOURCE_DIR}" STREQUAL "${CMAKE_SOURCE_DIR}" )
     set( CMAKE_CXX_STANDARD 17 )
     set( AVRLIBCPP_MCU "" CACHE STRING "avr-libcpp: MCU type" )
     add_compile_options(
@@ -57,7 +56,7 @@ if( NOT ${AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS} )
     add_compile_definitions(
         F_CPU=1000000
     )
-endif( NOT ${AVRLIBCPP_USE_PARENT_PROJECT_BUILD_FLAGS} )
+endif( "${PROJECT_SOURCE_DIR}" STREQUAL "${CMAKE_SOURCE_DIR}" )
 
 # capture project version information
 include( git-utilities )

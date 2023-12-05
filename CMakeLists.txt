@@ -32,7 +32,7 @@ list(
 )
 
 # configure compilation and linking
-if( "${CMAKE_SOURCE_DIR}" STREQUAL "${PROJECT_SOURCE_DIR}" )
+if( "${PROJECT_SOURCE_DIR}" STREQUAL "${CMAKE_SOURCE_DIR}" )
     set( CMAKE_CXX_STANDARD 17 )
     set( AVRLIBCPP_MCU "" CACHE STRING "avr-libcpp: MCU type" )
     add_compile_options(
@@ -56,7 +56,7 @@ if( "${CMAKE_SOURCE_DIR}" STREQUAL "${PROJECT_SOURCE_DIR}" )
     add_compile_definitions(
         F_CPU=1000000
     )
-endif( "${CMAKE_SOURCE_DIR}" STREQUAL "${PROJECT_SOURCE_DIR}" )
+endif( "${PROJECT_SOURCE_DIR}" STREQUAL "${CMAKE_SOURCE_DIR}" )
 
 # capture project version information
 include( git-utilities )

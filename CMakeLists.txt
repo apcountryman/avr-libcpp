@@ -13,7 +13,7 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: avr-libcpp core CMake rules.
+# Description: Core CMake rules.
 
 cmake_minimum_required( VERSION 3.12.4 )
 project(

@@ -27,8 +27,8 @@ on:
             - main
 
 jobs:
-    analyze-static-cppcheck:
-        name: Analyze (static) - cppcheck
+    analyze-cppcheck:
+        name: Analyze (cppcheck)
         runs-on: ubuntu-20.04
         steps:
             - uses: actions/checkout@v4
@@ -41,8 +41,8 @@ jobs:
               shell: bash
               run: ./ci/analyze --analyzer cppcheck
 
-    analyze-static-lizard:
-        name: Analyze (static) - lizard
+    analyze-lizard:
+        name: Analyze (lizard)
         runs-on: ubuntu-20.04
         steps:
             - uses: actions/checkout@v4
@@ -52,8 +52,8 @@ jobs:
               shell: bash
               run: ./ci/analyze --analyzer lizard
 
-    analyze-static-shellcheck:
-        name: Analyze (static) - shellcheck
+    analyze-shellcheck:
+        name: Analyze (shellcheck)
         runs-on: ubuntu-20.04
         steps:
             - uses: actions/checkout@v4

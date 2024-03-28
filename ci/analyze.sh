@@ -115,7 +115,7 @@ function run_lizard()
         "--CCN"       "10"
     )
 
-    if ! "$repository/lizard/lizard.py" "${lizard_options[@]}" "${source_files[@]}"; then
+    if ! "$repository/tools/lizard/lizard.py" "${lizard_options[@]}" "${source_files[@]}"; then
         abort
     fi
 }

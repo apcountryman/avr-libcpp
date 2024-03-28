@@ -13,10 +13,10 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: ATmega808 configuration.
+# Description: Build (ATmega1609) configuration.
 
 set( CMAKE_BUILD_TYPE              "MinSizeRel" CACHE INTERNAL "" )
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON           CACHE INTERNAL "" )
 
-set( AVRLIBCPP_MCU                 "atmega808" CACHE INTERNAL "" )
-set( AVRLIBCPP_SUPPRESS_SFR_MACROS OFF         CACHE INTERNAL "" )
+set( AVRLIBCPP_MCU                 "atmega1609" CACHE INTERNAL "" )
+set( AVRLIBCPP_SUPPRESS_SFR_MACROS OFF          CACHE INTERNAL "" )

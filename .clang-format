@@ -13,7 +13,6 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: .clang-format
 # Description: clang-format style configuration for the avr-libcpp repository.
 
 Language: Cpp

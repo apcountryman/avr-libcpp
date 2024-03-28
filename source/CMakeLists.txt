@@ -13,7 +13,6 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: CMakeLists.txt
 # Description: avr-libcpp CMake rules.
 
 configure_file(

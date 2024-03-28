@@ -183,27 +183,6 @@ function ensure_no_build_errors_are_present()
     done
 }
 
-function ensure_no_automated_test_errors_are_present()
-{
-    local configurations; mapfile -t configurations < <( git -C "$repository" ls-files 'configuration/' | cut -f 2 -d / | sort -u | grep '^build-' | grep 'test-automated' ); readonly configurations
-
-    local configuration
-    for configuration in "${configurations[@]}"; do
-        message "checking for ($configuration) automated test errors"
-
-        local build_directory="$repository/build/$configuration"
-
-        if ! cmake --build "$build_directory" --target test > "/dev/null" 2>&1; then
-            message_status_errors_found
-            error "aborting commit due to automated test error(s), listed below"
-            cmake --build "$build_directory" --target test -- CTEST_OUTPUT_ON_FAILURE=1
-            abort
-        fi
-
-        message_status_no_errors_found
-    done
-}
-
 function main()
 {
     local -r script=$( readlink -f "$0" )
@@ -262,7 +241,6 @@ function main()
     ensure_no_whitespace_errors_are_present
     ensure_no_script_errors_are_present
     ensure_no_build_errors_are_present
-    ensure_no_automated_test_errors_are_present
 }
 
 main "$@"

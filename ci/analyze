@@ -47,7 +47,6 @@ function display_help_text()
     echo "    --analyzer <analyzer>"
     echo "        Specify the analyzer to run against avr-libcpp. The following analyzers"
     echo "        are supported:"
-    echo "            cppcheck"
     echo "            lizard"
     echo "            shellcheck"
     echo "    --help"
@@ -57,7 +56,6 @@ function display_help_text()
     echo "EXAMPLES"
     echo "    $mnemonic --help"
     echo "    $mnemonic --version"
-    echo "    $mnemonic --analyzer cppcheck"
     echo "    $mnemonic --analyzer lizard"
     echo "    $mnemonic --analyzer shellcheck"
 }
@@ -65,29 +63,6 @@ function display_help_text()
 function display_version()
 {
     echo "$mnemonic, version $version"
-}
-
-function generate_compilation_database()
-{
-    local -r build_configuration="$repository/configuration/analysis/CMakeLists.txt"
-
-    if ! cmake -C "$build_configuration" -S "$repository" -B "$build_directory"; then
-        abort
-    fi
-}
-
-function run_cppcheck()
-{
-    generate_compilation_database
-
-    local -r cppcheck_options=(
-        "--template=gcc"
-        "--project=$repository/build/analysis/compile_commands.json"
-    )
-
-    if ! cppcheck "${cppcheck_options[@]}"; then
-        abort
-    fi
 }
 
 function run_lizard()
@@ -129,7 +104,6 @@ function main()
     local -r mnemonic=$( basename "$script" )
     local -r repository=$( readlink -f "$( dirname "$script" )/.." )
     local -r version=$( git -C "$repository" describe --match=none --always --dirty --broken )
-    local -r build_directory="$repository/build/analysis"
 
     while [[ "$#" -gt 0 ]]; do
         local argument="$1"; shift
@@ -146,7 +120,7 @@ function main()
 
                 local -r analyzer="$1"; shift
 
-                if [[ "$analyzer" != "cppcheck" && "$analyzer" != "lizard" && "$analyzer" != "shellcheck" ]]; then
+                if [[ "$analyzer" != "lizard" && "$analyzer" != "shellcheck" ]]; then
                     abort "'$analyzer' is not a supported analyzer"
                 fi
                 ;;

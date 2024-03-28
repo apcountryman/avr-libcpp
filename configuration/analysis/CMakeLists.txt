@@ -16,11 +16,10 @@
 # File: configuration/analysis/CMakeLists.txt
 # Description: avr-libcpp static analysis configuration.
 
-# install prefix is not applicable
-set( CMAKE_INSTALL_PREFIX "" CACHE INTERNAL "" )
+mark_as_advanced( CMAKE_INSTALL_PREFIX )
 
-# build configuration
+set( CMAKE_BUILD_TYPE              "Release" CACHE INTERNAL "" )
+set( CMAKE_EXPORT_COMPILE_COMMANDS ON        CACHE INTERNAL "" )
+
 set( AVRLIBCPP_MCU                 "atmega2560" CACHE INTERNAL "" )
 set( AVRLIBCPP_SUPPRESS_SFR_MACROS OFF          CACHE INTERNAL "" )
-set( CMAKE_BUILD_TYPE              "Release"    CACHE INTERNAL "" )
-set( CMAKE_EXPORT_COMPILE_COMMANDS ON           CACHE INTERNAL "" )

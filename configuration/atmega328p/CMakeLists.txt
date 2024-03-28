@@ -13,7 +13,6 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: configuration/atmega328p/CMakeLists.txt
 # Description: avr-libcpp ATmega328/P configuration.
 
 set( CMAKE_BUILD_TYPE              "MinSizeRel" CACHE INTERNAL "" )

@@ -35,29 +35,50 @@ function abort()
     exit 1
 }
 
+function validate_script()
+{
+    if ! shellcheck "$script"; then
+        abort
+    fi
+}
+
 function display_help_text()
 {
-    echo "NAME"
-    echo "    $mnemonic - Run a static analyzer against avr-libcpp."
-    echo "SYNOPSIS"
-    echo "    $mnemonic --help"
-    echo "    $mnemonic --version"
-    echo "    $mnemonic --analyzer <analyzer>"
-    echo "OPTIONS"
-    echo "    --analyzer <analyzer>"
-    echo "        Specify the analyzer to run against avr-libcpp. The following analyzers"
-    echo "        are supported:"
-    echo "            lizard"
-    echo "            shellcheck"
-    echo "    --help"
-    echo "        Display this help text."
-    echo "    --version"
-    echo "        Display the version of this script."
-    echo "EXAMPLES"
-    echo "    $mnemonic --help"
-    echo "    $mnemonic --version"
-    echo "    $mnemonic --analyzer lizard"
-    echo "    $mnemonic --analyzer shellcheck"
+    local analyzer
+
+    printf "%b" \
+        "NAME\n" \
+        "    $mnemonic - Ensure no static analysis errors are present.\n" \
+        "SYNOPSIS\n" \
+        "    $mnemonic --help\n" \
+        "    $mnemonic --version\n" \
+        "    $mnemonic --analyzer <analyzer>\n" \
+        "OPTIONS\n" \
+        "    --analyzer <analyzer>\n" \
+        "        Specify the analyzer to run. The following analyzers are supported:\n" \
+        ""
+
+    for analyzer in "${analyzers[@]}"; do
+        printf "%b" \
+            "            $analyzer\n" \
+            ""
+    done
+
+    printf "%b" \
+        "    --help\n" \
+        "        Display this help text.\n" \
+        "    --version\n" \
+        "        Display the version of this script.\n" \
+        "EXAMPLES\n" \
+        "    $mnemonic --help\n" \
+        "    $mnemonic --version\n" \
+        ""
+
+    for analyzer in "${analyzers[@]}"; do
+        printf "%b" \
+            "    $mnemonic --analyzer $analyzer\n" \
+            ""
+    done
 }
 
 function display_version()
@@ -65,9 +86,24 @@ function display_version()
     echo "$mnemonic, version $version"
 }
 
+function value_is_in_array()
+{
+    local -r target_value="$1"; shift
+    local -r array=( "$@" )
+
+    local value
+    for value in "${array[@]}"; do
+        if [[ "$target_value" == "$value" ]]; then
+            return 0;
+        fi
+    done
+
+    return 1
+}
+
 function run_lizard()
 {
-    local source_files; mapfile -t source_files < <( git -C "$repository" ls-files '*.h' '*.cc' '*.cc.in' | xargs -r -d '\n' -I '{}' echo "$repository/{}" ); readonly source_files
+    local source_files; mapfile -t source_files < <( git -C "$repository" ls-files '*.h' '*.h.in' '*.cc' '*.cc.in' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly source_files
 
     local -r lizard_options=(
         "--languages" "cpp"
@@ -86,7 +122,7 @@ function run_lizard()
 
 function run_shellcheck()
 {
-    local scripts; mapfile -t scripts < <( git -C "$repository" ls-files ':!:cmake/modules/' ':!:lizard/' ':!:toolchain-avr-gcc/' | xargs -r -d '\n' -I '{}' find "$repository/{}" -executable ); readonly scripts
+    local scripts; mapfile -t scripts < <( git -C "$repository" ls-files '*.sh' | xargs -r -d '\n' -I '{}' find "$repository/{}" ); readonly scripts
 
     if ! shellcheck "${scripts[@]}"; then
         abort
@@ -102,8 +138,16 @@ function main()
 {
     local -r script=$( readlink -f "$0" )
     local -r mnemonic=$( basename "$script" )
+
+    validate_script
+
     local -r repository=$( readlink -f "$( dirname "$script" )/.." )
     local -r version=$( git -C "$repository" describe --match=none --always --dirty --broken )
+
+    local -r analyzers=(
+        lizard
+        shellcheck
+    )
 
     while [[ "$#" -gt 0 ]]; do
         local argument="$1"; shift
@@ -120,7 +164,7 @@ function main()
 
                 local -r analyzer="$1"; shift
 
-                if [[ "$analyzer" != "lizard" && "$analyzer" != "shellcheck" ]]; then
+                if ! value_is_in_array "$analyzer" "${analyzers[@]}"; then
                     abort "'$analyzer' is not a supported analyzer"
                 fi
                 ;;

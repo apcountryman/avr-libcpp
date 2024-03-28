@@ -35,7 +35,7 @@ jobs:
                   submodules: recursive
             - name: Analyze
               shell: bash
-              run: ./ci/analyze --analyzer lizard
+              run: ./ci/analyze.sh --analyzer lizard
 
     analyze-shellcheck:
         name: Analyze (shellcheck)
@@ -46,7 +46,7 @@ jobs:
                   submodules: recursive
             - name: Analyze
               shell: bash
-              run: ./ci/analyze --analyzer shellcheck
+              run: ./ci/analyze.sh --analyzer shellcheck
 
     format:
         name: Format
@@ -58,4 +58,4 @@ jobs:
               run: sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-10 100 && sudo update-alternatives --set clang-format /usr/bin/clang-format-10
             - name: Format
               shell: bash
-              run: ./ci/format
+              run: ./ci/format.sh

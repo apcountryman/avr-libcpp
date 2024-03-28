@@ -30,11 +30,11 @@ option(
     OFF
     )
 
-# CMake modules
+# CMake modules configuration
 list(
     APPEND CMAKE_MODULE_PATH
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/apcountryman-cmake-utilities"
-)
+    )
 
 # compilation and linking configuration
 if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )

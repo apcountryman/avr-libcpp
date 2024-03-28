@@ -28,7 +28,7 @@ add_subdirectory( avr-libcpp )
 target_link_libraries(
     foo
     avr-libcpp
-)
+    )
 ```
 
 The `avr-libcpp` static library does not include `::avrlibcpp::VERSION`.
@@ -36,9 +36,8 @@ To use `::avrlibcpp::VERSION`, link with the `avr-libcpp-version` static library
 ```cmake
 target_link_libraries(
     foo
-    avr-libcpp
     avr-libcpp-version
-)
+    )
 ```
 
 ### General Configuration Options

@@ -32,7 +32,7 @@ option(
 # CMake modules configuration
 list(
     APPEND CMAKE_MODULE_PATH
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/apcountryman-cmake-utilities"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/cmake-utilities"
     )
 
 # compilation and linking configuration
@@ -77,4 +77,4 @@ execute_git_command(
     )
 
 # libraries
-add_subdirectory( source )
+add_subdirectory( libraries )

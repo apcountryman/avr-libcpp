@@ -13,19 +13,7 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: Git submodules.
+# Description: Libraries CMake rules.
 
-# CMake modules
-[submodule "cmake/modules/cmake-utilities"]
-	path = cmake/modules/cmake-utilities
-	url = ../cmake-utilities
-
-# CMake toolchains
-[submodule "tolchains/toolchain-avr-gcc"]
-	path = toolchains/toolchain-avr-gcc
-	url = ../toolchain-avr-gcc
-
-# tools
-[submodule "tools/lizard"]
-	path = tools/lizard
-	url = ../lizard
+add_subdirectory( avr-libcpp )
+add_subdirectory( avr-libcpp-version )

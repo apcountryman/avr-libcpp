@@ -13,19 +13,20 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: Git submodules.
+# Description: avr-libcpp-version static CMake rules.
 
-# CMake modules
-[submodule "cmake/modules/cmake-utilities"]
-	path = cmake/modules/cmake-utilities
-	url = ../cmake-utilities
+add_library( avr-libcpp-version STATIC )
 
-# CMake toolchains
-[submodule "tolchains/toolchain-avr-gcc"]
-	path = toolchains/toolchain-avr-gcc
-	url = ../toolchain-avr-gcc
+target_include_directories( avr-libcpp-version
+    PUBLIC include
+    )
 
-# tools
-[submodule "tools/lizard"]
-	path = tools/lizard
-	url = ../lizard
+configure_file(
+    source/avr-libcpp/version.cc.in
+    source/avr-libcpp/version.cc
+    @ONLY
+    )
+
+target_sources( avr-libcpp-version
+    PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/source/avr-libcpp/version.cc"
+    )

@@ -146,7 +146,7 @@ function ensure_no_build_errors_are_present()
 {
     local configurations; mapfile -t configurations < <( git -C "$repository" ls-files 'configuration/' | cut -f 2 -d / | sort -u | grep '^build-' ); readonly configurations
 
-    local -r toolchain_file="$repository/toolchain-avr-gcc/toolchain.cmake"
+    local -r toolchain_file="$repository/toolchains/toolchain-avr-gcc/toolchain.cmake"
 
     local configuration
     for configuration in "${configurations[@]}"; do

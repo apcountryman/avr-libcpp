@@ -20,7 +20,7 @@ configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/avr-libcpp/version.cc.in"
     "${CMAKE_CURRENT_BINARY_DIR}/avr-libcpp/version.cc"
     @ONLY
-)
+    )
 
 add_library(
     avr-libcpp STATIC
@@ -64,22 +64,25 @@ add_library(
     "std/utility.cc"
     "type_traits.cc"
     "utility.cc"
-)
+    )
+
 target_include_directories(
     avr-libcpp
     PUBLIC "${PROJECT_SOURCE_DIR}/include"
     PUBLIC "${PROJECT_SOURCE_DIR}/system"
-)
+    )
+
 target_compile_definitions(
     avr-libcpp
-    PUBLIC "$<IF:$<BOOL:${AVRLIBCPP_SUPPRESS_SFR_MACROS}>,AVRLIBCPP_SUPPRESS_SFR_MACROS,>"
-)
+    PUBLIC $<IF:$<BOOL:${AVRLIBCPP_SUPPRESS_SFR_MACROS}>,AVRLIBCPP_SUPPRESS_SFR_MACROS,>
+    )
 
 add_library(
     avr-libcpp-version STATIC
     "${CMAKE_CURRENT_BINARY_DIR}/avr-libcpp/version.cc"
-)
+    )
+
 target_include_directories(
     avr-libcpp-version
     PUBLIC "${PROJECT_SOURCE_DIR}/include"
-)
+    )

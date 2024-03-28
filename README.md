@@ -41,10 +41,10 @@ target_link_libraries(
 )
 ```
 
-### Configuration Options
+### General Configuration Options
 
-avr-libcpp supports the following project configuration options:
-- `AVRLIBCPP_SUPPRESS_SFR_MACROS` (defaults to `OFF`): suppress SFR macros
+avr-libcpp supports the following general configuration options:
+- `AVRLIBCPP_SUPPRESS_SFR_MACROS` (defaults to `OFF`): Suppress SFR macros.
 
 
 ## Usage (Development)

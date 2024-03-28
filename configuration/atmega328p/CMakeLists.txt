@@ -14,13 +14,10 @@
 # permissions and limitations under the License.
 
 # File: configuration/atmega328p/CMakeLists.txt
-# Description: avr-libcpp ATmega328P configuration.
+# Description: avr-libcpp ATmega328/P configuration.
 
-# install prefix is not applicable
-set( CMAKE_INSTALL_PREFIX "" CACHE INTERNAL "" )
-
-# build configuration
-set( AVRLIBCPP_MCU                 "atmega328p" CACHE INTERNAL "" )
-set( AVRLIBCPP_SUPPRESS_SFR_MACROS OFF          CACHE INTERNAL "" )
 set( CMAKE_BUILD_TYPE              "MinSizeRel" CACHE INTERNAL "" )
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON           CACHE INTERNAL "" )
+
+set( AVRLIBCPP_MCU                 "atmega328p" CACHE INTERNAL "" )
+set( AVRLIBCPP_SUPPRESS_SFR_MACROS OFF          CACHE INTERNAL "" )

@@ -16,11 +16,8 @@
 # File: configuration/atmega1608/CMakeLists.txt
 # Description: avr-libcpp ATmega1608 configuration.
 
-# install prefix is not applicable
-set( CMAKE_INSTALL_PREFIX "" CACHE INTERNAL "" )
-
-# build configuration
-set( AVRLIBCPP_MCU                 "atmega1608" CACHE INTERNAL "" )
-set( AVRLIBCPP_SUPPRESS_SFR_MACROS OFF          CACHE INTERNAL "" )
 set( CMAKE_BUILD_TYPE              "MinSizeRel" CACHE INTERNAL "" )
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON           CACHE INTERNAL "" )
+
+set( AVRLIBCPP_MCU                 "atmega1608" CACHE INTERNAL "" )
+set( AVRLIBCPP_SUPPRESS_SFR_MACROS OFF          CACHE INTERNAL "" )

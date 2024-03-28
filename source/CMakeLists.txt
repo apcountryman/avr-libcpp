@@ -13,7 +13,7 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: avr-libcpp CMake rules.
+# Description: Libraries CMake rules.
 
 configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/avr-libcpp/version.cc.in"

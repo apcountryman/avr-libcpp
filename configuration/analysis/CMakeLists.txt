@@ -13,7 +13,7 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: avr-libcpp static analysis configuration.
+# Description: Static analysis configuration.
 
 mark_as_advanced( CMAKE_INSTALL_PREFIX )
 

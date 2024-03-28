@@ -13,7 +13,7 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: avr-libcpp ATmega3208 configuration.
+# Description: ATmega3208 configuration.
 
 set( CMAKE_BUILD_TYPE              "MinSizeRel" CACHE INTERNAL "" )
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON           CACHE INTERNAL "" )

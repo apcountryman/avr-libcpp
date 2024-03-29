@@ -29,7 +29,7 @@
     || defined( __AVR_ATmega1608__ ) || defined( __AVR_ATmega1609__ ) \
     || defined( __AVR_ATmega3208__ ) || defined( __AVR_ATmega3209__ ) \
     || defined( __AVR_ATmega4808__ ) || defined( __AVR_ATmega4809__ )
-#ifdef AVRLIBCPP_SUPPRESS_SFR_MACROS
+#if AVRLIBCPP_SUPPRESS_SFR_MACROS
 
 #ifdef AC0
 #undef AC0

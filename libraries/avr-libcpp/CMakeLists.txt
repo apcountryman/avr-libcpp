@@ -18,7 +18,7 @@
 add_library( avr-libcpp STATIC )
 
 target_compile_definitions( avr-libcpp
-    PUBLIC $<IF:$<BOOL:${AVRLIBCPP_SUPPRESS_SFR_MACROS}>,AVRLIBCPP_SUPPRESS_SFR_MACROS,>
+    PUBLIC AVRLIBCPP_SUPPRESS_SFR_MACROS=$<IF:$<BOOL:${AVRLIBCPP_SUPPRESS_SFR_MACROS}>,1,0>
     )
 
 target_include_directories( avr-libcpp

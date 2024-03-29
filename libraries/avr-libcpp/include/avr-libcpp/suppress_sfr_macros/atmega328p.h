@@ -26,7 +26,7 @@
 #include <avr/io.h>
 
 #ifdef __AVR_ATmega328P__
-#ifdef AVRLIBCPP_SUPPRESS_SFR_MACROS
+#if AVRLIBCPP_SUPPRESS_SFR_MACROS
 
 #ifdef ACBG
 #undef ACBG

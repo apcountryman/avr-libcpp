@@ -31,8 +31,8 @@ target_link_libraries(
     )
 ```
 
-The `avr-libcpp` static library does not include `::avrlibcpp::VERSION`.
-To use `::avrlibcpp::VERSION`, link with the `avr-libcpp-version` static library.
+The `avr-libcpp` static library does not include `::avrlibcpp::version()`.
+To use `::avrlibcpp::version()`, link with the `avr-libcpp-version` static library.
 ```cmake
 target_link_libraries(
     foo

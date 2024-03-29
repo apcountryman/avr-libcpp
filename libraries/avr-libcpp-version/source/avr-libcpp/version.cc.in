@@ -17,13 +17,16 @@
 
 /**
  * \file
- * \brief avrlibcpp::VERSION implementation.
+ * \brief avrlibcpp::version() implementation.
  */
 
 #include "avr-libcpp/version.h"
 
 namespace avrlibcpp {
 
-char const * const VERSION{ "@AVRLIBCPP_VERSION@" };
+auto version() noexcept -> char const *
+{
+    return "@AVRLIBCPP_VERSION@";
+}
 
 } // namespace avrlibcpp

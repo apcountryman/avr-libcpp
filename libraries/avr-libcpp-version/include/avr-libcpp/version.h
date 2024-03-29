@@ -17,7 +17,7 @@
 
 /**
  * \file
- * \brief avrlibcpp::VERSION interface.
+ * \brief avrlibcpp::version() interface.
  */
 
 #ifndef AVRLIBCPP_VERSION_H
@@ -26,9 +26,11 @@
 namespace avrlibcpp {
 
 /**
- * \brief Library version.
+ * \brief Get the library version.
+ *
+ * \return The library version.
  */
-extern char const * const VERSION;
+auto version() noexcept -> char const *;
 
 } // namespace avrlibcpp
 

@@ -15,5 +15,5 @@
 
 # Description: Git ignore rules.
 
-# ignore the build directory
+# standalone build build directory
 build/

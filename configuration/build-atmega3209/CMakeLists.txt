@@ -18,5 +18,6 @@
 set( CMAKE_BUILD_TYPE              "MinSizeRel" CACHE INTERNAL "" )
 set( CMAKE_EXPORT_COMPILE_COMMANDS ON           CACHE INTERNAL "" )
 
-set( AVRLIBCPP_MCU                 "atmega3209" CACHE INTERNAL "" )
-set( AVRLIBCPP_SUPPRESS_SFR_MACROS OFF          CACHE INTERNAL "" )
+set( AVRLIBCPP_MCU                 "atmega3209"           CACHE INTERNAL "" )
+set( AVRLIBCPP_DFP                 "dfp-microchip-atmega" CACHE INTERNAL "" )
+set( AVRLIBCPP_SUPPRESS_SFR_MACROS OFF                    CACHE INTERNAL "" )

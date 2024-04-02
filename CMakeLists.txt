@@ -44,9 +44,15 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
         "" CACHE STRING
         "avr-libcpp: MCU type."
         )
+    set(
+        AVRLIBCPP_DFP
+        "" CACHE STRING
+        "avr-libcpp: DFP submodule name."
+        )
 
     add_compile_options(
         -mmcu=${AVRLIBCPP_MCU}
+        -B "${CMAKE_CURRENT_SOURCE_DIR}/dfps/${AVRLIBCPP_DFP}/dfp/gcc/dev/${AVRLIBCPP_MCU}"
         -Werror -Wall -Wextra
         -Wcast-align=strict
         -Wcast-qual
@@ -66,6 +72,10 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
 
     add_compile_definitions(
         F_CPU=1000000
+        )
+
+    include_directories( SYSTEM
+        "${CMAKE_CURRENT_SOURCE_DIR}/dfps/${AVRLIBCPP_DFP}/dfp/include"
         )
 endif( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
 

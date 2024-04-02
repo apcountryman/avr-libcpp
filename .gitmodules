@@ -25,6 +25,11 @@
 	path = toolchains/toolchain-avr-gcc
 	url = ../toolchain-avr-gcc
 
+# DFPs
+[submodule "dfps/dfp-microchip-atmega"]
+	path = dfps/dfp-microchip-atmega
+	url = ../dfp-microchip-atmega
+
 # tools
 [submodule "tools/lizard"]
 	path = tools/lizard

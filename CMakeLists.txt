@@ -16,8 +16,7 @@
 # Description: Core CMake rules.
 
 cmake_minimum_required( VERSION 3.12.4 )
-project(
-    avr-libcpp
+project( avr-libcpp
     LANGUAGES CXX
     )
 

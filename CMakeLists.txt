@@ -31,7 +31,7 @@ option(
 # CMake modules configuration
 list(
     APPEND CMAKE_MODULE_PATH
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/cmake-utilities"
+    "${PROJECT_SOURCE_DIR}/cmake/modules/cmake-utilities"
     )
 
 # compilation and linking configuration
@@ -51,7 +51,7 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
 
     add_compile_options(
         -mmcu=${AVRLIBCPP_MCU}
-        -B "${CMAKE_CURRENT_SOURCE_DIR}/dfps/${AVRLIBCPP_DFP}/dfp/gcc/dev/${AVRLIBCPP_MCU}"
+        -B "${PROJECT_SOURCE_DIR}/dfps/${AVRLIBCPP_DFP}/dfp/gcc/dev/${AVRLIBCPP_MCU}"
         -Werror -Wall -Wextra
         -Wcast-align=strict
         -Wcast-qual
@@ -74,7 +74,7 @@ if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
         )
 
     include_directories( SYSTEM
-        "${CMAKE_CURRENT_SOURCE_DIR}/dfps/${AVRLIBCPP_DFP}/dfp/include"
+        "${PROJECT_SOURCE_DIR}/dfps/${AVRLIBCPP_DFP}/dfp/include"
         )
 endif( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
 

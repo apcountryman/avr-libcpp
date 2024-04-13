@@ -22,15 +22,13 @@ project( avr-libcpp
 
 # general configuration
 
-option(
-    AVRLIBCPP_SUPPRESS_SFR_MACROS
+option( AVRLIBCPP_SUPPRESS_SFR_MACROS
     "avr-libcpp: Suppress SFR macros."
     OFF
     )
 
 # CMake modules configuration
-list(
-    APPEND CMAKE_MODULE_PATH
+list( APPEND CMAKE_MODULE_PATH
     "${PROJECT_SOURCE_DIR}/cmake/modules/cmake-utilities"
     )
 
@@ -38,13 +36,12 @@ list(
 if( PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
     set( CMAKE_CXX_STANDARD 17 )
 
-    set(
-        AVRLIBCPP_MCU
+    set( AVRLIBCPP_MCU
         "" CACHE STRING
         "avr-libcpp: MCU type."
         )
-    set(
-        AVRLIBCPP_DFP
+
+    set( AVRLIBCPP_DFP
         "" CACHE STRING
         "avr-libcpp: DFP submodule name."
         )
